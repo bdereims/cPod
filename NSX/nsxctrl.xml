@@ -1,0 +1,6 @@
+<controllerSyslogServer>
+     <syslogServer>192.168.1.45</syslogServer>
+     <port>514</port>
+     <protocol>UDP</protocol>
+     <level>INFO</level>
+</controllerSyslogServer>

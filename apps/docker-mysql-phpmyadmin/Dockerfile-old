@@ -1,0 +1,38 @@
+FROM debian 
+
+RUN echo 'phpmyadmin phpmyadmin/dbconfig-install             boolean         true' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/upgrade-error                select          abort' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/remove-error                 select          abort' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/reconfigure-webserver        multiselect     apache2' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/purge                        boolean         false' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/db/app-user                  string          admin' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/remote/port                  string          3307' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/remote/host                  select          172.16.184.8' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/setup-username               string          admin' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/upgrade-backup               boolean         false' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/install-error                select          ignore' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/internal/skip-preseed        boolean         false' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/dbconfig-upgrade             boolean         true' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/missing-db-package-error     select          abort' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/database-type                select          mysql' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/internal/reconfiguring       boolean         false' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/remote/newhost               string          172.16.184.8' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/db/dbname                    string          phpmyadmin' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/mysql/admin-user             string          admin' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/dbconfig-reinstall           boolean         false' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/mysql/method                 select          tcp/ip' | debconf-set-selections
+RUN echo 'phpmyadmin phpmyadmin/mysql/app-pass               password        changeme' | debconf-set-selections
+
+RUN apt-get update
+
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get -y install mysql-client mysql-server phpmyadmin
+
+RUN sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+RUN echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
+
+ADD ./startup.sh /opt/startup.sh
+
+EXPOSE 3306
+EXPOSE 80
+
+CMD ["/bin/bash", "/opt/startup.sh"]
