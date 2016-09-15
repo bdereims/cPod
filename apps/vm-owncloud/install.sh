@@ -8,6 +8,7 @@ apt-get -y install apache2 php5 php5-gd php-xml-parser php5-intl php5-mysqlnd ph
 
 curl -k https://download.owncloud.org/community/owncloud-8.1.1.tar.bz2 | tar jx -C /var/www/
 mkdir -p /var/www/owncloud/data
+cp ./autoconfig.php /var/www/owncloud/config/
 chown -R www-data:www-data /var/www/owncloud
 
 cp ./001-owncloud.conf /etc/apache2/sites-available/
