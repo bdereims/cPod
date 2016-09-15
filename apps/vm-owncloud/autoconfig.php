@@ -3,11 +3,11 @@ $AUTOCONFIG = array(
   "dbtype"        => "mysql",
   "dbname"        => "owncloud",
   "dbuser"        => "admin",
-  "dbpass"        => "VMware1!",
+  "dbpass"        => "###PW###",
   "dbhost"        => "###IP###",
   "dbtableprefix" => "",
   "adminlogin"    => "admin",
-  "adminpass"     => "VMware1!",
+  "adminpass"     => "###PW###",
   "directory"     => "/var/www/owncloud/data",
 );
 
