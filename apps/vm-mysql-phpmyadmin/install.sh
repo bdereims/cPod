@@ -1,6 +1,8 @@
 #!/bin/bash
 
-apt -y update
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/vmware/bin
+
+apt-get -y update
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y install mysql-client mysql-server phpmyadmin
