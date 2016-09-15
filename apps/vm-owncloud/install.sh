@@ -6,7 +6,7 @@ apt-get -y update
 apt-get -y install apache2 php5 php5-gd php-xml-parser php5-intl php5-mysqlnd php5-json php5-mcrypt php-apc smbclient curl libcurl3 php5-curl bzip2 wget openssl
 #apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-curl -k https://download.owncloud.org/community/owncloud-8.1.1.tar.bz2 | tar jx -C /var/www/
+curl -k https://download.owncloud.org/community/owncloud-9.1.0.tar.bz2 | tar jx -C /var/www/
 mkdir -p /var/www/owncloud/data
 cp ./autoconfig.php /var/www/owncloud/config/
 chown -R www-data:www-data /var/www/owncloud
