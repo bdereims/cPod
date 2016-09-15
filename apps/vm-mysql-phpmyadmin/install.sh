@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#apt -y update
+apt -y update
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get -y install mysql-client mysql-server phpmyadmin

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#apt-get -y update
+apt-get -y update
 apt-get install -y apache2 php5 php5-gd php-xml-parser php5-intl php5-mysqlnd php5-json php5-mcrypt php-apc smbclient curl libcurl3 php5-curl bzip2 wget openssl
 apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
