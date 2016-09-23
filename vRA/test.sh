@@ -1,1 +1,0 @@
-curl --request POST -H "Accept:application/json" -H "Content-Type:application/json" --data '{"username":"admin@vsphere.local","password":"VMware1!","tenant":"vsphere.local"}' https://vra.cpod.net/identity/api/tokens -k -v -A "Mozilla/4.0"
