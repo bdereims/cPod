@@ -1,0 +1,91 @@
+# oms bootup configurations
+oms.uuid = VIO
+oms.initialize.uuid = false
+
+# root vm folder for all clusters will be OMS-${oms.uuid}
+oms.root_folder_prefix = OMS
+
+# Linked clone can only be used for dev & test. If linked clone is used,
+# then the storage space we need for the provisioning can be much less.
+# But, there are several issues for using linked clone:
+#   1. The template VM should be placed on a shared datastore.
+#   2. The performance of the OpenStack node VM may be impacted.
+# By default, the system disk size is 20 GB + swap disk size (memory size).
+# If linked clone use used, only 5 GB will be reserved.
+oms.use_linked_clone = true
+
+# Default size for the secondary disk (data disk).
+oms.datadisk_size = 20
+
+# the max number of event processors to handle vCenter events
+oms.event_processor.poolsize = 2
+
+# also means max number of concurrent nodes execution
+oms.scheduler.poolsize = 20
+
+# Is OMS deployed as an bundle vApp or two separeted VMs?
+deploy_as_vapp = true
+
+oms.just_upgraded = false
+
+# Jarvis url
+ansible.url = http:\/\/localhost:8088\/
+
+# If the number of users exceed this number, throw warning.
+# https://bugs.launchpad.net/keystone/+bug/1083463
+oms.ldap_user_max_number = 1000
+
+# Define the OpenStack node VM size (CPU and Memory)
+# vCPUs
+oms.vmsize.cpu.lb = 2
+oms.vmsize.cpu.controller = 8
+oms.vmsize.cpu.db = 4
+oms.vmsize.cpu.dhcp = 4
+oms.vmsize.cpu.mq = 4
+oms.vmsize.cpu.memcache = 2
+oms.vmsize.cpu.compute = 2
+oms.vmsize.cpu.storage = 2
+oms.vmsize.cpu.smoke = 2
+oms.vmsize.cpu.mongodb = 2
+oms.vmsize.cpu.ceilometer = 2
+oms.singlevm.cpu.size = 2
+# MB
+oms.vmsize.memory.lb = 4096
+oms.vmsize.memory.controller = 16384
+oms.vmsize.memory.db = 16384
+oms.vmsize.memory.dhcp = 16384
+oms.vmsize.memory.mq = 16384
+oms.vmsize.memory.memcache = 4096
+oms.vmsize.memory.compute = 4096
+oms.vmsize.memory.storage = 4096
+oms.vmsize.memory.smoke = 4096
+oms.vmsize.memory.mongodb = 4096
+oms.vmsize.memory.ceilometer = 4096
+oms.singlevm.mem.size = 16384
+
+oms.disable_datastores_anti_affinity = true
+oms.disable_hosts_anti_affinity = true
+oms.include_local_datastores = true
+oms.skip_cluster_vmotion_check = true
+
+# Flag to control nsxt related UI.
+oms.nsxt.enabled = false
+
+# Default topology.
+#  - Don't change these numbers.
+#  - If NSXv is used, there is no DHCP group.
+oms.nodes.number.lb = 2
+oms.nodes.number.controller = 2
+oms.nodes.number.db = 3
+oms.nodes.number.dhcp = 2
+oms.nodes.number.mq = 2
+oms.nodes.number.memcache = 2
+oms.nodes.number.storage = 1
+oms.nodes.number.smoke = 0
+oms.nodes.number.mongodb = 3
+oms.nodes.number.ceilometer = 1
+oms.extension.registered = true
+
+oms.allow_shared_edge_cluster = true
+oms.need.restart.vapp = false
+oms.vc.reachable = true
