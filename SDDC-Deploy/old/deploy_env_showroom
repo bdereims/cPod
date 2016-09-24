@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #bdereims@gmail.com
 
 export DNS=192.168.1.2
@@ -7,7 +7,6 @@ export DOMAIN=cpod.net
 export GATEWAY=${DNS}
 export NETMASK=255.255.255.0
 export PASSWORD=VMware1!
-export VC_PASSWORD=${PASSWORD}
 export PORTGROUP=DPortGroup
 export ADMIN=administrator%40vsphere.local
 export TARGET=vcenter.cpod.net/Datacenter/host/AdminCluster/esx03.cpod.net/

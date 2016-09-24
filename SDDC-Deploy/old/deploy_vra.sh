@@ -1,21 +1,24 @@
-#!/bin/bash
+#!/bin/sh
 #bdereims@vmware.com
 
-[ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
-[ ! -f "${1}" ] && echo "error: file '${1}' does not exist" && exit 1
-
-. ./"${1}"
 
 ### Local vars ####
 
 HOSTNAME=vra
-NAME=lab-cPod-vra
+NAME=vRA
 IP=192.168.1.42
-OVA=${BITS}/VMware-vR-Appliance-7.1.0.710-4270058_OVF10_TechPreview.ova
+OVA=${BITS}/VMware-vR-Appliance-7.0.1.150-3622989_OVF10.ova
 
 ###################
 
 export MYSCRIPT=/tmp/$$
+
+if [ "${1}" == "" ]; then
+	echo "usage: deploy_xxx.sh deploy_env"
+	exit 1
+fi
+
+. ./${1}
 
 cat << EOF > ${MYSCRIPT}
 ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
@@ -30,7 +33,7 @@ ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
 --prop:varoot-password=${PASSWORD} \
 -ds=${DATASTORE} -n=${NAME} --network=${PORTGROUP} \
 ${OVA} \
-vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
+vi://${ADMIN}:${PASSWORD}@${TARGET}
 EOF
 
 sh ${MYSCRIPT}
