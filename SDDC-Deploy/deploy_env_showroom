@@ -1,0 +1,15 @@
+#!/bin/bash
+#bdereims@gmail.com
+
+export DNS=192.168.1.2
+export NTP=${DNS}
+export DOMAIN=cpod.net
+export GATEWAY=${DNS}
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=
+export PORTGROUP=vxw-dvs-18-virtualwire-9-sid-5005-lab-bde-cPod
+export ADMIN=bdereims%40showroom.local
+export TARGET=p-vc-paris01.showroom.local/Showroom/host/ClusterDell/d-esx04.showroom.local/
+export DATASTORE=vsanDatastore
+export BITS=../BITS
