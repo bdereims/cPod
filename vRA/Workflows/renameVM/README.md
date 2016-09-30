@@ -1,11 +1,14 @@
-- import renameVM workflow in vRO
+- Import renameVM workflow in vRO
 
-- add this custom propertty:
+- Add this Customx.Property:
 Extensibility.Lifecycle.Properties.VMPSMasterWorkflow32.BuildingMachine = *
 
-- add with EBS:
+- You must register the vRA IaaS Host of the "Default" vRA Host
+Library -> vRealize Automation -> Configuration -> Add the IaaS Host of a vRA Host
+
+- Add within EBS:
 Machine provisioning
 	All of the following 	-> Data | Lyfe cycle state name equaks VMPSMasterWorkflow32.BuildingMachine && 
 				-> Data | State phase equals PRE &&
 				-> Data | Machine Type equals Virtual Machine
-	add the corresponding workflow
+	Add the corresponding workflow

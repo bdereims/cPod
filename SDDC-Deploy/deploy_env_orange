@@ -1,0 +1,16 @@
+#!/bin/bash
+#bdereims@gmail.com
+
+export DNS=10.10.1.10
+export NTP=0.fr.pool.ntp.org,1.fr.pool.ntp.org,2.fr.pool.ntp.org
+export DOMAIN=showroom.local
+export GATEWAY=10.66.0.1
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP=DPortGroup
+export ADMIN=administrator%40vsphere.local
+export TARGET=orange-vcsa.showroom.local/Datacenter/host/Cluster/orange-esx04.showroom.local/
+export DATASTORE=vsanDatastore
+export SYSLOG=orange-li.showroom.local
+export BITS=../../BITS
