@@ -1,5 +1,6 @@
 # cPod
 
-Scripts and artifacts to demonstrate vRA/VIO/NSX.
+Scripts and artifacts to demonstrate VMware solutions.
+
 
 bdereims@vmware | @bdereims

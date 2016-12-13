@@ -27,7 +27,8 @@ ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
 --prop:netmask0=${NETMASK} \
 --prop:admin_password=${PASSWORD} \
 --prop:pcuser_password=${PASSWORD} \
--ds=${DATASTORE} -n=${NAME} --network=${PORTGROUP} \
+"--datastore=${DATASTORE}" -n=${NAME} "--net=NAT=${PORTGROUP}" \
+--powerOn --diskMode=thin \
 ${OVA} \
 vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
 EOF
