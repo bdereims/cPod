@@ -1,0 +1,29 @@
+﻿hosts:
+  - address_ranges: 10.66.0.11
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - MGMT
+      - CLOUD
+    metadata:
+      MANAGEMENT_DATASTORE: datastore1
+      MANAGEMENT_PORTGROUP: VM Network
+      MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
+      MANAGEMENT_NETWORK_DNS_SERVER: 10.66.0.15
+      MANAGEMENT_NETWORK_GATEWAY: 10.66.0.1
+      MANAGEMENT_VM_IPS: 10.66.0.18
+  - address_ranges: 10.66.0.12
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - CLOUD
+deployment:
+  resume_system: true
+  image_datastores:
+    - datastore1
+  auth_enabled: false
+  sdn_enabled: false
+  stats_enabled: false
+  ntp_endpoint: 10.66.0.15
+  use_image_datastore_for_vms: true
+  loadbalancer_enabled: true

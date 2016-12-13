@@ -14,3 +14,4 @@ export TARGET=10.66.0.11
 export DATASTORE=datastore1
 export BITS=/data/BITS
 export PCONTROLLER=10.66.0.18
+export INSTALLVM=10.66.0.17
