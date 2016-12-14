@@ -29,9 +29,9 @@ TENANT_ID=`photon tenant list | grep ${TENANT} | cut -d' ' -f1`
 mk_del "photon -n tenant delete ${TENANT_ID}"
 photon tenant set ${TENANT} 
 
-photon -n resource-ticket create --name gold-ticket --limits "vm.memory 32 GB, vm 100 COUNT"
+photon -n resource-ticket create --name gold-ticket --limits "vm.memory 300 GB, vm 300 COUNT"
 
-photon -n project create --resource-ticket gold-ticket --name ${PROJECT} --limits "vm.memory 32 GB, vm 100 COUNT"
+photon -n project create --resource-ticket gold-ticket --name ${PROJECT} --limits "vm.memory 300 GB, vm 300 COUNT"
 PROJECT_ID=`photon project list | grep ${PROJECT} | cut -d' ' -f1`
 mk_del "photon -n project delete ${PROJECT_ID}"
 photon project set ${PROJECT} 
@@ -40,7 +40,7 @@ photon -n image create ${BITS}/${PHOTONOS} -n ${PHOTONOS} -i EAGER
 IMAGE_ID=`photon image list | grep ${PHOTONOS} | cut -d' ' -f1`
 mk_del "photon -n image delete ${IMAGE_ID}"
 
-photon -n flavor create --name photon-vm --kind "vm" --cost "vm.cpu 1.0 COUNT, vm.memory 2.0 GB, vm.cost 1.0 COUNT"
+photon -n flavor create --name photon-vm --kind "vm" --cost "vm.cpu 1.0 COUNT, vm.memory 1.0 GB, vm.cost 1.0 COUNT"
 FLAVOR_VM_ID=`photon flavor list | grep photon-vm | cut -d' ' -f1`
 mk_del "photon -n flavor delete ${FLAVOR_VM_ID}"
 photon -n flavor create --name photon-disk --kind "ephemeral-disk" --cost "ephemeral-disk 1.0 COUNT"
