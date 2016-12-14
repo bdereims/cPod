@@ -12,7 +12,7 @@
       MANAGEMENT_NETWORK_DNS_SERVER: 10.66.0.15
       MANAGEMENT_NETWORK_GATEWAY: 10.66.0.1
       MANAGEMENT_VM_IPS: 10.66.0.18
-  - address_ranges: 10.66.0.12-10.66.0.14
+  - address_ranges: 10.66.0.12
     username: root
     password: 'VMware1!'
     usage_tags:
