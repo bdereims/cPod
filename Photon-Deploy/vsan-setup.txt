@@ -51,3 +51,6 @@ Check policy:
 
 
 Ready to consume! wait 15' in oder to be discover by photon controller.
+
+http://www.virten.net/2015/01/manage-virtual-san-with-rvc-complete-guide/
+http://cormachogan.com/2016/11/23/photon-controller-v1-1-vsan-interoperability/

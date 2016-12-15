@@ -22,13 +22,15 @@ function mk_del {
 	echo $1 >> ${TMP} 
 }
 
-photon target set http://${PCONTROLLER}:28080
+#photon target set http://${PCONTROLLER}:28080
+photon target set -c https://${PCONTROLLER}:443 
+photon target login --username administrator@esxcloud --password VMware1!
 photon tenant set ${TENANT} 
 photon project set ${PROJECT}
 
 IMAGE_ID=`photon image list | grep ${PHOTONOS} | cut -d' ' -f1`
 
-for i in `seq 1 100`;
+for i in `seq 1 50`;
 do
 	BULK_NAME=${VM_NAME}-${i}
 	photon -n vm create --name ${BULK_NAME} --image ${IMAGE_ID} --flavor photon-vm --disks "disk-1 photon-disk boot=true"
