@@ -3,4 +3,4 @@
 Scripts and artifacts to demonstrate VMware solutions.
 
 
-bdereims@vmware | @bdereims
+bdereims@vmware.com | @bdereims

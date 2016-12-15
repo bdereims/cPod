@@ -11,7 +11,7 @@
       MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
       MANAGEMENT_NETWORK_DNS_SERVER: 10.66.0.15
       MANAGEMENT_NETWORK_GATEWAY: 10.66.0.1
-      MANAGEMENT_VM_IPS: 10.66.0.18
+      MANAGEMENT_VM_IPS: 10.66.0.20
   - address_ranges: 10.66.0.12
     username: root
     password: 'VMware1!'
@@ -25,7 +25,17 @@
       MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
       MANAGEMENT_NETWORK_DNS_SERVER: 10.66.0.15
       MANAGEMENT_NETWORK_GATEWAY: 10.66.0.1
-      MANAGEMENT_VM_IPS: 10.66.0.19
+      MANAGEMENT_VM_IPS: 10.66.0.21
+  - address_ranges: 10.66.0.13
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - CLOUD
+    metadata:
+      MANAGEMENT_PORTGROUP: VM Network
+      MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
+      MANAGEMENT_NETWORK_DNS_SERVER: 10.66.0.15
+      MANAGEMENT_NETWORK_GATEWAY: 10.66.0.1
 deployment:
   resume_system: true
   image_datastores:

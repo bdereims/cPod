@@ -12,4 +12,4 @@
 ###################
 
 photon target set http://${INSTALLVM}:9000
-photon system deploy photon.yaml
+photon system deploy photon-complex.yam 
