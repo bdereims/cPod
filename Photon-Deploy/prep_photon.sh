@@ -22,7 +22,9 @@ function mk_del {
 	echo $1 >> ${TMP} 
 }
 
-photon target set http://${PCONTROLLER}:28080
+#photon target set http://${PCONTROLLER}:28080
+photon target set -c https://${PCONTROLLER}:443 
+photon target login --username administrator@esxcloud --password VMware1!
 
 photon -n tenant create ${TENANT} 
 TENANT_ID=`photon tenant list | grep ${TENANT} | cut -d' ' -f1`
@@ -58,6 +60,9 @@ mk_del "photon -n vm delete ${VM_ID}"
 photon vm start ${VM_ID}
 mk_del "photon -n vm stop ${VM_ID}"
 
+
+mk_del "photon target login --username administrator@esxcloud --password VMware1!"
+mk_del "photon target set -c https://${PCONTROLLER}:443"
 mk_del "#auto-generated during prep"
 mk_del "#!/bin/bash"
 tac ${TMP} > ${DEL_ENV}

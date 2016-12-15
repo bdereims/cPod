@@ -1,0 +1,7 @@
+ssh to 10.66.0.21 with esxcloud/vmware
+within "docker exec -it Lightwave bash" do:
+
+cd /opt/vmware/bin
+./dir-cli ssogroup create --name "photonControllerAdmins"
+./dir-cli user create --account pc-admin --user-password VMware1! --first-name pc --last-name admin
+./dir-cli group modify --name photonControllerAdmins --add pc-admin
