@@ -1,0 +1,53 @@
+create in Lightwave:
+
+./dir-cli ssogroup create --name VSANAdmins
+/dir-cli user create --account vsanadmin --user-password 'VMware1!' --first-name vsanadmin --last-name vsanadmin
+./dir-cli group modify --name VSANAdmins --add vsanadmin
+./dir-cli group list --name VSANAdmins
+
+Execute on all VSAN ESXi:
+esxcli vsan network ipv4 add -i vmk0
+
+Log on photon-vsan VM:
+ssh root@10.66.0.18 (password: VMware1!)
+
+Change:
+/etc/systemd/network/10-dhcp-ens32.network 
+- DNS=10.66.0.21 to DNS=10.66.0.15
+
+/etc/vmware-vsan-health/config.conf
+- administratorgroup = photon.vmware.com\ESXCloudAdmins to administratorgroup = esxcloud\VSANAdmins
+
+Reboot photon-vsan
+
+On photon-vsan log on RVC after reboot and do:
+rvc vsanadmin@esxcloud@photon-vsan:8006
+/photon-vsan> cd 1/0/3
+/photon-vsan/Global/computers> cluster.create vsan-cluster
+/photon-vsan/Global/computers> cluster.add_host 0 10.66.0.11 -u "root" -p "VMware1!"
+/photon-vsan/Global/computers> cluster.add_host 0 10.66.0.12 -u "root" -p "VMware1!"
+/photon-vsan/Global/computers> cluster.add_host 0 10.66.0.13 -u "root" -p "VMware1!"
+
+Check conf with:
+/photon-vsan/Global/computers> vsan.cluster_info 0
+/photon-vsan/Global/computers> vsan.health.health_summary 0
+
+Activate auto-claim:
+/photon-vsan/Global/computers> vsan.cluster_change_autoclaim --enable vsan-cluster
+
+Consume disks:
+/photon-vsan/Global/computers> vsan.host_consume_disks vsan-cluster/hosts/esxcloud01.cpod.showroom.local 
+/photon-vsan/Global/computers> vsan.host_consume_disks vsan-cluster/hosts/esxcloud02.cpod.showroom.local 
+/photon-vsan/Global/computers> vsan.host_consume_disks vsan-cluster/hosts/esxcloud03.cpod.showroom.local 
+
+Check again:
+photon-vsan/Global/computers> vsan.disks_info vsan-cluster/hosts/esxcloud01.cpod.showroom.local
+
+Modify default policy with ftt=1 and stripe=4:
+/photon-vsan/Global/computers> vsan.cluster_set_default_policy vsan-cluster '(("hostFailuresToTolerate" i1) ("stripeWidth" i4))'
+
+Check policy:
+/photon-vsan/Global/computers> esxcli.execute vsan-cluster/hosts/esxcloud01.cpod.showroom.local vsan policy getdefault
+
+
+Ready to consume! wait 15' in oder to be discover by photon controller.

@@ -5,3 +5,5 @@ cd /opt/vmware/bin
 ./dir-cli ssogroup create --name "photonControllerAdmins"
 ./dir-cli user create --account pc-admin --user-password VMware1! --first-name pc --last-name admin
 ./dir-cli group modify --name photonControllerAdmins --add pc-admin
+
+
