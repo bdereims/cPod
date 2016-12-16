@@ -30,7 +30,7 @@ photon project set ${PROJECT}
 
 IMAGE_ID=`photon image list | grep ${PHOTONOS} | cut -d' ' -f1`
 
-for i in `seq 1 50`;
+for i in `seq 1 111`;
 do
 	BULK_NAME=${VM_NAME}-${i}
 	photon -n vm create --name ${BULK_NAME} --image ${IMAGE_ID} --flavor photon-vm --disks "disk-1 photon-disk boot=true"

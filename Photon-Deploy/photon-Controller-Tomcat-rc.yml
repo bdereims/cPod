@@ -1,0 +1,20 @@
+kind: "ReplicationController"
+apiVersion: "v1"
+metadata:
+  name: "tomcat-server"
+spec:
+  replicas: 1
+  selector:
+    name: "tomcat-server"
+  template:
+    spec:
+      containers:
+        - name: "tomcat-frontend"
+          image: "tomcat"
+          ports:
+            - containerPort: 8080
+    metadata:
+      labels:
+        name: "tomcat-server"
+  labels:
+    name: "tomcat-server"

@@ -1,4 +1,4 @@
-create in Lightwave:
+Create in Lightwave:
 
 ./dir-cli ssogroup create --name VSANAdmins
 /dir-cli user create --account vsanadmin --user-password 'VMware1!' --first-name vsanadmin --last-name vsanadmin
@@ -42,12 +42,58 @@ Consume disks:
 
 Check again:
 photon-vsan/Global/computers> vsan.disks_info vsan-cluster/hosts/esxcloud01.cpod.showroom.local
+2016-12-15 10:17:56 +0000: Gathering disk information for host esxcloud01.cpod.showroom.local
+2016-12-15 10:17:59 +0000: Done gathering disk information
+Disks on host esxcloud01.cpod.showroom.local:
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| DisplayName                                                                                | isSSD | Size   | State                                                                                                                       |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| SEAGATE Serial Attached SCSI Disk (naa.5000c5009785b2cf)                                   | MD    | 558 GB | ineligible (Existing partitions found on disk 'naa.5000c5009785b2cf'.)                                                      |
+| SEAGATE ST600MM0088                                                                        |       |        |                                                                                                                             |
+|                                                                                            |       |        | Partition table:                                                                                                            |
+|                                                                                            |       |        | 1: 558.91 GB, type = vmfs ('datastore1')                                                                                    |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| SEAGATE Serial Attached SCSI Disk (naa.5000c5009785c41f)                                   | MD    | 558 GB | inUse (The disk resides on a non-local storage transport: 'naa.5000c5009785c41f'.)                                          |
+| SEAGATE ST600MM0088                                                                        |       |        | VSAN Format Version: v3                                                                                                     |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| SEAGATE Serial Attached SCSI Disk (naa.5000c5009785edcb)                                   | MD    | 558 GB | inUse (The disk resides on a non-local storage transport: 'naa.5000c5009785edcb'.)                                          |
+| SEAGATE ST600MM0088                                                                        |       |        | VSAN Format Version: v3                                                                                                     |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| TOSHIBA Serial Attached SCSI Disk (naa.500003972c88ccb1)                                   | SSD   | 372 GB | inUse (The disk resides on a non-local storage transport: 'naa.500003972c88ccb1'.)                                          |
+| TOSHIBA PX04SMB040                                                                         |       |        | VSAN Format Version: v3                                                                                                     |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| SEAGATE Serial Attached SCSI Disk (naa.5000c5009785f137)                                   | MD    | 558 GB | inUse (The disk resides on a non-local storage transport: 'naa.5000c5009785f137'.)                                          |
+| SEAGATE ST600MM0088                                                                        |       |        | VSAN Format Version: v3                                                                                                     |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| Local ATA Disk (t10.ATA_____SATADOM2DSL_3ME__________________________TW02PTHF4829361D0402) | SSD   | 59 GB  | ineligible (Existing partitions found on disk 't10.ATA_____SATADOM2DSL_3ME__________________________TW02PTHF4829361D0402'.) |
+| ATA SATADOM-SL 3ME                                                                         |       |        |                                                                                                                             |
+|                                                                                            |       |        | Partition table:                                                                                                            |
+|                                                                                            |       |        | 2: 4.00 GB, type = vfat                                                                                                     |
+|                                                                                            |       |        | 5: 0.24 GB, type = vfat                                                                                                     |
+|                                                                                            |       |        | 6: 0.24 GB, type = vfat                                                                                                     |
+|                                                                                            |       |        | 7: 0.11 GB, type = coredump                                                                                                 |
+|                                                                                            |       |        | 8: 0.28 GB, type = vfat                                                                                                     |
+|                                                                                            |       |        | 9: 2.50 GB, type = coredump                                                                                                 |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
+| SEAGATE Serial Attached SCSI Disk (naa.5000c5009785bd3b)                                   | MD    | 558 GB | inUse (The disk resides on a non-local storage transport: 'naa.5000c5009785bd3b'.)                                          |
+| SEAGATE ST600MM0088                                                                        |       |        | VSAN Format Version: v3                                                                                                     |
++--------------------------------------------------------------------------------------------+-------+--------+-----------------------------------------------------------------------------------------------------------------------------+
 
 Modify default policy with ftt=1 and stripe=4:
 /photon-vsan/Global/computers> vsan.cluster_set_default_policy vsan-cluster '(("hostFailuresToTolerate" i1) ("stripeWidth" i4))'
 
 Check policy:
 /photon-vsan/Global/computers> esxcli.execute vsan-cluster/hosts/esxcloud01.cpod.showroom.local vsan policy getdefault
++--------------+-----------------------------------------------------------------------------+
+| Policy Class | Policy Value                                                                |
++--------------+-----------------------------------------------------------------------------+
+| cluster      | (("stripeWidth" i4) ("hostFailuresToTolerate" i1))                          |
+| vdisk        | (("stripeWidth" i4) ("hostFailuresToTolerate" i1))                          |
+| vmnamespace  | (("stripeWidth" i4) ("hostFailuresToTolerate" i1))                          |
+| vmswap       | (("stripeWidth" i4) ("hostFailuresToTolerate" i1) ("forceProvisioning" i1)) |
+| vmem         | (("hostFailuresToTolerate" i1) ("forceProvisioning" i1))                    |
++--------------+-----------------------------------------------------------------------------+
+
 
 
 Ready to consume! wait 15' in oder to be discover by photon controller.

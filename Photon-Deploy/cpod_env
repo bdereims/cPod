@@ -15,3 +15,6 @@ export DATASTORE=datastore1
 export BITS=/data/BITS
 export PCONTROLLER=10.66.0.20
 export INSTALLVM=10.66.0.17
+export ESX_IPS=(10.66.0.11 10.66.0.12 10.66.0.13)
+export K8S_IP=10.66.0.22
+export ETCD_IP=10.66.0.23
