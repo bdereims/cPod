@@ -17,7 +17,7 @@ cd ${VIC_DIR}
 --password VMware1! --compute-resource Cluster --image-store datastoreRAID5 --name VCH --no-tlsverify \
 --bridge-network "VCH Bridge" --management-network "VCH" \
 --public-network "VCH" --client-network "VCH" \
---force
+--force 
 #--dns-server=10.66.0.15 \
 #--management-network-gateway 10.66.0.1/24 --management-network-ip 10.66.0.31 \
 #--public-network-gateway 10.66.0.1/24 --public-network-ip 10.66.0.32 \

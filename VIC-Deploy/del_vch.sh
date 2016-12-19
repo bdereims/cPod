@@ -16,4 +16,5 @@ cd ${VIC_DIR}
 ./vic-machine-linux delete --target vcsa.cpod.showroom.local/Datacenter --force \
 --user administrator@vsphere.local --password VMware1! \
 --compute-resource Cluster --name VCH \
---thumbprint 57:21:1B:AD:74:DF:44:06:8B:CE:2E:7E:6E:E3:13:CF:D9:C4:E8:42
+--force
+#--thumbprint 57:21:1B:AD:74:DF:44:06:8B:CE:2E:7E:6E:E3:13:CF:D9:C4:E8:42
