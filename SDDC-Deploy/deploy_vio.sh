@@ -11,7 +11,7 @@
 
 HOSTNAME=oms
 NAME=VIO
-IP=192.168.1.39
+IP=172.16.60.42
 OVA=${BITS}/VMware-OpenStack-3.0.0.0-4334264_OVF10.ova
 
 ###################

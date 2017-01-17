@@ -1,0 +1,38 @@
+{
+    "__version": "1.1",
+    "__comments": "Sample template to deploy a vCenter Server with an embedded Platform Services Controller to an ESXi host.",
+    "target.vcsa": {
+        "appliance": {
+            "deployment.network": "VM Network",
+            "deployment.option": "small",
+            "name": "vCSA",
+            "thin.disk.mode": true
+        },
+        "esx": {
+            "hostname": "172.16.60.1",
+            "username": "root",
+            "password": "VMware1!",
+            "datastore": "dsESX60"
+        },
+        "network": {
+            "hostname": "vcsa.brmc.local",
+            "dns.servers": [
+                "172.16.60.10"
+            ],
+            "gateway": "172.16.60.254",
+            "ip": "172.16.60.11",
+            "ip.family": "ipv4",
+            "mode": "static",
+            "prefix": "24"
+        },
+        "os": {
+            "password": "VMware1!",
+            "ssh.enable": true
+        },
+        "sso": {
+            "password": "VMware1!",
+            "domain-name": "vsphere.local",
+            "site-name": "VSPHERE"
+        }
+    }
+}

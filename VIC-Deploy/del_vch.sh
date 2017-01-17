@@ -13,8 +13,8 @@
 
 cd ${VIC_DIR}
 
-./vic-machine-linux delete --target vcsa.cpod.showroom.local/Datacenter --force \
+./vic-machine-linux delete --target vcsa.brmc.local/DC01 --force \
 --user administrator@vsphere.local --password VMware1! \
---compute-resource Cluster --name VCH \
+--compute-resource CLCOMP01 --name VCH01 \
 --force
 #--thumbprint 57:21:1B:AD:74:DF:44:06:8B:CE:2E:7E:6E:E3:13:CF:D9:C4:E8:42

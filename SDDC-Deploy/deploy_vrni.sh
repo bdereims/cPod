@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #bdereims@vmware.com
 
 [ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
@@ -8,10 +8,10 @@
 
 ### Local vars ####
 
-HOSTNAME=orange-vrni
-NAME=orange-vrni
-IP=10.66.0.29
-OVA=${BITS}/VMware_vRealize_Network_Insight_3.0.0-1469457715_platform.ova
+HOSTNAME=vrni
+NAME=vrni
+IP=172.16.60.25
+OVA=${BITS}/VMWare-vRealize-Networking-insight-3.2.0.1480511973-platform.ova
 
 ###################
 

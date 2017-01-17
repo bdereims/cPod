@@ -1,0 +1,18 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export DNS=172.16.60.10
+export NTP=${DNS}
+export DOMAIN=brmc.local
+export GATEWAY=172.16.60.254
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="VM Network"
+export ADMIN=administrator@vsphere.local
+export VCSA=vcsa.brmc.local
+export TARGET=${VCSA}/DC01
+export DATASTORE=dsVSAN-COMP-01
+export BITS=../../BITS
+export VIC_DIR=../../../vic
+export THUMBPRINT=`openssl s_client -connect ${VCSA}:443 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin | sed -e 's/^.*=//'`

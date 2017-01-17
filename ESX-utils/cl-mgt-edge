@@ -1,0 +1,6 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export ESX_IPS=(172.16.60.1 172.16.60.2 172.16.60.3 172.16.60.4)
+export PASSWORD=VMware1!
+export ADMIN=root

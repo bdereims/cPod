@@ -1,0 +1,20 @@
+#! /bin/sh
+#
+# Created by configure
+
+"./configure" \
+"--prefix=/etc/httpd" \
+"--exec-prefix=/usr" \
+"--bindir=/usr/bin" \
+"--sbindir=/usr/sbin" \
+"--mandir=/usr/share/man" \
+"--libdir=/usr/lib" \
+"--sysconfdir=/etc/httpd/conf" \
+"--includedir=/usr/include/httpd" \
+"--libexecdir=/usr/lib/httpd/modules" \
+"--enable-authnz-fcgi" \
+"--enable-mods-shared=all cgi" \
+"--enable-mpms-shared=all" \
+"--with-apr=/usr" \
+"--with-apr-util=/usr" \
+"$@"

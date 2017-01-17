@@ -13,10 +13,10 @@
 
 cd ${VIC_DIR}
 
-./vic-machine-linux create --target vcsa.cpod.showroom.local/Datacenter --user administrator@vsphere.local \
---password VMware1! --compute-resource Cluster --image-store datastoreRAID5 --name VCH --no-tlsverify \
---bridge-network "VCH Bridge" --management-network "VCH" \
---public-network "VCH" --client-network "VCH" \
+./vic-machine-linux create --target vcsa.brmc.local/DC01 --user administrator@vsphere.local \
+--password VMware1! --compute-resource CLCOMP01 --image-store dsVSAN-COMP-01 --name VCH01 --no-tlsverify \
+--bridge-network "vxw-dvs-67-virtualwire-11-sid-5008-VCH01-Bridge" --management-network "vxw-dvs-67-virtualwire-10-sid-5007-VCH01" \
+--public-network "vxw-dvs-67-virtualwire-10-sid-5007-VCH01" --client-network "vxw-dvs-67-virtualwire-10-sid-5007-VCH01" \
 --force 
 #--dns-server=10.66.0.15 \
 #--management-network-gateway 10.66.0.1/24 --management-network-ip 10.66.0.31 \

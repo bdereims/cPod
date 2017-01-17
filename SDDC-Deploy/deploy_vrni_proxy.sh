@@ -8,10 +8,10 @@
 
 ### Local vars ####
 
-HOSTNAME=orange-vrni-proxy
-NAME=orange-vrni-proxy
-IP=10.66.0.30
-OVA=${BITS}/VMware_vRealize_Network_Insight_3.0.0-1469457715_proxy.ova
+HOSTNAME=vrni-proxy
+NAME=vrni-proxy
+IP=172.16.60.26
+OVA=${BITS}/VMWare-vRealize-Networking-insight-3.2.0.1480511973-proxy.ova
 
 ###################
 
@@ -19,7 +19,7 @@ export MYSCRIPT=/tmp/$$
 
 cat << EOF > ${MYSCRIPT}
 ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
---prop:Proxy_Shared_Secret="I7/W1rFiBWaRWrA/H20+PgckKZct9qgg2wqKkdAs81JroQ0C+hiyHCtwi91PWRqdrt81TfBZHeMk1BQZ3W1/UulLgoGtZEK49lz1BvtIh9uZ0g095Gk2IJCjfVjH3NeR5PVuTf1bZ8wUzznKMT9kB9gY3GekEjIruWqvJ5CeQsw=" \
+--prop:Proxy_Shared_Secret="" \
 --prop:DNS=${DNS} \
 --prop:IP_Address=${IP} \
 --prop:Netmask=${NETMASK} \

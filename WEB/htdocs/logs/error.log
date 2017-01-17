@@ -1,0 +1,17 @@
+[Thu Jan 05 19:38:51.546932 2017] [mpm_event:notice] [pid 395:tid 139884848703360] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Thu Jan 05 19:38:51.546985 2017] [core:notice] [pid 395:tid 139884848703360] AH00094: Command line: '/usr/sbin/httpd'
+[Fri Jan 06 15:46:42.771855 2017] [mpm_event:notice] [pid 395:tid 139884848703360] AH00491: caught SIGTERM, shutting down
+[Mon Jan 09 15:41:46.901624 2017] [mpm_event:notice] [pid 706:tid 140447286630272] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Mon Jan 09 15:41:47.038536 2017] [core:notice] [pid 706:tid 140447286630272] AH00094: Command line: '/usr/sbin/httpd'
+[Mon Jan 09 15:43:39.539561 2017] [mpm_event:notice] [pid 706:tid 140447286630272] AH00491: caught SIGTERM, shutting down
+[Mon Jan 09 15:43:48.517773 2017] [mpm_event:notice] [pid 580:tid 140437130176384] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Mon Jan 09 15:43:48.538971 2017] [core:notice] [pid 580:tid 140437130176384] AH00094: Command line: '/usr/sbin/httpd'
+[Wed Jan 11 11:20:48.050208 2017] [mpm_event:notice] [pid 580:tid 140437130176384] AH00491: caught SIGTERM, shutting down
+[Wed Jan 11 11:22:02.059946 2017] [mpm_event:notice] [pid 1955:tid 140309775153024] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Wed Jan 11 11:22:02.060015 2017] [core:notice] [pid 1955:tid 140309775153024] AH00094: Command line: '/usr/sbin/httpd'
+[Wed Jan 11 13:09:02.213499 2017] [mpm_event:notice] [pid 740:tid 139965491857280] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Wed Jan 11 13:09:02.218860 2017] [core:notice] [pid 740:tid 139965491857280] AH00094: Command line: '/usr/sbin/httpd'
+[Thu Jan 12 10:59:39.736418 2017] [core:error] [pid 747:tid 139965149124352] [client 10.0.0.10:53176] AH00126: Invalid URI in request GET /../../../../../../../mnt/mtd/qt HTTP/1.0
+[Sat Jan 14 15:44:15.026604 2017] [mpm_event:notice] [pid 740:tid 139965491857280] AH00491: caught SIGTERM, shutting down
+[Sat Jan 14 15:44:59.379748 2017] [mpm_event:notice] [pid 2409:tid 139922835634048] AH00489: Apache/2.4.18 (Unix) configured -- resuming normal operations
+[Sat Jan 14 15:44:59.379819 2017] [core:notice] [pid 2409:tid 139922835634048] AH00094: Command line: '/usr/sbin/httpd'
