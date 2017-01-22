@@ -1,5 +1,5 @@
 #!/bin/bash
-#bdereims@gmail.com
+#bdereims@vmware.com
 
 export DNS=172.16.60.10
 export NTP=${DNS}

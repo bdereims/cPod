@@ -1,5 +1,5 @@
 #!/bin/bash
-#bdereims@gmail.com
+#bdereims@vmware.com
 
 export DNS=10.10.1.10
 export NTP=0.fr.pool.ntp.org,1.fr.pool.ntp.org,2.fr.pool.ntp.org
