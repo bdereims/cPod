@@ -1,0 +1,15 @@
+#!/bin/bash
+#bdereims@gmail.com
+
+export DNS=172.16.60.10
+export NTP=${DNS}
+export DOMAIN=brmc.local
+export GATEWAY=172.16.60.254
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP=DPG-MGT-1660
+export ADMIN=administrator%40vsphere.local
+export TARGET=vcsa.brmc.local/DC01/host/CLMGT/
+export DATASTORE=dsVSAN-MGT
+export BITS=../../../BITS

@@ -9,10 +9,10 @@
 
 ### Local vars ####
 
-HOSTNAME=photon-installer
-NAME=photon-installer
-IP=10.66.0.17
-OVA=${BITS}/installer-vm-1.1.0-5de1cb7.ova 
+HOSTNAME=photonos
+NAME=photonos
+IP=172.16.60.99
+OVA=${BITS}/photon-custom-hw10-1.0-13c08b6.ova
 
 ###################
 

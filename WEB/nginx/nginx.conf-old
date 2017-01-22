@@ -26,7 +26,7 @@ http {
     #tcp_nopush     on;
 
     #keepalive_timeout  0;
-    keepalive_timeout  20;
+    keepalive_timeout  65;
 
     #gzip  on;
 
@@ -88,16 +88,21 @@ http {
 		proxy_pass http://192.168.33.10/;
 	}
 
+	location /oc/ {
+     		#rewrite /owncloud/(.*) /$1 break;
+     		#rewrite ^/owncloud$ /owncloud/ permanent;
+		proxy_pass http://172.16.60.122/;
+     		#proxy_redirect / /owncloud/;
+     		#proxy_set_header Host $host;
+     		#proxy_buffering off;
+		#proxy_set_header X-Real-IP $remote_addr;
+            	#proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           	#proxy_set_header X-Forwarded-Proto $scheme;
+	}
+
 	location /attendees-production/ {
 		proxy_set_header Host "attendees-production.cfapps.pcf.brmc.local";
 		proxy_pass http://192.168.33.10/;
-	}
-
-	location /owncloud/ {
-		proxy_pass http://172.16.60.122/owncloud/;
-		proxy_set_header Host "brmc.mooo.com";
-		#rewrite /owncloud/(.*) /$1 break;
-     		#rewrite ^/owncloud$ /owncloud/ permanent;
 	}
     }
 
