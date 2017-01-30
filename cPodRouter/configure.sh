@@ -5,11 +5,13 @@
 ### Assuming connected to Internet    ### 
 
 DIR=conf.d
+MISC=misc
+BITS=BITS
 NAME=cpodrouter
 
 #Update for the role
 tdnf -y update
-tdnf -y install dnsmasq git sshpass ntp nginx tar
+tdnf -y install dnsmasq git sshpass ntp nginx tar wget
 
 #Change name
 echo $NAME > /etc/hostname
@@ -50,7 +52,26 @@ rm -fr .ssh
 cat /dev/zero | ssh-keygen -q -N "" -t rsa
 cd -
 
+#Install BGP Quagga deamon
+groupadd quagga
+useradd quagga -g quagga
+MYDIR=$(pwd)
+cd /
+tar xvzf ${MYDIR}/${MISC}/quagga.tgz
+cd -
+
+#Install OVFTOOL
+MYDIR=$(pwd)
+cd /root
+tar xvzf ${MYDIR}/${MISC}/ovftool.tgz
+cd -
+
+#Create BITS dir
+mkdir -p /root/BITS
+cp ${BITS}/* /root/BITS/.
+
 #Statup scripts
 systemctl enable dnsmasq
 systemctl enable ntpd
 systemctl enable nginx 
+systemctl enable bgpd
