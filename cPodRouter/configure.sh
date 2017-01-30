@@ -70,6 +70,16 @@ cd -
 mkdir -p /root/BITS
 cp ${BITS}/* /root/BITS/.
 
+#Install Photon CLI
+mkdir -p /tmp/$$
+cd /tmp/$$
+wget https://github.com/vmware/photon-controller/releases/download/v1.1.0/photon-linux64-1.1.0-5de1cb7
+PHOTONCLI=$(ls -1 photon-linux*)
+cp ${PHOTONCLI} /usr/bin/photon
+chmod +x /usr/bin/photon
+cd -
+rm -fr /tmp/$$
+
 #Statup scripts
 systemctl enable dnsmasq
 systemctl enable ntpd
