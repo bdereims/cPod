@@ -4,12 +4,12 @@
 ### Configure this host as cPodRouter ###
 ### Assuming connected to Internet    ### 
 
-DIR=./conf.d
+DIR=conf.d
 NAME=cpodrouter
 
 #Update for the role
 tdnf -y update
-tdnf -y install dnsmasq git sshpass ntp
+tdnf -y install dnsmasq git sshpass ntp nginx tar
 
 #Change name
 echo $NAME > /etc/hostname
@@ -38,6 +38,19 @@ cp ${DIR}/dnsmasq.conf /etc/.
 cp ${DIR}/ntp.conf /etc/.
 ntpdate ntp.org
 
+#Web Portal
+MYDIR=$(pwd)
+cd /etc/nginx
+tar xvzf ${MYDIR}/${DIR}/html.tgz
+cd -
+
+#Generate SSH keys
+cd /root
+rm -fr .ssh
+cat /dev/zero | ssh-keygen -q -N "" -t rsa
+cd -
+
 #Statup scripts
 systemctl enable dnsmasq
 systemctl enable ntpd
+systemctl enable nginx 
