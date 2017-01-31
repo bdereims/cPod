@@ -1,0 +1,54 @@
+﻿hosts:
+  - address_ranges: 172.16.16.101
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - MGMT
+      - CLOUD
+    metadata:
+      MANAGEMENT_DATASTORE: vsanDatastore 
+      MANAGEMENT_PORTGROUP: VM Network
+      MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
+      MANAGEMENT_NETWORK_DNS_SERVER: 172.16.66.1 
+      MANAGEMENT_NETWORK_GATEWAY: 172.16.66.1
+      MANAGEMENT_VM_IPS: 172.16.66.111
+  - address_ranges: 172.16.66.102
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - MGMT
+      - CLOUD
+    metadata:
+      ALLOWED_SERVICES: Lightwave
+      MANAGEMENT_DATASTORE: datastore2
+      MANAGEMENT_PORTGROUP: VM Network
+      MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
+      MANAGEMENT_NETWORK_DNS_SERVER: 172.16.66.1 
+      MANAGEMENT_NETWORK_GATEWAY: 172.16.66.1
+      MANAGEMENT_VM_IPS: 172.16.66.112 
+  - address_ranges: 172.16.66.103
+    username: root
+    password: 'VMware1!'
+    usage_tags:
+      - CLOUD
+    metadata:
+      MANAGEMENT_PORTGROUP: VM Network
+      MANAGEMENT_NETWORK_NETMASK: 255.255.255.0
+      MANAGEMENT_NETWORK_DNS_SERVER: 172.16.66.1 
+      MANAGEMENT_NETWORK_GATEWAY: 172.16.66.1 
+deployment:
+  resume_system: true
+  image_datastores:
+    - vsanDatastore 
+  auth_enabled: true 
+  sdn_enabled: false
+  stats_enabled: false
+  ntp_endpoint: 172.16.66.1
+  use_image_datastore_for_vms: true
+  loadbalancer_enabled: true
+  oauth_tenant: 'esxcloud'
+  oauth_username: 'Administrator'
+  oauth_password: 'VMware1!' 
+  oauth_security_groups:
+    - "esxcloud\\Administrators"
+    - "esxcloud\\photonControllerAdmins"
