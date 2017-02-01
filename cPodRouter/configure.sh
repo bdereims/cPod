@@ -80,8 +80,13 @@ chmod +x /usr/bin/photon
 cd -
 rm -fr /tmp/$$
 
+#PowerCLIcore Container
+systemctl start docker
+docker pull vmware/powerclicore
+
 #Statup scripts
 systemctl enable dnsmasq
 systemctl enable ntpd
 systemctl enable nginx 
 systemctl enable bgpd
+systemctl enable docker 
