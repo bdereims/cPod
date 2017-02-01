@@ -2,7 +2,7 @@
 #bdereims@vmware.com
 
 ###
-### Join all ESX to vSAN Datastore 
+### Set the default vSAN Policy: FTT=0 STRIP=1
 ### $1 : env configuration 
 ###
 
@@ -18,11 +18,13 @@ CONFDIR=./conf.d
 
 ###################
 
-UUID=$(rexec ${ESX[0]} "esxcli system uuid get" 2>&1)
-UUID=$(echo $UUID | cut -d ' ' -f 22)
+PCLASS=(cluster vdisk vmnamespace vmswap vmem)
 
 for HOST in ${ESX[@]} ;
 do
         echo -e "\e[7m### ${HOST} ###\e[0m"
-	rexec ${HOST} "esxcli vsan cluster join -u ${UUID}"
+	for CLASS in ${PCLASS[@]} ;
+	do	
+		rexec ${HOST} "esxcli vsan policy setdefault -c ${CLASS} -p \"((\\\"hostFailuresToTolerate\\\" i0) (\\\"forceProvisioning\\\" i1) (\\\"stripeWidth\\\" i1))\""
+	done
 done
