@@ -21,7 +21,7 @@ CONFDIR=./conf.d
 
 rexec ${2} "esxcli system settings advanced set -o /Net/FollowHardwareMac -i 1"
 rexec ${2} "sed -i 's#/system/uuid.*##' /etc/vmware/esx.conf"
-rexec ${2} "echo hv.assumeEnabled = TRUE >> /etc/vmware/config"
-#rexec ${2} "echo vmx.allowNested = TRUE >> /etc/vmware/config"
-#rexec ${2} "/sbin/auto-backup.sh"
+rexec ${2} "echo hv.assumeEnabled = \\\"TRUE\\\" >> /etc/vmware/config"
+rexec ${2} "echo vmx.allowNested = \\\"TRUE\\\" >> /etc/vmware/config"
+rexec ${2} "/sbin/auto-backup.sh"
 rpoweroff ${2}
