@@ -24,4 +24,6 @@ rexec ${2} "sed -i 's#/system/uuid.*##' /etc/vmware/esx.conf"
 rexec ${2} "echo hv.assumeEnabled = \\\"TRUE\\\" >> /etc/vmware/config"
 rexec ${2} "echo vmx.allowNested = \\\"TRUE\\\" >> /etc/vmware/config"
 rexec ${2} "/sbin/auto-backup.sh"
+rscp ${2} "/root/.ssh/id_rsa.pub" "/etc/ssh/keys-root/authorized_keys"
+rexec ${2} "chmod 0600 /etc/ssh/keys-root/authorized_keys"
 rpoweroff ${2}

@@ -27,3 +27,16 @@ function rpoweroff {
         [ ${?} -eq 0 ] && STATUS="\e[32mOk\e[0m"
         echo -e "Exec status : ${STATUS}"
 }
+
+### Copy file 
+### $1 : ESX @IP
+### $2 : Source and local file
+### $3 : Target on remote
+function rscp {
+	STATUS="\e[91mFailed\e[0m"
+	echo -e "Copy ${2} on ${1} as \e[2m${3}\e[0m with ${ADMIN}"
+	sshpass -p ${PASSWORD} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+	${2} ${ADMIN}@${1}:${3}
+        [ ${?} -eq 0 ] && STATUS="\e[32mOk\e[0m"
+        echo -e "Copy status : ${STATUS}"
+}
