@@ -3,15 +3,16 @@
 
 ###
 ### Create a Photon demo tenant
-### $1 : env configuration 
 ###
 
-CONFDIR=./conf.d
+CONFDIR=./conf.d 
+DEFAULT=".default"
 
-[ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
-[ ! -f "${CONFDIR}/${1}" ] && echo "error: file '${1}' does not exist" && exit 1
+[ ! -e ${DEFAULT} ] && echo "error: file '${DEFAULT}' does not exist" && exit 1
+CONF=$(cat ${DEFAULT})
+[ ! -e ${CONFDIR}/${CONF} ] && echo "error: conf file '${CONFDIR}/${CONF}' does not exist" && exit 1
 
-. ${CONFDIR}/${1}
+.  ${CONFDIR}/${CONF}
 
 ### Local vars ####
 
@@ -21,13 +22,15 @@ TMP=/tmp/$$
 TENANT=Demo
 PROJECT=demo-project
 VN_NAME=vm-1
-LB=172.16.66.111
 
 ###################
 
 function mk_del {
 	echo $1 >> ${TMP} 
 }
+
+echo -e "Did you create a Port Group called \e[1m'Photon Network'\e[0m?"
+read -n 1 -s -p "Press any key to continue"
 
 #photon target set http://${PCONTROLLER}:28080
 photon target set -c https://${LB}:443 
@@ -38,13 +41,14 @@ TENANT_ID=`photon tenant list | grep ${TENANT} | cut -d' ' -f1`
 mk_del "photon -n tenant delete ${TENANT_ID}"
 photon tenant set ${TENANT} 
 
-photon -n resource-ticket create --name gold-ticket --limits "vm.memory 300 GB, vm 300 COUNT"
+photon -n resource-ticket create --name gold-ticket --limits "vm.memory 20 GB, vm 10 COUNT"
 
-photon -n project create --resource-ticket gold-ticket --name ${PROJECT} --limits "vm.memory 300 GB, vm 300 COUNT"
+photon -n project create --resource-ticket gold-ticket --name ${PROJECT} --limits "vm.memory 20 GB, vm 10 COUNT"
 PROJECT_ID=`photon project list | grep ${PROJECT} | cut -d' ' -f1`
 mk_del "photon -n project delete ${PROJECT_ID}"
 photon project set ${PROJECT} 
 
+echo "Importing PhotonOS OVA, should take time!"
 photon -n image create ${BITS}/${PHOTONOS} -n ${PHOTONOS} -i EAGER
 IMAGE_ID=`photon image list | grep ${PHOTONOS} | cut -d' ' -f1`
 mk_del "photon -n image delete ${IMAGE_ID}"
@@ -69,9 +73,10 @@ mk_del "photon -n vm stop ${VM_ID}"
 
 
 mk_del "photon target login --username administrator@esxcloud --password VMware1!"
-mk_del "photon target set -c https://${PCONTROLLER}:443"
+mk_del "photon target set -c https://${LB}:443"
 mk_del "#auto-generated during prep"
 mk_del "#!/bin/bash"
 tac ${TMP} > ${DEL_ENV}
 chmod +x ${DEL_ENV}
 rm ${TMP}
+echo "\n\nExecute ${DEL_ENV} in ${TMP} to destroy tenant."
