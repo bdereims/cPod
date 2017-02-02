@@ -1,6 +1,11 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+###
+### Set and deploy Photon environnement 
+### $1 : env configuration 
+###
+
 CONFDIR=./conf.d
 
 [ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1

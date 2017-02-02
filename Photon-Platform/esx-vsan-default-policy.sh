@@ -22,7 +22,7 @@ PCLASS=(cluster vdisk vmnamespace vmswap vmem)
 
 for HOST in ${ESX[@]} ;
 do
-        echo -e "\e[7m### ${HOST} ###\e[0m"
+	echo -e "\e[7m### ${HOST} ###\e[0m"
 	for CLASS in ${PCLASS[@]} ;
 	do	
 		rexec ${HOST} "esxcli vsan policy setdefault -c ${CLASS} -p \"((\\\"hostFailuresToTolerate\\\" i0) (\\\"forceProvisioning\\\" i1) (\\\"stripeWidth\\\" i1))\""

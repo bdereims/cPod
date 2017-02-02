@@ -1,6 +1,11 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+###
+### Deploy Photon Controller OVA 
+### $1 : env configuration 
+###
+
 CONFDIR=./conf.d
 
 [ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
@@ -10,8 +15,8 @@ CONFDIR=./conf.d
 
 ### Local vars ####
 
-HOSTNAME=photon-controller
-NAME=photon-controller
+HOSTNAME=photon-controller-01
+NAME=photon-controller-01
 IP=${PCIP}
 OVA=${BITS}/installer-vm-1.1.0-5de1cb7.ova
 
@@ -23,7 +28,7 @@ cat << EOF > ${MYSCRIPT}
 cd ${OVFDIR}
 ./ovftool --acceptAllEulas --noSSLVerify --skipManifestCheck \
 --X:injectOvfEnv --overwrite --powerOffTarget --allowExtraConfig \
---X:apiVersion=5.5 --powerOn --diskMode=thin \
+--X:apiVersion=5.5 --X:waitForIp --powerOn --diskMode=thin \
 --prop:ip0=${IP} \
 --prop:netmask0=${NETMASK} \
 --prop:gateway=${GATEWAY} \

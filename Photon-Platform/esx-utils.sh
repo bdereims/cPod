@@ -13,7 +13,7 @@ function rexec {
 	echo -e "Exec on ${1} : \e[2m${2}\e[0m with ${ADMIN}"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
 	${ADMIN}@${1} $2
-	 [ ${?} -eq 0 ] && STATUS="\e[32mOk\e[0m" 	
+	[ ${?} -eq 0 ] && STATUS="\e[32mOk\e[0m" 	
 	echo -e "Exec status : ${STATUS}"
 }
 
