@@ -19,6 +19,7 @@ HOSTNAME=photon-controller-01
 NAME=photon-controller-01
 IP=${PCIP}
 OVA=${BITS}/installer-vm-1.1.0-5de1cb7.ova
+DATASTORE=datastore1
 
 ###################
 
