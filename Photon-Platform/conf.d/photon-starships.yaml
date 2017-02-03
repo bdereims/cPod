@@ -51,5 +51,5 @@ deployment:
   oauth_username: 'Administrator'
   oauth_password: 'VMware1!' 
   oauth_security_groups:
-    - "esxcloud\\Administrators"
-    - "esxcloud\\photonControllerAdmins"
+    - "cpod.net\\Administrators"
+    - "cpod.net\\photonControllerAdmins"

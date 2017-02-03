@@ -120,7 +120,7 @@ UsePrivilegeSeparation sandbox		# Default for new installations.
 #VersionAddendum none
 
 # no default banner path
-#Banner none
+Banner /etc/issue.net 
 
 # override default of no subsystems
 Subsystem	sftp	/usr/libexec/sftp-server

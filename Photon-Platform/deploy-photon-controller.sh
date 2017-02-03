@@ -3,15 +3,16 @@
 
 ###
 ### Deploy Photon Controller OVA 
-### $1 : env configuration 
 ###
 
-CONFDIR=./conf.d
+CONFDIR=./conf.d 
+DEFAULT=".default"
 
-[ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
-[ ! -f "${CONFDIR}/${1}" ] && echo "error: file '${1}' does not exist" && exit 1
+[ ! -e ${DEFAULT} ] && echo "error: file '${DEFAULT}' does not exist" && exit 1
+CONF=$(cat ${DEFAULT})
+[ ! -e ${CONFDIR}/${CONF} ] && echo "error: conf file '${CONFDIR}/${CONF}' does not exist" && exit 1
 
-. ${CONFDIR}/${1}
+.  ${CONFDIR}/${CONF}
 
 ### Local vars ####
 

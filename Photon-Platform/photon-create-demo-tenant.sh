@@ -31,10 +31,11 @@ function mk_del {
 
 echo -e "Did you create a Port Group called \e[1m'Photon Network'\e[0m?"
 read -n 1 -s -p "Press any key to continue"
+echo "\n"
 
 #photon target set http://${PCONTROLLER}:28080
 photon target set -c https://${LB}:443 
-photon target login --username administrator@esxcloud --password VMware1!
+photon target login --username administrator@cpod.net --password VMware1!
 
 photon -n tenant create ${TENANT} 
 TENANT_ID=`photon tenant list | grep ${TENANT} | cut -d' ' -f1`
@@ -72,7 +73,7 @@ photon vm start ${VM_ID}
 mk_del "photon -n vm stop ${VM_ID}"
 
 
-mk_del "photon target login --username administrator@esxcloud --password VMware1!"
+mk_del "photon target login --username administrator@cpod.net --password VMware1!"
 mk_del "photon target set -c https://${LB}:443"
 mk_del "#auto-generated during prep"
 mk_del "#!/bin/bash"
