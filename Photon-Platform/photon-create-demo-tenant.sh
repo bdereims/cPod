@@ -31,7 +31,7 @@ function mk_del {
 
 echo -e "Did you create a Port Group called \e[1m'Photon Network'\e[0m?"
 read -n 1 -s -p "Press any key to continue"
-echo "\n"
+echo -e "\n"
 
 #photon target set http://${PCONTROLLER}:28080
 photon target set -c https://${LB}:443 
@@ -80,4 +80,4 @@ mk_del "#!/bin/bash"
 tac ${TMP} > ${DEL_ENV}
 chmod +x ${DEL_ENV}
 rm ${TMP}
-echo "\n\nExecute ${DEL_ENV} in ${TMP} to destroy tenant."
+echo -e "\n\nExecute ${DEL_ENV} in ${TMP} to destroy tenant."

@@ -4,6 +4,8 @@
 ### Configure this host as cPodRouter ###
 ### Assuming connected to Internet    ### 
 
+### at least 1 vCPUi, 1Go for Memory and 8Go for Disk
+
 DIR=conf.d
 MISC=misc
 BITS=BITS

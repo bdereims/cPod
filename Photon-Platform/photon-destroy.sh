@@ -27,3 +27,4 @@ do
 	rexec ${HOST} "esxcli software vib remove -n photon-controller-agent"
 done
 
+echo -e "\n\nThink about to delete photon-controller-01 VM, it's error prone to redeploy on the same controller.\n"
