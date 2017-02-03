@@ -1,11 +1,18 @@
 #!/bin/bash 
 #bdereims@vmware.com
 
+###
+### Deploy Kubernetes in Photon Platform 
+###
 
-[ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
-[ ! -f "${1}" ] && echo "error: file '${1}' does not exist" && exit 1
+CONFDIR=./conf.d 
+DEFAULT=".default"
 
-. ./"${1}"
+[ ! -e ${DEFAULT} ] && echo "error: file '${DEFAULT}' does not exist" && exit 1
+CONF=$(cat ${DEFAULT})
+[ ! -e ${CONFDIR}/${CONF} ] && echo "error: conf file '${CONFDIR}/${CONF}' does not exist" && exit 1
+
+.  ${CONFDIR}/${CONF}
 
 ### Local vars ####
 
@@ -22,7 +29,7 @@ function mk_del {
 }
 
 function pauth {
-	photon target set -c https://${PCONTROLLER}:443 
+	photon target set -c https://${LB}:443 
 	photon target login --username administrator@cpod.net --password VMware1!
 
 	TENANT_ID=`photon tenant list | grep ${TENANT} | cut -d' ' -f1`
@@ -50,7 +57,7 @@ photon -n cluster create -n K8s -k KUBERNETES --dns ${DNS} --gateway ${GATEWAY} 
 -v photon-vm -d photon-disk 
 
 mk_del "photon target login --username administrator@cpod.net --password VMware1!"
-mk_del "photon target set -c https://${PCONTROLLER}:443"
+mk_del "photon target set -c https://${LB}:443"
 mk_del "#auto-generated during prep"
 mk_del "#!/bin/bash"
 tac ${TMP} > ${DEL_ENV}

@@ -25,3 +25,7 @@ export PHOTONENV=photon-starships.yaml
 export PCONTROLLER01=${PCIP}
 export LB=172.16.66.111
 export LIGHTWAVE01=172.16.66.112
+
+#Kubernetes
+export K8S_IP=172.16.66.113
+export ETCD_IP=172.16.66.114
