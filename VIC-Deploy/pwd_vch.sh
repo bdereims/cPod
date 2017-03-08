@@ -16,5 +16,6 @@ THUMBPRINT=`openssl s_client -connect ${VCSA}:443 < /dev/null 2>/dev/null | open
 cd ${VIC_DIR}
 
 ./vic-machine-linux debug --target ${TARGET} --user ${ADMIN} \
---password ${VC_PASSWORD} --name VCH --enable-ssh --rootpw ${PASSWORD} \
+--password ${VC_PASSWORD} --name VCH02 --enable-ssh --rootpw ${PASSWORD} \
+--compute-resource CLCOMP02 \
 --thumbprint ${THUMBPRINT} 

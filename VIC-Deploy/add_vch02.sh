@@ -13,11 +13,16 @@
 
 cd ${VIC_DIR}
 
-./vic-machine-linux create --target vcsa.brmc.local/DC01 --user administrator@vsphere.local \
---password VMware1! --compute-resource CLCOMP02 --image-store "dsVSAN-COMP-02" --name VCH02 --no-tlsverify \
---bridge-network "VCH02-Bridge" --management-network "VCH" \
---public-network "VCH" --client-network "VCH" \
---force --timeout 5m0s
+./vic-machine-linux create --target 'vcsa.brmc.local/DC01' --user 'administrator@vsphere.local' \
+--password 'VMware1!' --compute-resource 'CLCOMP02' --name 'VCH02' \
+--bridge-network "vxw-dvs-70-virtualwire-13-sid-5009-VCH02-Bridge" --management-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" \
+--public-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" --client-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" \
+--thumbprint ${THUMBPRINT} \
+--no-tls \
+--image-store 'dsVSAN-COMP-02' \
+--debug 1 
+#--force --timeout 10m0s
+#--image-store "dsVSAN-COMP-02"
 #--dns-server=10.66.0.15 \
 #--management-network-gateway 10.66.0.1/24 --management-network-ip 10.66.0.31 \
 #--public-network-gateway 10.66.0.1/24 --public-network-ip 10.66.0.32 \

@@ -13,7 +13,7 @@
 
 cd ${VIC_DIR}
 
-./vic-machine-linux delete --target vcsa.brmc.local/DC01 --force \
+./vic-machine-linux delete --target vcsa.brmc.local/DC01 \
 --user administrator@vsphere.local --password VMware1! \
 --compute-resource CLCOMP02 --name VCH02 \
 --force
