@@ -1,2 +1,0 @@
-. /root/check_proxy.sh
-rm /root/.ssh/known_hosts &> /dev/null

@@ -1,0 +1,9 @@
+[Unit]
+Description=Update public DNS entry for this network
+Wants=dyndns.timer
+ 
+[Service]
+ExecStart=/root/update-dns.sh
+
+[Install]
+WantedBy=minute-timer.target

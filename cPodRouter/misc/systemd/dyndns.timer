@@ -1,0 +1,9 @@
+[Unit]
+Description=Update public DNS entry for this network
+
+[Timer]
+OnBootSec=1min
+OnCalendar=*:0/1
+
+[Install]
+WantedBy=basic.target
