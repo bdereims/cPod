@@ -17,9 +17,10 @@ cd ${VIC_DIR}
 --password 'VMware1!' --compute-resource 'CLCOMP02' --name 'VCH02' \
 --bridge-network "vxw-dvs-70-virtualwire-13-sid-5009-VCH02-Bridge" --management-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" \
 --public-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" --client-network "vxw-dvs-70-virtualwire-37-sid-5027-VCH02" \
---thumbprint ${THUMBPRINT} \
+--thumbprint "2B:6C:C9:83:FD:DD:25:F7:8B:D1:1A:FB:49:00:3F:42:44:AE:CE:8C" \
+--image-store 'Datastore' \
 --no-tls \
---image-store 'dsVSAN-COMP-02' \
+--dns-server=172.16.60.10 \
 --debug 1 
 #--force --timeout 10m0s
 #--image-store "dsVSAN-COMP-02"
