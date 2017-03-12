@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #bdereims@vmware.com
 
 [ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
@@ -10,7 +10,6 @@
 
 HOSTNAME=photonos
 NAME=${HOSTNAME}
-IP=10.66.0.99
 OVA=${BITS}/photon-custom-hw11-1.0-13c08b6.ova
 
 ###################
@@ -22,9 +21,9 @@ ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
 --noSSLVerify --skipManifestCheck --powerOn --diskMode=thin \
 "-ds=${DATASTORE}" -n=${NAME} "--network=${PORTGROUP}" \
 ${OVA} \
-vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
+vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}/host/${CLUSTER}
 EOF
 
 sh ${MYSCRIPT}
 
-#rm ${MYSCRIPT}
+rm ${MYSCRIPT}
