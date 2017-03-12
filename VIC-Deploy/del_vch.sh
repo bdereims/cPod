@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #bdereims@vmware.com
 
 
@@ -13,8 +13,7 @@
 
 cd ${VIC_DIR}
 
-./vic-machine-linux delete --target vcsa.brmc.local/DC01 --force \
---user administrator@vsphere.local --password VMware1! \
---compute-resource CLCOMP01 --name VCH01 \
+./vic-machine-linux delete --target ${TARGET} --force \
+--user ${ADMIN} --password ${VC_PASSWORD} \
+--compute-resource ${CLUSTER} --name ${VCH} \
 --force
-#--thumbprint 57:21:1B:AD:74:DF:44:06:8B:CE:2E:7E:6E:E3:13:CF:D9:C4:E8:42

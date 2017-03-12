@@ -1,17 +1,20 @@
 #!/bin/bash
 #bdereims@vmware.com
 
-export DNS=10.66.0.15
+export DNS=172.16.66.1
 export NTP=${DNS}
-export DOMAIN=cpod.showroom.local
-export GATEWAY=10.66.0.1
+export DOMAIN=cpod.net
+export GATEWAY=172.16.66.1
 export NETMASK=255.255.255.0
 export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="VM Network"
-export ADMIN=administrator@vsphere.local
-export VCSA=vcsa.cpod.showroom.local
+export BRIDGE="DPortGroup"
+export ADMIN=administrator@cpod.net
+export VCSA=vcsa65.cpod.net
 export TARGET=${VCSA}/Datacenter
-export DATASTORE=datastoreRAID5
-export BITS=../../BITS
-export VIC_DIR=../../vic
+export VCH=VCH01
+export CLUSTER=Cluster
+export DATASTORE=DS65
+export BITS=../../../BITS
+export VIC_DIR=../../../vic

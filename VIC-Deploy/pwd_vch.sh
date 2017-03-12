@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #bdereims@vmware.com
 
 
@@ -16,5 +16,5 @@ THUMBPRINT=`openssl s_client -connect ${VCSA}:443 < /dev/null 2>/dev/null | open
 cd ${VIC_DIR}
 
 ./vic-machine-linux debug --target ${TARGET} --user ${ADMIN} \
---password ${VC_PASSWORD} --name VCH --enable-ssh --rootpw ${PASSWORD} \
+--password ${VC_PASSWORD} --name ${VCH} --enable-ssh --rootpw ${PASSWORD} \
 --thumbprint ${THUMBPRINT} 
