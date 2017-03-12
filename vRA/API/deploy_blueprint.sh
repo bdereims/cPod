@@ -45,7 +45,7 @@ while true; do
 	fi
 	END=$(date +%s.%N)
 	DIFF=$(echo "$END - $START" | bc)
-	echo -en "\rDuration: ${DIFF}s - Current statusi: $STATUS"
+	echo -en "\rDuration: ${DIFF}s - Current status: $STATUS"
 	sleep $REFRESHRATE 
 done
 
