@@ -14,5 +14,5 @@ export VCSA=vcsa.brmc.local
 export TARGET=${VCSA}/DC01
 export DATASTORE=dsVSAN-COMP-01
 export BITS=../../BITS
-export VIC_DIR=../../../vic
+export VIC_DIR=../../vic
 export THUMBPRINT=`openssl s_client -connect ${VCSA}:443 < /dev/null 2>/dev/null | openssl x509 -fingerprint -noout -in /dev/stdin | sed -e 's/^.*=//'`
