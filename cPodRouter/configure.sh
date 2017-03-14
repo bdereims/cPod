@@ -82,6 +82,15 @@ chmod +x /usr/bin/photon
 cd -
 rm -fr /tmp/$$
 
+#Install jq 1.5
+mkdir -p /tmp/$$
+cd /tmp/$$
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+mv jq-linux64 /usr/bin/jq
+chmod +x /usr/bin/jq 
+cd -
+rm -fr /tmp/$$
+
 #PowerCLIcore Container
 systemctl start docker
 docker pull vmware/powerclicore
