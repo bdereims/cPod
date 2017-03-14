@@ -78,7 +78,7 @@ cd /tmp/$$
 wget https://github.com/vmware/photon-controller/releases/download/v1.1.0/photon-linux64-1.1.0-5de1cb7
 PHOTONCLI=$(ls -1 photon-linux*)
 cp ${PHOTONCLI} /usr/bin/photon
-chmod +x /usr/bin/photon
+chmod ugo+rx /usr/bin/photon
 cd -
 rm -fr /tmp/$$
 
@@ -87,7 +87,16 @@ mkdir -p /tmp/$$
 cd /tmp/$$
 wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
 mv jq-linux64 /usr/bin/jq
-chmod +x /usr/bin/jq 
+chmod ugo+rx /usr/bin/jq 
+cd -
+rm -fr /tmp/$$
+
+#Install docker-compose
+mkdir -p /tmp/$$
+cd /tmp/$$
+wget https://github.com/docker/compose/releases/download/1.11.2/docker-compose-Linux-x86_64
+mv docker-compose-Linux-x86_64 /usr/local/bin/docker-compose
+chmod ugo+rx /usr/local/bin/docker-compose
 cd -
 rm -fr /tmp/$$
 
