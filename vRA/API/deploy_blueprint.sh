@@ -19,7 +19,7 @@ AUTH=$(echo $TOKEN | sed -e 's/^.*id":"//' -e 's/".*$//')
 AUTH="Bearer $AUTH"
 
 #Query Blueprint ID
-BPID=$(curl -s --insecure -H "Accept:text/json" -H "Authorization: $AUTH" https://$VRA/catalog-service/api/consumer/entitledCatalogItemViews?%24filter=name+eq+%27Erable%27 | python -m json.tool | grep "catalogItemId" | sed -e 's/.*": "//' -e 's/".*$//')
+BPID=$(curl -s --insecure -H "Accept:text/json" -H "Authorization: $AUTH" https://$VRA/catalog-service/api/consumer/entitledCatalogItemViews?%24filter=name+eq+%27${BLUEPRINT}%27 | python -m json.tool | grep "catalogItemId" | sed -e 's/.*": "//' -e 's/".*$//')
 
 #Create JSON template
 curl -s --insecure -H "application/json" -H "Authorization: $AUTH" \
