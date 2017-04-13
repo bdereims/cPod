@@ -1,12 +1,25 @@
 #!/bin/sh
-#bdereims@vmware.com
+# Copyright 2017, bdereims@vmware.com 
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 
 export REFRESHRATE=20
-export USERNAME=erable@brmc.local
-export PASSWORD=c@perabl3
-export TENANT=vsphere.local
-export VRA=vra.brmc.local
-export BLUEPRINT=Erable
+export USERNAME=<username@tenant.local in vRA, ex. administrator@vsphere.local>
+export PASSWORD=<user password>
+export TENANT=<tenant where the blueprint is, ex. vsphere.local>
+export VRA=<vRA appliance FQDN, ex. vra.cpod.net>
+export BLUEPRINT=<Blueprint Name, ex. CentOS>
 export BPJSON=/tmp/$BLUEPRINT-$$.json
 
 DATA='{"username":"'$USERNAME'","password":"'$PASSWORD'","tenant":"'$TENANT'"}'
