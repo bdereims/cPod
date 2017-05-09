@@ -1,6 +1,6 @@
 #/bin/bash -x
 #bdereims@vmware.com
-
+ 
 ### Configure this host as cPodRouter ###
 ### Assuming connected to Internet    ### 
 
@@ -37,9 +37,12 @@ cp ${DIR}/sshd_config /etc/ssh/.
 
 #DNS/DHCP
 cp ${DIR}/dnsmasq.conf /etc/.
+chmod 0755 /etc/dnsmasq.conf
 
 #NTP Configuration
 cp ${DIR}/ntp.conf /etc/.
+chown ntp:ntp /etc/ntp.conf
+chmod 0644 /etc/ntp.conf
 ntpdate ntp.org
 
 #Web Portal
