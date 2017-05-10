@@ -13,7 +13,7 @@ NAME=cpodrouter
 
 #Update for the role
 tdnf -y update
-tdnf -y install dnsmasq git sshpass ntp nginx tar wget
+tdnf -y install dnsmasq git sshpass ntp nginx tar wget nfs-utils
 
 #Change name
 echo $NAME > /etc/hostname
