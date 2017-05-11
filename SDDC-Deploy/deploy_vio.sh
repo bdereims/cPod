@@ -10,9 +10,9 @@
 ### Local vars ####
 
 HOSTNAME=oms
-NAME=VIO
-IP=172.16.60.42
-OVA=${BITS}/VMware-OpenStack-3.0.0.0-4334264_OVF10.ova
+NAME=OMS
+IP=172.18.0.97
+OVA=${BITS}/VMware-OpenStack-3.1.0.0-5065461_OVF10.ova
 
 ###################
 

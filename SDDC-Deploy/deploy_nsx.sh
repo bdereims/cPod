@@ -1,1 +1,40 @@
-ovftool --acceptAllEulas --allowExtraConfig --prop:vsm_cli_passwd_0=VMware1! --prop:vsm_cli_en_passwd_0=VMware1! --prop:vsm_hostname=nsx.cpod.net --prop:vsm_ip_0=192.168.1.41 --prop:vsm_netmask_0=255.255.255.0 --prop:vsm_gateway_0=192.168.1.2 --prop:vsm_dns1_0=192.168.1.2 --prop:vsm_domain_0=cpod.net --prop:vsm_ntp_0=192.168.1.2 --prop:vsm_isSSHEnabled=True -ds=vsanDatastore -n=lab-cPod-nsx --network="VM Network" ./VMware-NSX-Manager-6.2.4-4292526.ova vi://bdereims%40showroom.local@p-vc-paris01.showroom.local/Showroom/host/ClusterDell/d-esx04.showroom.local/ 
+#!/bin/bash
+#bdereims@vmware.com
+
+
+[ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
+[ ! -f "${1}" ] && echo "error: file '${1}' does not exist" && exit 1
+
+. ./"${1}"
+
+### Local vars ####
+
+HOSTNAME=nsx2
+NAME=NSX2
+IP=172.18.0.98
+OVA=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova
+
+###################
+
+export MYSCRIPT=/tmp/$$
+
+cat << EOF > ${MYSCRIPT}
+ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
+--prop:vsm_cli_passwd_0=${PASSWORD} \
+--prop:vsm_cli_en_passwd_0=${PASSWORD} \
+--prop:vsm_hostname=${HOSTNAME} \
+--prop:vsm_ip_0=${IP} \
+--prop:vsm_netmask_0=${NETMASK} \
+--prop:vsm_gateway_0=${GATEWAY} \
+--prop:vsm_dns1_0=${DNS} \
+--prop:vsm_domain_0=${DOMAIN} \
+--prop:vsm_ntp_0=${NTP} \
+--prop:vsm_isSSHEnabled=True \
+-ds=${DATASTORE} -n=${NAME} --network='${PORTGROUP}' \
+${OVA} \
+vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
+EOF
+
+sh ${MYSCRIPT}
+
+#rm ${MYSCRIPT}

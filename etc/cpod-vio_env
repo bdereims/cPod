@@ -1,0 +1,15 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export DNS=172.18.0.1
+export NTP=${DNS}
+export DOMAIN=cpod-vio.shwrfr.mooo.com
+export GATEWAY=172.18.0.1
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="VM Network"
+export ADMIN=administrator%40vsphere.local
+export TARGET=vcsa.cpod-vio.shwrfr.mooo.com/cPod-VIO/host/Management/
+export DATASTORE=Datastore
+export BITS=../../BITS
