@@ -9,8 +9,8 @@
 
 ### Local vars ####
 
-HOSTNAME=nsx2
-NAME=NSX2
+HOSTNAME=nsx
+NAME=NSX
 IP=172.18.0.98
 OVA=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova
 

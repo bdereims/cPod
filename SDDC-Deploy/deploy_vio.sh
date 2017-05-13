@@ -29,7 +29,7 @@ ovftool --acceptAllEulas --allowExtraConfig \
 --prop:ntpServer=${NTP} \
 "--prop:viouser_passwd=${PASSWD}" \
 --vService:"installation"="com.vmware.vim.vsm:extension_vservice" \
--ds=${DATASTORE} -n=${NAME} --network=${PORTGROUP} \
+-ds=${DATASTORE} -n=${NAME} --network='${PORTGROUP}' \
 ${OVA} \
 vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
 EOF

@@ -10,9 +10,9 @@
 ### Local vars ####
 
 HOSTNAME=li
-NAME=lab-cPod-li
-IP=192.168.1.45
-OVA=${BITS}/VMware-vRealize-Log-Insight-3.6.0-4202923.ova
+NAME=LI
+IP=172.18.0.92
+OVA=${BITS}/VMware-vRealize-Log-Insight-4.3.0-5084751.ova
 
 ###################
 

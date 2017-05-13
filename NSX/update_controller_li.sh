@@ -2,9 +2,9 @@
 
 MYSCRIPT=$$
 CREDENTIALS=admin:VMware1!
-NSXMGR=nsx.cpod.net
+NSXMGR=nsx.cpod-vio.shwrfr.mooo.com
 
-NSXCTRL=1
+NSXCTRL=2
 curl -k -u ${CREDENTIALS} --header "Content-Type:text/xml;charset=UTF-8" -d @nsxctrl.xml -X POST https://${NSXMGR}/api/2.0/vdn/controller/controller-${NSXCTRL}/syslog
 
 echo "--Check Settings--"
