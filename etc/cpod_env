@@ -1,0 +1,15 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export DNS=172.18.0.1
+export NTP=${DNS}
+export DOMAIN=cpod-vio.shwrfr.mooo.com
+export GATEWAY=172.18.0.1
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="vxw-dvs-109-virtualwire-5-sid-5002-cpod-vio"
+export ADMIN=administrator%40vsphere.local
+export TARGET=10.1.0.100/Showroom/host/DELL%20Cluster/
+export DATASTORE=DELL-VSAN
+export BITS=../../BITS
