@@ -1,0 +1,31 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+#Base of configuration
+export OVFDIR=/root/ovftool
+export DNS=172.18.2.1
+export NTP=${DNS}
+export DOMAIN=cpod-pp.shwrfr.mooo.com
+export CPODROUTER=cpodrouter.${DONAIN}
+export GATEWAY=172.18.2.1
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export PORTGROUP="VM Network"
+export ADMIN=root
+export DATASTORE=Datastore
+export BITS=/data/BITS
+export TARGET=esx-01.${DOMAIN}
+
+#List of ESX in the Pod
+export ESX=(172.18.2.11 172.18.2.12 172.18.2.13 172.18.2.14 172.18.2.15)
+
+#Photon Platform configuration
+export PCIP=172.18.2.30
+export PHOTONENV=photon-cpod-pp.yaml
+export PCONTROLLER01=${PCIP}
+export LB=172.18.2.31
+export LIGHTWAVE01=172.18.2.32
+
+#Kubernetes
+export K8S_IP=172.18.2.33
+export ETCD_IP=172.18.2.34
