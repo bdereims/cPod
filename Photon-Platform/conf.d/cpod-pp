@@ -14,7 +14,7 @@ export PORTGROUP="VM Network"
 export ADMIN=root
 export DATASTORE=Datastore
 export BITS=/data/BITS
-export TARGET=esx-01.${DOMAIN}
+export TARGET=esx-02.${DOMAIN}
 
 #List of ESX in the Pod
 export ESX=(172.18.2.11 172.18.2.12 172.18.2.13 172.18.2.14 172.18.2.15)
