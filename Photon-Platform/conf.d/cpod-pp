@@ -29,3 +29,6 @@ export LIGHTWAVE01=172.18.2.32
 #Kubernetes
 export K8S_IP=172.18.2.33
 export ETCD_IP=172.18.2.34
+
+#Photon Installer
+PINSTALLER=172.18.2.141
