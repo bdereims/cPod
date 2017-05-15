@@ -1,0 +1,73 @@
+compute:
+  hypervisors:
+    esx-02:
+      hostname: "esx-02"
+      ipaddress: "172.18.2.12"
+      dns: "172.18.2.30"
+      credential:
+        username: "root"
+        password: "VMware1!"
+lightwave:
+  domain: "cpod-pp.shwrfr.mooo.com"
+  credential:
+    username: "administrator"
+    password: "VMware1!"
+  controllers:
+    lightwave-1:
+      site: "cPod"
+      appliance:
+        hostref: "esx-02"
+        datastore: "Datastore"
+        credential:
+          username: "root"
+          password: "VMware1!"
+        network-config:
+          network: "NAT=VM Network"
+          type: "static"
+          hostname: "lightwave-1.cpod-pp.shwrfr.mooo.com"
+          ipaddress: "172.18.2.30"
+          dns: "172.18.2.1"
+          ntp: "172.18.2.1"
+          netmask: "255.255.0.0"
+          gateway: "172.18.2.1"
+photon:
+  imagestore:
+    img-store-1:
+      datastore: "Datastore"
+      enableimagestoreforvms: "true"
+  cloud:
+    hostref1: "esx-02"
+  controllers:
+    pc-1:
+      appliance:
+        hostref: "esx-02"
+        datastore: "Datastore"
+        credential:
+          username: "root"
+          password: "VMware1!"
+        network-config:
+          network: "NAT=VM Network"
+          type: "static"
+          hostname: "pc-1.cpod-pp.shwrfr.mooo.com"
+          ipaddress: "172.18.2.31"
+          netmask: "255.255.0.0"
+          dns: "172.18.2.30"
+          ntp: "172.18.2.1"
+          gateway: "172.18.2.1"
+loadBalancer:
+  lb-1:
+    appliance:
+      hostref: "esx-02"
+      datastore: "Datastore"
+      credential:
+        username: "root"
+        password: "VMware1!"
+      network-config:
+        network: "NAT=VM Network"
+        type: "static"
+        hostname: "lb-1.cpod-pp.shwrfr.mooo.com"
+        ipaddress: "172.18.2.32"
+        netmask: "255.255.0.0"
+        dns: "172.18.2.30"
+        ntp: "172.18.2.1"
+        gateway: "172.18.2.1"

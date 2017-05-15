@@ -18,7 +18,8 @@ CONF=$(cat ${DEFAULT})
 
 HOSTNAME=photon-installer
 NAME=photon-installer
-OVA=${BITS}/installer-ova-nv-1.2-dd9d360.ova
+OVA=${BITS}/installer-ova-nv-1.2.1-77a6d82.ova
+IP=172.18.2.19
 DATASTORE=Datastore
 
 ###################
@@ -32,11 +33,9 @@ cd ${OVFDIR}
 --X:apiVersion=5.5 --X:waitForIp --powerOn --diskMode=thin \
 --prop:ip0=${IP} \
 --prop:netmask0=${NETMASK} \
---prop:gateway=${GATEWAY} \
+--prop:gateway0=${GATEWAY} \
 --prop:DNS=${DNS} \
 --prop:ntp_servers=${NTP} \
---prop:admin_password=${PASSWORD} \
---prop:pcuser_password=${PASSWORD} \
 "--datastore=${DATASTORE}" -n=${NAME} "--network=${PORTGROUP}" \
 ${OVA} \
 vi://${ADMIN}:'${PASSWORD}'@${TARGET}
