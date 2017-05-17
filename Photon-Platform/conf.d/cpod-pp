@@ -20,15 +20,15 @@ export TARGET=esx-02.${DOMAIN}
 export ESX=(172.18.2.11 172.18.2.12 172.18.2.13 172.18.2.14 172.18.2.15)
 
 #Photon Platform configuration
-export PCIP=172.18.2.30
+export PCIP=172.18.2.31
 export PHOTONENV=photon-cpod-pp.yaml
 export PCONTROLLER01=${PCIP}
-export LB=172.18.2.31
-export LIGHTWAVE01=172.18.2.32
+export LB=172.18.2.33
+export LIGHTWAVE01=172.18.2.30
 
 #Kubernetes
-export K8S_IP=172.18.2.33
-export ETCD_IP=172.18.2.34
+export K8S_IP=172.18.2.37
+export ETCD_IP=172.18.2.38
 
 #Photon Installer
 PINSTALLER=172.18.2.141
