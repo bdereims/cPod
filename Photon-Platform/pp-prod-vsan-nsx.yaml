@@ -64,7 +64,7 @@ lightwave:
       site: "paris-2"
       partner: "172.18.2.30"
       appliance:
-        hostref: "esx-01"
+        hostref: "esx-03"
         datastore: "Datastore"
         memoryMb: 2048
         cpus: 2
@@ -86,16 +86,18 @@ photon:
       datastore: "Datastore"
       enableimagestoreforvms: "true"
   cloud:
-    hostref-1: "esx-03"
-    hostref-2: "esx-04"
-    hostref-3: "esx-05"
+    hostref-1: "esx-01"
+    hostref-2: "esx-02"
+    hostref-3: "esx-03"
+    hostref-4: "esx-04"
+    hostref-5: "esx-05"
   administrator-group: "cpod-pp.shwrfr.mooo.com\\Administrators"
   syslog:
     ipaddress: "172.18.2.34"
   controllers:
     pc-1:
       appliance:
-        hostref: "esx-01"
+        hostref: "esx-04"
         datastore: "Datastore"
         memoryMb: 2048
         cpus: 2
@@ -113,7 +115,7 @@ photon:
           gateway: "172.18.2.1"
     pc-2:
       appliance:
-        hostref: "esx-02"
+        hostref: "esx-05"
         datastore: "Datastore"
         memoryMb: 2048
         cpus: 2
@@ -132,7 +134,7 @@ photon:
 vsan:
   vsan-1:
     appliance:
-      hostref: "esx-02"
+      hostref: "esx-01"
       datastore: "Datastore"
       memoryMb: 2048
       cpus: 2
@@ -167,8 +169,26 @@ loadBalancer:
         dns: "172.18.2.30,172.18.2.33"
         ntp: "172.18.2.1"
         gateway: "172.18.2.1"
+  load-balancer-2:
+    appliance:
+      hostref: "esx-03"
+      datastore: "Datastore"
+      memoryMb: 2048
+      cpus: 2
+      credential:
+        username: "root"
+        password: "VMware1!"
+      network-config:
+        type: "static"
+        hostname: "lb-2.cpod-pp.shwrfr.mooo.com"
+        ipaddress: "172.18.2.37"
+        network: "NAT=VM Network"
+        netmask: "255.255.255.0"
+        dns: "172.18.2.30,172.18.2.33"
+        ntp: "172.18.2.1"
+        gateway: "172.18.2.1"
 nsxconfig:
-  ipaddress: "172.18.2."
+  ipaddress: "172.18.2.20"
   credential:
     username: "admin"
     password: "VMware1!"
