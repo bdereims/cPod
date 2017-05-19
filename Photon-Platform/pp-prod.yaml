@@ -1,12 +1,5 @@
 compute:
   hypervisors:
-    esx-01:
-      hostname: "esx-01"
-      ipaddress: "172.18.2.11"
-      dns: "172.18.2.30"
-      credential:
-        username: "root"
-        password: "VMware1!"
     esx-02:
       hostname: "esx-02"
       ipaddress: "172.18.2.12"
@@ -86,11 +79,10 @@ photon:
       datastore: "Datastore"
       enableimagestoreforvms: "true"
   cloud:
-    hostref-1: "esx-01"
-    hostref-2: "esx-02"
-    hostref-3: "esx-03"
-    hostref-4: "esx-04"
-    hostref-5: "esx-05"
+    hostref-1: "esx-02"
+    hostref-2: "esx-03"
+    hostref-3: "esx-04"
+    hostref-4: "esx-05"
   administrator-group: "cpod-pp.shwrfr.mooo.com\\Administrators"
   syslog:
     ipaddress: "172.18.2.34"
@@ -132,7 +124,7 @@ photon:
           ntp: "172.18.2.1"
           gateway: "172.18.2.1"
 loadBalancer:
-  load-balancer-1:
+  load-balancer:
     appliance:
       hostref: "esx-02"
       datastore: "Datastore"
@@ -143,26 +135,8 @@ loadBalancer:
         password: "VMware1!"
       network-config:
         type: "static"
-        hostname: "lb-1.cpod-pp.shwrfr.mooo.com"
-        ipaddress: "172.18.2.31"
-        network: "NAT=VM Network"
-        netmask: "255.255.255.0"
-        dns: "172.18.2.30,172.18.2.33"
-        ntp: "172.18.2.1"
-        gateway: "172.18.2.1"
-  load-balancer-2:
-    appliance:
-      hostref: "esx-03"
-      datastore: "Datastore"
-      memoryMb: 2048
-      cpus: 2
-      credential:
-        username: "root"
-        password: "VMware1!"
-      network-config:
-        type: "static"
-        hostname: "lb-2.cpod-pp.shwrfr.mooo.com"
-        ipaddress: "172.18.2.37"
+        hostname: "lb.cpod-pp.shwrfr.mooo.com"
+        ipaddress: "172.18.2.32"
         network: "NAT=VM Network"
         netmask: "255.255.255.0"
         dns: "172.18.2.30,172.18.2.33"

@@ -23,7 +23,7 @@ export ESX=(172.18.2.11 172.18.2.12 172.18.2.13 172.18.2.14 172.18.2.15)
 export PCIP=172.18.2.31
 export PHOTONENV=photon-cpod-pp.yaml
 export PCONTROLLER01=${PCIP}
-export LB=172.18.2.33
+export LB=172.18.2.32
 export LIGHTWAVE01=172.18.2.30
 
 #Kubernetes

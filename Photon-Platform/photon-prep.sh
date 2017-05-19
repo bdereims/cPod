@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #bdereims@vmware.com
 
 ###
@@ -23,7 +23,7 @@ PROCJET_HABOR="Habor"
 ###################
 
 photon target set -c https://${LB}:443
-photon target login --username administrator@${DOMAIN} --password '${PASSWORD}'
+photon target login --username administrator@${DOMAIN} --password ${PASSWORD}
 
 photon tenant create ${TENANT} \ 
 --limits 'vm.count 100 COUNT, \
@@ -68,9 +68,13 @@ photon -n flavor create --name "disk-eph" --kind "ephemeral-disk" \
 photon -n flavor create --name "disk-persist" --kind "persistent-disk" \
 --cost "persistent-disk 1 COUNT"
 
+exit 0
+
 # Create Images
 photon image create --name habor-image --image_replication ON_DEMAND --scope project --project ${PROCJET_HABOR} \
 $BITS/harbor-0.4.1-pc-1.2.1-77a6d82.ova
+
+exit 0
 
 HARBOR_IMAGE_ID=$(photon image list | grep harbor-image | cut -d' ' -f1)
 photon system enable-service-type --type HARBOR ${HARBOR_IMAGE_ID}
