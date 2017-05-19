@@ -1,0 +1,4 @@
+
+photon service create --name harbor-service --type HARBOR --dns 172.18.2.30 --gateway 172.18.2.1 --netmask 255.255.255.0 --worker_count 1 --master-ip 172.18.2.37 --vm_flavor harbor-service-vm --tenant Demo --project Harbor --admin-password 'VMware1!'
+
+photon service create -n K8s -k KUBERNETES --master-ip 172.18.2.38 --master-ip2 172.18.2.39 --load-balancer-ip 172.18.2.43 --etcd1 172.18.2.40 --etcd2 172.18.2.41 --etcd3 172.18.2.42 --container-network 10.2.0.0/16 --dns 172.18.2.30 --gateway 172.18.2.1 --netmask 255.255.0.0 -c 3 --vm_flavor service-small
