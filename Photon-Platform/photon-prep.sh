@@ -26,18 +26,20 @@ photon target set -c https://${LB}:443
 photon target login --username administrator@${DOMAIN} --password ${PASSWORD}
 
 photon tenant create ${TENANT} \ 
---limits 'vm.count 100 COUNT, \
-vm.cost 1000 COUNT, \
-vm.memory 1000 GB, \
-vm.cpu 500 COUNT, \
-ephemeral-disk 1000 COUNT, \
-ephemeral-disk.capacity 1000 GB, \
-ephemeral-disk.cost 1000 GB, \ 
-persistent-disk 1000 COUNT, \
-persistent-disk.capacity 1000 GB, \
-persistent-disk.cost 1000 GB, \
-storage.LOCAL_VMFS 1000 COUNT, \
-storage.VSAN 1000 COUNT, \
+--limits 'vm.count 100 COUNT, 
+vm.cost 1000 COUNT, 
+vm.memory 1000 GB, 
+vm.cpu 500 COUNT, 
+vm 500 COUNT, 
+vm.flavor.cluster-other-vm 100 COUNT,
+ephemeral-disk 1000 COUNT, 
+ephemeral-disk.capacity 1000 GB, 
+ephemeral-disk.cost 1000 GB,  
+persistent-disk 1000 COUNT, 
+persistent-disk.capacity 1000 GB, 
+persistent-disk.cost 1000 GB, 
+storage.LOCAL_VMFS 1000 COUNT, 
+storage.VSAN 1000 COUNT, 
 sdn.floatingip.size 1000 COUNT'
 
 photon tenant set ${TENANT}
@@ -60,7 +62,7 @@ photon flavor create --name service-small --kind "vm" \
 --cost "vm.count 1 COUNT, vm.cpu 1 COUNT, vm.memory 2 GB"
 
 photon -n flavor create --name "vm-basic" --kind "vm" \
---cost "vmcount 1 COUNT, vm.cpu 2 COUNT, vm.memory 4 GB" \
+--cost "vm.count 1 COUNT, vm.cpu 2 COUNT, vm.memory 4 GB" 
 
 photon -n flavor create --name "disk-eph" --kind "ephemeral-disk" \
 --cost "ephemeral-disk 1 COUNT"
@@ -68,30 +70,36 @@ photon -n flavor create --name "disk-eph" --kind "ephemeral-disk" \
 photon -n flavor create --name "disk-persist" --kind "persistent-disk" \
 --cost "persistent-disk 1 COUNT"
 
-exit 0
 
+### Harbor ###
 # Create Images
-photon image create --name habor-image --image_replication ON_DEMAND --scope project --project ${PROCJET_HABOR} \
+PROJECTID=$( photon project list | grep Harbor | cut -d' ' -f1 )
+photon image create --name harbor-image --image_replication ON_DEMAND --scope project --project ${PROJECTID} \
 $BITS/harbor-0.4.1-pc-1.2.1-77a6d82.ova
 
-exit 0
-
 HARBOR_IMAGE_ID=$(photon image list | grep harbor-image | cut -d' ' -f1)
-photon system enable-service-type --type HARBOR ${HARBOR_IMAGE_ID}
+photon system enable-service-type --type HARBOR --image-id ${HARBOR_IMAGE_ID}
 
 # Create Services
 photon service create --name harbor-service --type HARBOR \
---dns ${LB} --gateway ${GATEWAY} --netmask ${NETMASK} --worker_count 1 \
+--dns ${LB} --gateway ${GATEWAY} --netmask ${NETMASK} \
 --master-ip ${HARBORIP} --vm_flavor harbor-service-vm \
---tenant ${TENANT} --project ${PROCJET_HABOR} --admin-passwd ${PASSWORD} 
+--tenant ${TENANT} --project ${PROCJET_HABOR} --admin-password ${PASSWORD} 
 
-#photon cluster show CLUSTER-ID/Entity
+photon service list
 
-photon service create -n k8s-service -k KUBERNETES --tenant ${TENANT} --project ${PROJECT}
+### K8s ###
+PROJECTID=$( photon project list | grep cPod | cut -d' ' -f1 )
+photon image create --name k8s-image --image_replication ON_DEMAND --scope project --project ${PROJECTID} \
+$BITS/kubernetes-1.6.0-pc-1.2.1-77a6d82.ova
+
+K8S_IMAGE_ID=$(photon image list | grep k8s-image | cut -d' ' -f1)
+photon system enable-service-type --type KUBERNETES --image-id ${K8S_IMAGE_ID}
+
+photon service create -n k8s-service -k KUBERNETES --tenant ${TENANT} --project ${PROJECT} \
 --master-ip 172.18.2.38 --master-ip2 172.18.2.39 --load-balancer-ip 172.18.2.43 \ 
 --etcd1 172.18.2.40 --etcd2 172.18.2.41 --etcd3 172.18.2.42 \
 --container-network 10.2.0.0/16 --dns ${LB} --gateway ${GATEWAY} --netmask ${NETMASK} \
 --worker_count 1 --master-vm-flavor service-small --worker-vm-flavor vm-basic
 
-#SERVICE_ID=$(photon service list | ...)
 #photon service get-kubectl-auth -u administrator@${DOMAIN} -p '${PASSWORD} ${SERVICE_ID} 
