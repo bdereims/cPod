@@ -25,7 +25,7 @@ ln -s /etc/issue /etc/issue.net
 cp ${DIR}/photon.png /boot/grub2/themes/photon/.
 
 #Network configuration
-rm -fr /etc/systemd/network/10-dhcp-en.network
+rm -fr /etc/systemd/network/*
 cp ${DIR}/*network /etc/systemd/network
 chmod o+r /etc/systemd/network/*
 cp ${DIR}/iptables /etc/systemd/scripts/.

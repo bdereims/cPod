@@ -6,3 +6,6 @@ Address=172.16.66.1/24
 
 [DHCP]
 UseDNS=false
+
+[Link]
+MTUBytes=8192
