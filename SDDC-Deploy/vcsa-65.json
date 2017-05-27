@@ -3,34 +3,34 @@
     "__comments": "Sample template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
-            "hostname": "10.66.0.14",
+            "hostname": "###TARGET###",
             "username": "root",
-            "password": "VMware1!",
-            "deployment.network": "VM Network",
-            "datastore": "datastoreRAID5"
+            "password": "###PASSWORD###",
+            "deployment.network": "###PORTGROUP###",
+            "datastore": "###DATASTORE###"
         },
         "appliance": {
             "thin.disk.mode": true,
             "deployment.option": "small",
-            "name": "vCSA"
+            "name": "###NAME###"
         },
         "network": {
             "ip.family": "ipv4",
             "mode": "static",
-            "ip": "10.66.0.30",
+            "ip": "###IP###",
             "dns.servers": [
-                "10.66.0.15"
+                "###DNS###"
             ],
             "prefix": "24",
-            "gateway": "10.66.0.1",
-            "system.name": "vcsa.cpod.showroom.local"
+            "gateway": "###GATEWAY###",
+            "system.name": "###HOSTNAME###"
         },
         "os": {
-            "password": "VMware1!",
+            "password": "###PASSWORD###",
             "ssh.enable": true 
         },
         "sso": {
-            "password": "VMware1!",
+            "password": "###PASSWORD###",
             "domain-name": "vsphere.local",
             "site-name": "cPod"
         }
@@ -63,7 +63,7 @@
             ]
         },
         "settings": {
-            "ceip.enabled": true
+            "ceip.enabled": false 
         }
     }
 }
