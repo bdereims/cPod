@@ -11,7 +11,7 @@
 
 HOSTNAME=li
 NAME=LI
-IP=172.18.0.92
+IP=172.18.1.27
 OVA=${BITS}/VMware-vRealize-Log-Insight-4.3.0-5084751.ova
 
 ###################

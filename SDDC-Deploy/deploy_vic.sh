@@ -9,10 +9,10 @@
 
 ### Local vars ####
 
-HOSTNAME=nsx
-NAME=NSX
-IP=172.18.1.21
-OVA=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova
+HOSTNAME=vic
+NAME=VIC
+IP=172.18.1.26
+OVA=${BITS}/vic-v1.1.0-bf760ea2.ova
 
 ###################
 
@@ -20,16 +20,15 @@ export MYSCRIPT=/tmp/$$
 
 cat << EOF > ${MYSCRIPT}
 ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
---prop:vsm_cli_passwd_0=${PASSWORD} \
---prop:vsm_cli_en_passwd_0=${PASSWORD} \
---prop:vsm_hostname=${HOSTNAME} \
---prop:vsm_ip_0=${IP} \
---prop:vsm_netmask_0=${NETMASK} \
---prop:vsm_gateway_0=${GATEWAY} \
---prop:vsm_dns1_0=${DNS} \
---prop:vsm_domain_0=${DOMAIN} \
---prop:vsm_ntp_0=${NTP} \
---prop:vsm_isSSHEnabled=True \
+--prop:appliance.root_pwd=${PASSWORD} \
+--prop:registry.admin_password=${PASSWORD} \
+--prop:registry.db_password=${PASSWORD} \
+--prop:network.ip0=${IP} \
+--prop:network.netmask0=${NETMASK} \
+--prop:network.gateway=${GATEWAY} \
+--prop:network.DNS=${DNS} \
+--prop:network.searchpath=${DOMAIN} \
+--prop:network.fqdn=${HOSTNAME}.${DOMAIN} \
 -ds=${DATASTORE} -n=${NAME} --network='${PORTGROUP}' \
 ${OVA} \
 vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
