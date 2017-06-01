@@ -1,0 +1,22 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export DNS=172.18.3.1
+export NTP=${DNS}
+export DOMAIN=cpod-common.shwrfr.mooo.com
+export GATEWAY=172.18.3.1
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="VM Network"
+export ADMIN=administrator%40vsphere.local
+export TARGET=vcsa.cpod-common.shwrfr.mooo.com/cPod-Common/host/Management/
+export DATASTORE=VSAN-MGMT
+export BITS=../../BITS
+
+HOSTNAME_VCSA=vcsa.cpod-common.shwrfr.mooo.com
+NAME_VCSA=VCSA
+IP_VCSA=172.18.3.30
+OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
+TARGET_VCSA=172.18.3.11
+DATASTORE_VCSA=Temp

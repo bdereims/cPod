@@ -12,6 +12,5 @@
 ###################
 
 mkdir -p /tmp/scripts
-cp prep-vcsa.ps1 /tmp/scripts
-#docker run --rm -it -v /tmp/scripts:/tmp/scripts --entrypoint='/usr/bin/powershell' vmware/powerclicore:ubuntu14.04 /tmp/scripts/prep-vcsa.ps1
-docker run --rm -it -v /tmp/scripts:/tmp/scripts vmware/powerclicore:ubuntu14.04 powershell /tmp/scripts/prep-vcsa.ps1
+cp $1.ps1 /tmp/scripts
+docker run --rm -it -v /tmp/scripts:/tmp/scripts vmware/powerclicore:ubuntu14.04 powershell /tmp/scripts/$1.ps1

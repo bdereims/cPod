@@ -9,12 +9,12 @@
 
 ### Local vars ####
 
-HOSTNAME=vcsa.cpod-vr.shwrfr.mooo.com
-NAME=VCSA
-IP=172.18.4.30
-OVA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
-TARGET=172.18.4.11
-DATASTORE=Temp
+HOSTNAME=${HOSTNAME_VCSA}
+NAME=${NAME_VCSA}
+IP=${IP_VCSA}
+OVA=${OVA_VCSA}
+TARGET=${TARGET_VCSA}
+DATASTORE=${DATASTORE_VCSA}
 
 ###################
 
