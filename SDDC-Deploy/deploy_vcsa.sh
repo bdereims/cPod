@@ -11,9 +11,9 @@
 
 HOSTNAME=vcsa.cpod-vr.shwrfr.mooo.com
 NAME=VCSA
-IP=172.18.1.30
+IP=172.18.4.30
 OVA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
-TARGET=172.18.3.11
+TARGET=172.18.4.11
 DATASTORE=Temp
 
 ###################
