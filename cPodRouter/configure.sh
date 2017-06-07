@@ -11,6 +11,9 @@ MISC=misc
 BITS=BITS
 NAME=cpodrouter
 
+#Update root passwd expiration
+chage -I -1 -m 0 -M 99999 -E -1 root
+
 #Update for the role
 tdnf -y update
 tdnf -y install dnsmasq git sshpass ntp nginx tar wget nfs-utils
