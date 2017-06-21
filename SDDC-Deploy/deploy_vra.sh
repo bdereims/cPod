@@ -8,10 +8,10 @@
 
 ### Local vars ####
 
-HOSTNAME=vra
-NAME=lab-cPod-vra
-IP=192.168.1.42
-OVA=${BITS}/VMware-vR-Appliance-7.1.0.710-4270058_OVF10_TechPreview.ova
+HOSTNAME=${HOSTNAME_VRA}
+NAME=${NAME_VRA}
+IP=${IP_VRA}
+OVA=${OVA_VRA}
 
 ###################
 
