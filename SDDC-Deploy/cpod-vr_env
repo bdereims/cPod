@@ -13,3 +13,13 @@ export ADMIN=administrator%40vsphere.local
 export TARGET=vcsa.cpod-vr.shwrfr.mooo.com/cPod-vR/host/Management/
 export DATASTORE=Datastore
 export BITS=../../BITS
+
+export HOSTNAME_VRA=vra.cpod-vr.shwrfr.mooo.com
+export NAME_VRA=vRA
+export IP_VRA=172.18.4.31
+export OVA_VRA=${BITS}/VMware-vR-Appliance-7.3.0.536-5610496_OVF10.ova
+
+export HOSTNAME_NSX=nsx.cpod-vr.shwrfr.mooo.com
+export NAME_NSX=NSX
+export IP_NSX=172.18.4.33
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova

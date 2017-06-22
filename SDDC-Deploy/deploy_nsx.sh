@@ -9,10 +9,10 @@
 
 ### Local vars ####
 
-HOSTNAME=nsx
-NAME=NSX
-IP=172.18.1.21
-OVA=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova
+HOSTNAME=${HOSTNAME_NSX}
+NAME=${NAME_NSX}
+IP=${IP_NSX}
+OVA=${OVA_NSX}
 
 ###################
 
