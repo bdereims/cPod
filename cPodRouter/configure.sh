@@ -74,6 +74,13 @@ cd /root
 tar xvzf ${MYDIR}/${MISC}/ovftool.tgz
 cd -
 
+#Install OVFTOOL
+MYDIR=$(pwd)
+cd /
+tar xvzf ${MYDIR}/${MISC}/tmux.tgz
+locale-gen.sh
+cd -
+
 #Create BITS dir
 mkdir -p /root/BITS
 cp ${BITS}/* /root/BITS/.
