@@ -9,10 +9,10 @@
 
 ### Local vars ####
 
-HOSTNAME=vic
-NAME=VIC
-IP=172.18.1.26
-OVA=${BITS}/vic-v1.1.0-bf760ea2.ova
+HOSTNAME=${HOSTNAME_VIC}
+NAME=${NAME_VIC}
+IP=${IP_VIC}
+OVA=${OVA_VIC}
 
 ###################
 
@@ -36,4 +36,4 @@ EOF
 
 sh ${MYSCRIPT}
 
-#rm ${MYSCRIPT}
+rm ${MYSCRIPT}

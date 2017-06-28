@@ -25,3 +25,8 @@ export HOSTNAME_VRA=vra.cpod-vic.shwrfr.mooo.com
 export NAME_VRA=vRA
 export IP_VRA=172.18.1.30
 export OVA_VRA=${BITS}/VMware-vR-Appliance-7.3.0.536-5610496_OVF10.ova
+
+export HOSTNAME_VIC=vic
+export NAME_VIC=VIC
+export IP_VIC=172.18.1.26
+export OVA_VIC=${BITS}/vic-v1.1.1_56a309fb.ova
