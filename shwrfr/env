@@ -5,6 +5,7 @@
 . ./env.passwd
 
 NETWORK_DIR=network
+COMPUTE_DIR=compute
 
 NSX=10.1.0.101
 NSX_ADMIN="admin"
