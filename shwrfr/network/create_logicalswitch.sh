@@ -15,6 +15,6 @@ curl -s -k -u ${NSX_ADMIN}:${NSX_PASSWD} -H "Content-Type:text/xml;charset=UTF-8
 
 LS_PROPS=$( ${NETWORK_DIR}/props_logicialswitch.sh $1 $2 )
 
-[ "${LS_PROPS}" != "" ] && echo "Logicial Swith '${2}' has been sucessfully created in '${1}'." && exit 0
+[ "${LS_PROPS}" != "" ] && echo "Logicial Switch '${2}' has been sucessfully created in '${1}'." && exit 0
 
 echo "Logical Switch '${2}' doesn\t seem to be created." && exit 1
