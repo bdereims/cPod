@@ -1,9 +1,14 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+# this file is not synced in git
+. ./env.passwd
+
 NETWORK_DIR=network
 
 NSX=10.1.0.101
 NSX_ADMIN="admin"
-NSX_PASSWD="VMware1!"
 NSX_TRANSPORTZONE="TransportZone"
+
+VCENTER=10.1.0.100
+VCENTER_ADMIN="administrator@vsphere.local"

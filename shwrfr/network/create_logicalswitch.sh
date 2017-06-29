@@ -5,6 +5,7 @@
 
 [ "$1" == "" -o "$2" == "" ] && echo "usage: $0 <name_of_transportzone> <name_of_logicalswitch>" && exit 1 
 
+
 TZ_ID=$( ${NETWORK_DIR}/id_transportzone.sh ${1} )
 [ "${TZ_ID}" == "" ] && echo "${1} doesn't exist!" && exit 1
 
@@ -16,4 +17,4 @@ LS_PROPS=$( ${NETWORK_DIR}/props_logicialswitch.sh $1 $2 )
 
 [ "${LS_PROPS}" != "" ] && echo "Logicial Swith '${2}' has been sucessfully created in '${1}'." && exit 0
 
-echo "\nLogical Switch '${2}' doesn\t seem to be created." && exit 1
+echo "Logical Switch '${2}' doesn\t seem to be created." && exit 1
