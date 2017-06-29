@@ -1,0 +1,9 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+NETWORK_DIR=network
+
+NSX=10.1.0.101
+NSX_ADMIN="admin"
+NSX_PASSWD="VMware1!"
+NSX_TRANSPORTZONE="TransportZone"
