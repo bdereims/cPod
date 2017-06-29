@@ -37,12 +37,8 @@ network_create() {
 	${NETWORK_DIR}/create_logicalswitch.sh ${NSX_TRANSPORTZONE} ${NSX_LOGICALSWITCH}
 }
 
-release_mutex() {
-	rm -fr lock
-}
-
 exit_gate() {
-	release_mutex
+	rm -fr lock
 	exit $1 
 }
 
