@@ -27,6 +27,7 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###TEMPLATE_VM###/${TEMPLATE_VM}/" \
 -e "s/###IP###/${3}/" \
 -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" \
+-e "s/###DATASTORE###/${DATASTORE}/" \
 ${SCRIPT}
 
 echo "Creating vApp '${HEADER}-${1}'."

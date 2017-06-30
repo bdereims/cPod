@@ -17,6 +17,10 @@ network_delete() {
 	${NETWORK_DIR}/delete_logicalswitch.sh ${1} ${2}
 }
 
+vapp_delete() {
+	${COMPUTE_DIR}/delete_vapp.sh ${1}
+}
+
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	sed -i "/${1}/d" ${DNSMASQ} 
@@ -42,6 +46,7 @@ main() {
 	CPOD_NAME="cpod-$1"
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
 
+	vapp_delete ${1}
 	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}
 	modify_dnsmasq ${CPOD_NAME_LOWER}
 

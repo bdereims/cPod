@@ -50,7 +50,7 @@ vapp_create() {
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
-	echo "${2} cpod-${1}" >> ${HOSTS}
+	printf "${2}\tcpod-${1}" >> ${HOSTS}
 
 	systemctl stop dnsmasq
 	systemctl start dnsmasq

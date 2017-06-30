@@ -12,9 +12,12 @@ COMPUTE_DIR=compute
 NSX=10.1.0.101
 NSX_ADMIN="admin"
 NSX_TRANSPORTZONE="TransportZone"
+EDGE="edge-6"
 
 VCENTER=10.1.0.100
 VCENTER_ADMIN="administrator@vsphere.local"
 VCENTER_DATACENTER="Showroom"
 VCENTER_CLUSTER="Dell Cluster"
 TEMPLATE_VM="template-cPodrouter"
+TEMPLATE_ESX="template-ESX"
+DATASTORE="DELL-VSAN"
