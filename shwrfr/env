@@ -4,6 +4,8 @@
 # this file is not synced in git
 . ./env.passwd
 
+HEADER="cPod"
+
 NETWORK_DIR=network
 COMPUTE_DIR=compute
 
@@ -13,3 +15,6 @@ NSX_TRANSPORTZONE="TransportZone"
 
 VCENTER=10.1.0.100
 VCENTER_ADMIN="administrator@vsphere.local"
+VCENTER_DATACENTER="Showroom"
+VCENTER_CLUSTER="Dell Cluster"
+TEMPLATE_VM="template-cPodrouter"

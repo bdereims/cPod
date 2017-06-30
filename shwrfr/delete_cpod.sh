@@ -5,9 +5,25 @@
 
 [ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1 
 
+DNSMASQ=/etc/dnsmasq.conf
+HOSTS=/etc/hosts
+
 mutex() {
 	[ -f lock ] && echo "A cPod creation is running, please launch later." && exit 1
 	touch lock
+}
+
+network_delete() {
+	${NETWORK_DIR}/delete_logicalswitch.sh ${1} ${2}
+}
+
+modify_dnsmasq() {
+	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
+	sed -i "/${1}/d" ${DNSMASQ} 
+	sed -i "/${1}/d" ${HOSTS} 
+
+	systemctl stop dnsmasq 
+        systemctl start dnsmasq
 }
 
 release_mutex() {
@@ -20,11 +36,14 @@ exit_gate() {
 }
 
 main() {
-	echo "=== Deleting to deploy a new cPod called '$1'."
+	echo "=== Deleting cPod called '$1'."
 	mutex
 
 	CPOD_NAME="cpod-$1"
-	#${NETWORK_DIR}/delete_logicalswitch.sh ${NSX_TRANSPORTZONE} ${CPOD_NAME}
+	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
+
+	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}
+	modify_dnsmasq ${CPOD_NAME_LOWER}
 
 	echo "=== Deletion is finished."
 	exit_gate 0

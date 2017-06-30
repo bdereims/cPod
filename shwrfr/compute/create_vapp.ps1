@@ -1,8 +1,22 @@
-$Vc = "172.18.3.30"
-$vcUser = "administrator@vsphere.local"
-$vcPass = 'VMware1!'
-$Datacenter = "cPod-Common"
-$Cluster = "Management"
+#Mdofity Portgroup
+#bdereims@vmware.com
+
+$Vc = "###VCENTER###"
+$vcUser = "###VCENTER_ADMIN###"
+$vcPass = '###VCENTER_PASSWD###'
+$Datacenter = "###VCENTER_DATACENTER###"
+$Cluster = "###VCENTER_CLUSTER###"
+$Portgroup = "###PORTGTOUP###"
+$oldNet = "50-EDGE"
+$cPodName = "###CPOD_NAME###"
+$templateVM = "###TEMPLATE_VM###"
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -DefaultVIServerMode multiple
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
+
+$Vapp = New-VApp -Name cPod-$cPodName -Location ( Get-Cluster -Name $Cluster ) 
+$CpodRouter = New-VM -Name cPodRouter-$cPodName -VM $templateVM -ResourcePool $Vapp
+Get-VM $CpodRouter | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
+Start-VM -VM cPodRouter-$cPodName -Confirm:$false 
+Stop-VM -VM cPodRouter-$cPodName -Confirm:$false 
+Start-VM -VM cPodRouter-$cPodName -Confirm:$false 
