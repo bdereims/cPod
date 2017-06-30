@@ -44,7 +44,7 @@ network_create() {
 }
 
 vapp_create() {
-	${COMPUTE_DIR}/create_vapp.sh ${1} ${2} 
+	${COMPUTE_DIR}/create_vapp.sh ${1} ${2} ${3}
 }
 
 modify_dnsmasq() {
@@ -64,7 +64,8 @@ exit_gate() {
 main() {
 	mutex
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
-
+	START=$( date +%s ) 
+	
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 
 	network_env
@@ -73,6 +74,9 @@ main() {
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP}
 
 	echo "=== Creation is finished."
+	END=$( date +%s )
+	TIME=$( expr ${END} - ${START} )
+	echo "In ${TIME} Seconds."
 	exit_gate 0
 }
 

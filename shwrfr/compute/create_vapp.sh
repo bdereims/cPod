@@ -1,9 +1,13 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+# $1 : cPod Name
+# $2 : PortGroup Name
+# $3 : @IP
+
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_vapp>" && exit 1 
+[ "$1" == "" -o "$2" == "" -o "$3" == "" ] && echo "usage: $0 <name_of_vapp> <name_of_port_group> <ip_on_transit>" && exit 1 
 
 PS_SCRIPT=create_vapp.ps1
 
@@ -21,6 +25,8 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###PORTGTOUP###/${2}/" \
 -e "s/###CPOD_NAME###/${1}/" \
 -e "s/###TEMPLATE_VM###/${TEMPLATE_VM}/" \
+-e "s/###IP###/${3}/" \
+-e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" \
 ${SCRIPT}
 
 echo "Creating vApp '${HEADER}-${1}'."
