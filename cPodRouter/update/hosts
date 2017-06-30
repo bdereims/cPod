@@ -1,0 +1,7 @@
+# Begin /etc/hosts (network card version)
+
+::1         localhost ipv6-localhost ipv6-loopback
+127.0.0.1   localhost.localdomain
+127.0.0.1	localhost
+###IP###	cpodrouter cpod
+# End /etc/hosts (network card version)

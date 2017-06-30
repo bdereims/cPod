@@ -18,5 +18,4 @@ $Vapp = New-VApp -Name cPod-$cPodName -Location ( Get-Cluster -Name $Cluster )
 $CpodRouter = New-VM -Name cPodRouter-$cPodName -VM $templateVM -ResourcePool $Vapp
 Get-VM $CpodRouter | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 Start-VM -VM cPodRouter-$cPodName -Confirm:$false 
-Stop-VM -VM cPodRouter-$cPodName -Confirm:$false 
-Start-VM -VM cPodRouter-$cPodName -Confirm:$false 
+invoke-vmscript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName 172.16.0.17" -GuestUser root -GuestPassword VMware1! -scripttype Bash

@@ -1,0 +1,2 @@
+/data/Datastore		###SUBNET###(rw,no_subtree_check,insecure)
+/data/Temp		###SUBNET###(rw,no_subtree_check,insecure)

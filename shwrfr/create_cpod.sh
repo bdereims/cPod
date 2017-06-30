@@ -45,8 +45,6 @@ network_create() {
 
 vapp_create() {
 	${COMPUTE_DIR}/create_vapp.sh ${1} ${2} 
-	sleep 45
-	sshpass -p VMware1! ssh root@172.16.0.254 "cd update ; ./update.sh ${1} ${3} ; reboot"
 }
 
 modify_dnsmasq() {
@@ -64,8 +62,8 @@ exit_gate() {
 }
 
 main() {
-	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
 	mutex
+	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
 
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 

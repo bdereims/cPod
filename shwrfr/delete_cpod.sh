@@ -36,8 +36,8 @@ exit_gate() {
 }
 
 main() {
-	echo "=== Deleting cPod called '$1'."
 	mutex
+	echo "=== Deleting cPod called '$1'."
 
 	CPOD_NAME="cpod-$1"
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
