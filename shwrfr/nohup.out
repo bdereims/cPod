@@ -1,0 +1,11 @@
+=== Starting to deploy a new cPod called 'cPod-Brice'.
+The cPod IP address is '172.16.0.19' in transit network.
+The subnet of the cPod is '172.18.9.0/24'.
+Logicial Switch 'cpod-brice' has been sucessfully created in 'TransportZone'.
+Modifying 'vxw-dvs-109-virtualwire-70-sid-5009-cpod-brice' with Promiscuous and ForgetTrasnmists
+the input device is not a TTY
+Modifying '/etc/dnsmasq.conf' and '/etc/hosts'.
+Creating vApp 'cPod-Brice'.
+the input device is not a TTY
+=== Creation is finished.
+In 2 Seconds.

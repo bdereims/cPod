@@ -18,8 +18,8 @@ network_env() {
 	BASE_IP=$( echo ${TRANSIT_IP} | sed 's/\.[0-9]*$//' )
 	NEXT_IP=${BASE_IP}.${TMP}
 
-	ping -c 1 ${NEXT_IP} 2>&1 > /dev/null
-	[ $? -lt 1 ] && echo "! Impossible to create cPod. '${NEXT_IP}' is already taken, verify last_ip file." && exit_gate 1
+	#ping -c 1 ${NEXT_IP} 2>&1 > /dev/null
+	#[ $? -lt 1 ] && echo "! Impossible to create cPod. '${NEXT_IP}' is already taken, verify last_ip file." && exit_gate 1
 
 	TMP=$( expr ${TMP} - 10 )
 	SUBNET=172.18.${TMP}."0/24"
@@ -50,7 +50,7 @@ vapp_create() {
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
-	printf "${2}\tcpod-${1}" >> ${HOSTS}
+	printf "${2}\tcpod-${1}\n" >> ${HOSTS}
 
 	systemctl stop dnsmasq
 	systemctl start dnsmasq

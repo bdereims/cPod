@@ -1,0 +1,36 @@
+global
+    pidfile /var/run/haproxy.pid
+    tune.ssl.default-dh-param 2048
+    log 127.0.0.1 local0
+    log 127.0.0.1 local1 notice
+
+defaults
+    log global
+    mode    http
+    balance roundrobin
+
+    option  httplog
+    option  dontlognull
+    option  dontlog-normal
+    option  http-server-close
+    option  forwardfor
+    option  redispatch
+
+    maxconn 5000
+    timeout connect 5s
+    timeout client  20s
+    timeout server  20s
+    timeout queue   30s
+    timeout http-request 5s
+    timeout http-keep-alive 15s
+
+    stats enable
+    stats refresh 30s
+    stats realm Strictly\ Private
+    stats auth admin:admin
+    stats uri /admin?stats
+
+frontend services
+    bind *:80
+    bind *:443{{.CertsString}}
+    mode http

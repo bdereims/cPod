@@ -12,5 +12,7 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Defa
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
 
 $VApp = Get-VApp -Name cPod-$cPodName -Location ( Get-Cluster -Name $Cluster ) 
-Stop-VApp -VApp $VApp -Confirm:$false 
+Stop-VApp -Force -VApp $VApp -Confirm:$false 
 Remove-VApp -VApp $VApp -Confirm:$false -DeletePermanently:$true
+
+Disconnect-VIServer -Confirm:$false

@@ -22,6 +22,7 @@
 # /etc/quagga/bgpd.conf
 # /etc/systemd/networkd/eth0-static.network
 # /etc/systemd/networkd/eth1-static.network
+# /etc/nginx/html/index.html
 
 ### Constant
 NET_INT="172.18"
@@ -80,6 +81,10 @@ cat eth0-static.network | sed "s/###IP###/${IP}/" > /etc/systemd/network/eth0-st
 # eth1-static.network
 echo "### eth1-static.network"
 cat eth1-static.network | sed "s/###IP-TRANSIT###/${IP_TRANSIT}/" > /etc/systemd/network/eth1-static.network
+
+# index.html 
+echo "### index.html"
+cat index.html | sed "s/###NAME###/${NAME}/" > /etc/nginx/html/index.html
 
 # enable services
 systemctl enable bgpd

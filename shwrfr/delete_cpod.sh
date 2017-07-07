@@ -23,8 +23,8 @@ vapp_delete() {
 
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
-	sed -i "/${1}/d" ${DNSMASQ} 
-	sed -i "/${1}/d" ${HOSTS} 
+	sed -i "/${1}./d" ${DNSMASQ} 
+	sed -i "/\t${1}$/d" ${HOSTS} 
 
 	systemctl stop dnsmasq 
         systemctl start dnsmasq
@@ -47,6 +47,7 @@ main() {
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
 
 	vapp_delete ${1}
+	sleep 15
 	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}
 	modify_dnsmasq ${CPOD_NAME_LOWER}
 

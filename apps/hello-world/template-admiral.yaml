@@ -1,0 +1,37 @@
+---
+version: "2"
+services:
+  helloworld:
+    image: "172.18.1.26:443/cpod/helloworld"
+    ports:
+    - "5000"
+    links:
+    - "hello-svc"
+    - "world-svc"
+    restart: "no"
+    networks:
+    - "nw"
+    depends_on:
+    - "hello-svc"
+    - "world-svc"
+  hello-svc:
+    image: "172.18.1.26:443/cpod/hello"
+    ports:
+    - "5000"
+    restart: "no"
+    networks:
+      nw:
+        aliases:
+        - "hello-svc"
+  world-svc:
+    image: "172.18.1.26:443/cpod/world"
+    ports:
+    - "5000"
+    restart: "no"
+    networks:
+      nw:
+        aliases:
+        - "world-svc"
+networks:
+  nw:
+    external: false
