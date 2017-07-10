@@ -3,7 +3,7 @@
 
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <id_of_edge> <ip_of_peer>" && exit 1 
+[ "$1" == "" -o "$2" == "" ] && echo "usage: $0 <id_of_edge> <ip_of_peer>" && exit 1 
 
 DATA=/tmp/$$-data
 

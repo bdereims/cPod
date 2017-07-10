@@ -30,6 +30,10 @@ modify_dnsmasq() {
         systemctl start dnsmasq
 }
 
+bgp_delete_peer() {
+	./network/delete_bgp_neighbour.sh edge-6 ${1}
+}
+
 release_mutex() {
 	rm -fr lock
 }
@@ -45,7 +49,9 @@ main() {
 
 	CPOD_NAME="cpod-$1"
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
+	IP=$( cat ${HOSTS} | grep cpod-${CPOD_NAME_LOWER} | cut -f1 )
 
+	bgp_delete_peer ${IP}
 	vapp_delete ${1}
 	sleep 15
 	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}
