@@ -56,7 +56,7 @@ modify_dnsmasq() {
 	systemctl start dnsmasq
 }
 
-bgp_add_peer90 {
+bgp_add_peer() {
 	./network/add_bgp_neighbour.sh $1 $2 
 }
 
@@ -76,7 +76,7 @@ main() {
 	network_create ${NAME_LOWER}
 	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP}
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP}
-	bgp_add_peer edge-6 ${NEXT_IP}
+	#bgp_add_peer edge-6 ${NEXT_IP}
 
 	echo "=== Creation is finished."
 	END=$( date +%s )

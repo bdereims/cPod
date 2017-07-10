@@ -22,6 +22,7 @@
 # /etc/quagga/bgpd.conf
 # /etc/systemd/networkd/eth0-static.network
 # /etc/systemd/networkd/eth1-static.network
+# /etc/nginx/nginx.conf
 # /etc/nginx/html/index.html
 
 ### Constant
@@ -82,9 +83,26 @@ cat eth0-static.network | sed "s/###IP###/${IP}/" > /etc/systemd/network/eth0-st
 echo "### eth1-static.network"
 cat eth1-static.network | sed "s/###IP-TRANSIT###/${IP_TRANSIT}/" > /etc/systemd/network/eth1-static.network
 
+# nginx.conf
+echo "### nginx.conf"
+cat nginx.conf | sed "s/###NAME###/${NAME}/" > /etc/nginx/nginx.conf
+
 # index.html 
 echo "### index.html"
 cat index.html | sed "s/###NAME###/${NAME}/" > /etc/nginx/html/index.html
+
+# create /dev/sdb
+fdisk -l | grep /dev/sdb1
+if [ $? -ne 0 ]; then 
+	echo "### Creating & Formating /dev/sdb1"
+	echo -e "g\nn\n\n\n\nw\n" | fdisk /dev/sdb
+	mkfs.ext4 /dev/sdb1
+	echo "/dev/sdb1 /data ext4 defaults 1 1" >> /etc/fstab
+	mount -a
+	mkdir -p /data/Datastore
+	mkdir -p /data/Temp
+	chmod 0777 /data/Datastore /data/Temp
+fi
 
 # enable services
 systemctl enable bgpd
