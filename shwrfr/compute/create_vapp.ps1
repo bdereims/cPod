@@ -40,7 +40,7 @@ Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $
 
 #####
 Write-Host "Add ESX VMs."
-For ($i=1; $i -le 3; $i++) {
+For ($i=1; $i -le 1; $i++) {
 	Write-Host "-> cPod-$cPodName-esx-$i"
 	New-VM -Name cPod-$cPodName-esx-$i -VM "template-ESX" -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 	Start-VM -VM cPod-$cPodName-esx-$i -Confirm:$false -RunAsync 
