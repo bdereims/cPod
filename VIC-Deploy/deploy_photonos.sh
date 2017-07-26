@@ -8,7 +8,7 @@
 
 ### Local vars ####
 
-HOSTNAME=photon
+HOSTNAME=photon-dummy
 NAME=${HOSTNAME}
 OVA=${BITS}/photon-custom-hw10-1.0-62c543d.ova
 
