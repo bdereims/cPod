@@ -44,7 +44,8 @@ network_create() {
 }
 
 vapp_create() {
-	${COMPUTE_DIR}/create_vapp.sh ${1} ${2} ${3}
+	NAME_UPPER=$( echo ${1} | tr '[:lower:]' '[:upper:]' )
+	${COMPUTE_DIR}/create_vapp.sh ${NAME_UPPER} ${2} ${3}
 }
 
 modify_dnsmasq() {
@@ -52,8 +53,9 @@ modify_dnsmasq() {
 	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
 	printf "${2}\tcpod-${1}\n" >> ${HOSTS}
 
-	systemctl stop dnsmasq
-	systemctl start dnsmasq
+	#systemctl stop dnsmasq
+	#systemctl start dnsmasq
+	pkill -1 dnsmasq
 }
 
 bgp_add_peer() {
