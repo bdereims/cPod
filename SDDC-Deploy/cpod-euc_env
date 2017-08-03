@@ -1,0 +1,38 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export GATEWAY=172.18.5.1
+export DNS=${GATEWAY}
+export NTP=${DNS}
+export DOMAIN=cpod-euc.shwrfr.mooo.com
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="DPortGroup"
+export ADMIN=administrator%40vsphere.local
+export TARGET=vcsa.${DOMAIN}/cPod-EUC/host/Cluster
+export DATASTORE=Datastore
+export BITS=/data/BITS
+
+export HOSTNAME_VCSA=vcsa.${DOMAIN}
+export NAME_VCSA=VCSA
+export IP_VCSA=172.18.5.20
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
+export TARGET_VCSA=esx-01.${DOMAIN}
+export DATASTORE_VCSA=Datastore
+export PORTGROUP_VCSA=DPortGroup
+
+export HOSTNAME_VRA=vra.cpod-vic.shwrfr.mooo.com
+export NAME_VRA=vRA
+export IP_VRA=172.18.1.30
+export OVA_VRA=${BITS}/VMware-vR-Appliance-7.3.0.536-5610496_OVF10.ova
+
+export HOSTNAME_VROPS=vrops
+export NAME_VROPS=VROPS
+export IP_VROPS=172.18.1.33
+export OVA_VROP=${BITS}/vRealize-Operations-Manager-Appliance-6.6.0.5707161_OVF10.ova
+
+export HOSTNAME_NSX=nsx.cpod-euc.shwrfr.mooo.com
+export NAME_NSX=NSX
+export IP_NSX=172.18.5.21
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova

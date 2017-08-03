@@ -74,7 +74,7 @@ cd /root
 tar xvzf ${MYDIR}/${MISC}/ovftool.tgz
 cd -
 
-#Install OVFTOOL
+#Install tmux 
 MYDIR=$(pwd)
 cd /
 tar xvzf ${MYDIR}/${MISC}/tmux.tgz

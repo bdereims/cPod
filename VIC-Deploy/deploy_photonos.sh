@@ -21,8 +21,10 @@ ovftool --acceptAllEulas --X:injectOvfEnv --allowExtraConfig \
 --noSSLVerify --skipManifestCheck --powerOn --diskMode=thin \
 "-ds=${DATASTORE}" -n=${NAME} "--network=${PORTGROUP}" \
 ${OVA} \
-vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}/host/${CLUSTER}
+vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
 EOF
+
+#vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}/host/${CLUSTER}
 
 sh ${MYSCRIPT}
 

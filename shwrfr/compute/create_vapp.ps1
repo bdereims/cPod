@@ -13,6 +13,7 @@ $templateVM = "###TEMPLATE_VM###"
 $IP = "###IP###"
 $rootPasswd = "###ROOT_PASSWD###"
 $Datastore = "###DATASTORE###"
+$numberESX = 6
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -DefaultVIServerMode multiple
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
@@ -40,7 +41,7 @@ Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $
 
 #####
 Write-Host "Add ESX VMs."
-For ($i=1; $i -le 6; $i++) {
+For ($i=1; $i -le $numberESX; $i++) {
 	Write-Host "-> cPod-$cPodName-esx-$i"
 	New-VM -Name cPod-$cPodName-esx-$i -VM "template-ESX" -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 	Start-VM -VM cPod-$cPodName-esx-$i -Confirm:$false -RunAsync 

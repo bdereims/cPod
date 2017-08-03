@@ -1,6 +1,8 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+# Usage : ./create_cpod.sh EUC (not cPod-EUC)
+
 . ./env
 
 [ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1 
@@ -10,6 +12,7 @@ HOSTS=/etc/hosts
 
 network_env() {
 	TRANSIT_IP=$( grep "cpod-" ${DNSMASQ} | sed 's!^.*/!!' | sort | tail -n 1 )
+	TRANSIT_IP="172.16.0.14"
 	TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
 	TMP=$( expr ${TMP} + 1 )
 
@@ -53,9 +56,7 @@ modify_dnsmasq() {
 	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
 	printf "${2}\tcpod-${1}\n" >> ${HOSTS}
 
-	#systemctl stop dnsmasq
-	#systemctl start dnsmasq
-	pkill -1 dnsmasq
+	systemctl stop dnsmasq ; systemctl start dnsmasq
 }
 
 bgp_add_peer() {
@@ -80,6 +81,9 @@ main() {
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP}
 	bgp_add_peer edge-6 ${NEXT_IP}
 
+	### Installation of vCenter : cd ../SDDC-Deploy ; ./deploy_vcsa.sh cpod-XXX_env
+	### vCenter Prep : compute/prep_vcsa.sh cPod-XXX
+
 	echo "=== Creation is finished."
 	END=$( date +%s )
 	TIME=$( expr ${END} - ${START} )
@@ -87,4 +91,4 @@ main() {
 	exit_gate 0
 }
 
-main $1 $2
+main $1
