@@ -10,7 +10,7 @@ export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="DPortGroup"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.cpod-nsx-pan.shwrfr.mooo.com/cPod-VIC/host/Cluster
+export TARGET=vcsa.cpod-nsx-pan.shwrfr.mooo.com/Datacenter/host/Mgmt
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -22,7 +22,7 @@ export TARGET_VCSA=172.18.16.219
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
 
-export HOSTNAME_NSX=nsx.cpod-vr.shwrfr.mooo.com
+export HOSTNAME_NSX=nsx.cpod-nsx-pan.shwrfr.mooo.com
 export NAME_NSX=NSX
 export IP_NSX=172.18.16.21
-export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.1-5124716.ova
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.2-5672532.ova
