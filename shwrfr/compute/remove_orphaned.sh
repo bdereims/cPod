@@ -1,6 +1,8 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+# Usage: remove_orphaned.sh EUC
+
 . ./env
 
 [ "$1" == "" ] && echo "usage: $0 <name_of_cdpod>" && exit 1

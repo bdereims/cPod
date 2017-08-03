@@ -1,11 +1,14 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+# Usage: prep_vcsa.sh EUC
+
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_cdpod>" && exit 1
+[ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1
 
 CPOD_NAME=$( echo $1 | tr '[:upper:]' '[:lower:]' )
+CPOD_NAME="cpod-${CPOD_NAME}"
 CPOD_VCENTER_ADMIN="administrator@vsphere.local"
 CPOD_VCENTER_DATACENTER="${1}"
 CPOD_VCENTER_CLUSTER="Cluster"

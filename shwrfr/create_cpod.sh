@@ -12,7 +12,7 @@ HOSTS=/etc/hosts
 
 network_env() {
 	TRANSIT_IP=$( grep "cpod-" ${DNSMASQ} | sed 's!^.*/!!' | sort | tail -n 1 )
-	TRANSIT_IP="172.16.0.14"
+	#TRANSIT_IP="172.16.0.14"
 	TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
 	TMP=$( expr ${TMP} + 1 )
 

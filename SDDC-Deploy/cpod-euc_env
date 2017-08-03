@@ -19,8 +19,8 @@ export NAME_VCSA=VCSA
 export IP_VCSA=172.18.5.20
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
 export TARGET_VCSA=esx-01.${DOMAIN}
-export DATASTORE_VCSA=Datastore
-export PORTGROUP_VCSA=DPortGroup
+export DATASTORE_VCSA=Temp
+export PORTGROUP_VCSA="VM Network"
 
 export HOSTNAME_VRA=vra.cpod-vic.shwrfr.mooo.com
 export NAME_VRA=vRA
