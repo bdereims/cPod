@@ -51,6 +51,12 @@ echo ${DHCP_LOW}
 echo ${DHCP_HIGH}
 echo ${SUBNET}
 
+# Generate new ssh keys
+cd ~/.ssh
+rm -fr idi_rsa* known_hosts
+printf '\n' | ssh-keygen -N ''
+cd -
+
 # hostname
 echo "### hostname"
 cat hostname | sed "s/###NAME###/${NAME}/" > /etc/hostname

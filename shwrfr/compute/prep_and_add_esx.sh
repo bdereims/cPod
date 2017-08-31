@@ -5,6 +5,7 @@ DHCP_LEASE=/var/lib/misc/dnsmasq.leases
 DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 
+[ "$( hostname )" == "mgmt-cpodrouter" ] && exit 1
 
 I=$( cat ${DHCP_LEASE} | wc -l )
 for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do

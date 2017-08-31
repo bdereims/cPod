@@ -6,6 +6,8 @@
 
 ### at least 1 vCPUi, 1Go for Memory and 8Go for Disk
 
+[ "$( hostname )" == "mgmt-cpodrouter" ] && exit 1
+
 DIR=conf.d
 MISC=misc
 BITS=BITS

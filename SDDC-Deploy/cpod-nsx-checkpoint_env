@@ -1,0 +1,30 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+export SUBNET=172.18.17
+export DOMAIN=cpod-nsx-checkpoint.shwrfr.mooo.com
+
+export DNS=${SUBNET}.1
+export NTP=${DNS}
+export GATEWAY=${DNS}
+export NETMASK=255.255.255.0
+export PASSWORD=VMware1!
+export VC_PASSWORD=${PASSWORD}
+export PORTGROUP="DPortGroup"
+export ADMIN=administrator%40vsphere.local
+export TARGET=vcsa.${DOMAIN}/NSX-CHECKPOINT/host/MGMT
+export DATASTORE=Datastore
+export BITS=/data/BITS
+
+export HOSTNAME_VCSA=vcsa.${DOMAIN}
+export NAME_VCSA=VCSA
+export IP_VCSA=${SUBNET}.20
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
+export TARGET_VCSA=${SUBNET}.11
+export DATASTORE_VCSA=Temp
+export PORTGROUP_VCSA="VM Network"
+
+export HOSTNAME_NSX=nsx.${DOMAIN}
+export NAME_NSX=NSX
+export IP_NSX=${SUBNET}.21
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova

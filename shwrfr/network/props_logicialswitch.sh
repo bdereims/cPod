@@ -8,4 +8,9 @@
 TZ_ID=$( ${NETWORK_DIR}/id_transportzone.sh ${1} )
 [ "${TZ_ID}" == "" ] && echo "${1} doesn't exist!" && exit 1
 
-curl -s -k -u ${NSX_ADMIN}:${NSX_PASSWD} -X GET -H "Accept: application/json" https://${NSX}/api/2.0/vdn/scopes/${TZ_ID}/virtualwires | jq '. | .["dataPage"] | .["data"] | .[] | select(.name == "'${2}'")'
+curl -s -k -u ${NSX_ADMIN}:${NSX_PASSWD} -X GET -H "Accept: application/json" "https://${NSX}/api/2.0/vdn/scopes/${TZ_ID}/virtualwires?pagesize=200&startindex=0" | jq '. | .["dataPage"] | .["data"] | .[] | select(.name == "'${2}'")'
+#curl -s -k -u ${NSX_ADMIN}:${NSX_PASSWD} -X GET -H "Accept: application/json" https://${NSX}/api/2.0/vdn/scopes/${TZ_ID}/virtualwires > zz
+
+#printf "\n\n\n\#####\n\n\n"
+
+#curl -s -k -u ${NSX_ADMIN}:${NSX_PASSWD} -X GET -H "Accept: application/json" "https://${NSX}/api/2.0/vdn/scopes/${TZ_ID}/virtualwires?pagesize=100&startindex=0" > xx

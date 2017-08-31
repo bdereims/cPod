@@ -17,4 +17,4 @@ LS_PROPS=$( ${NETWORK_DIR}/props_logicialswitch.sh $1 $2 )
 
 [ "${LS_PROPS}" != "" ] && echo "Logicial Switch '${2}' has been sucessfully created in '${1}'." && exit 0
 
-echo "Logical Switch '${2}' doesn\t seem to be created." && exit 1
+echo "Logical Switch '${2}' does not seem to be created." && exit 1
