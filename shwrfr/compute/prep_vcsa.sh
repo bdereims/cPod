@@ -10,7 +10,7 @@
 CPOD_NAME=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 CPOD_NAME="cpod-${CPOD_NAME}"
 CPOD_VCENTER_ADMIN="administrator@vsphere.local"
-CPOD_VCENTER_DATACENTER="${1}"
+CPOD_VCENTER_DATACENTER="cPod-${1}"
 CPOD_VCENTER_CLUSTER="Cluster"
 CPOD_DOMAIN="${CPOD_NAME}.shwrfr.mooo.com"
 CPOD_VCENTER="vcsa.${CPOD_DOMAIN}"

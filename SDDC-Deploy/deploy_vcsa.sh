@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 #bdereims@vmware.com
 
 
@@ -22,6 +22,7 @@ PORTGROUP=${PORTGROUP_VCSA}
 SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/"
 cat vcsa-65.json | sed "${SEDCMD}"  > /tmp/vcsa-65.json
 
+umount /mnt
 mount -o loop $OVA /mnt
 cd /mnt/vcsa-cli-installer/lin64
 ./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip /tmp/vcsa-65.json

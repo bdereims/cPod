@@ -39,4 +39,7 @@ Get-Cluster | Where-Object {$_.ExtensionData.TriggeredAlarmState} | ForEach-Obje
     }
 }
 
+$thisDataStore = Get-datastore Datastore
+get-vmhost | foreach {$_ | get-advancedsetting -name "Syslog.global.logDir" | set-advancedsetting -Value "[Datastore] scratch/log" -confirm:$false}
+
 Disconnect-VIServer * -confirm:$false

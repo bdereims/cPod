@@ -18,7 +18,7 @@ export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="DPortGroup"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/MGMT
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
