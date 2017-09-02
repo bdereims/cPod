@@ -1,7 +1,7 @@
 #!/bin/bash
 #bdereims@vmware.com
 
-export SUBNET=172.18.17
+export SUBNET=172.18.18
 export DOMAIN=cpod-nsx-cni.shwrfr.mooo.com
 
 export DNS=${SUBNET}.1
@@ -12,14 +12,14 @@ export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="DPortGroup"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.${DOMAIN}/NSX-CHECKPOINT/host/MGMT
+export TARGET=vcsa.${DOMAIN}/NSX-CNI/host/MGMT
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
 export HOSTNAME_VCSA=vcsa.${DOMAIN}
 export NAME_VCSA=VCSA
 export IP_VCSA=${SUBNET}.20
-export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5318154.iso
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
 export TARGET_VCSA=${SUBNET}.11
 export DATASTORE_VCSA=Temp
 export PORTGROUP_VCSA="VM Network"

@@ -1,15 +1,9 @@
 #!/bin/bash
 #bdereims@vmware.com
 
-#######################
+export SUBNET=172.18.19
+export DOMAIN=cpod-kubo.shwrfr.mooo.com
 
-export CPOD=CCR
-export SUBNET=172.18.20
-
-#######################
-
-CPOD_LOWER=$( echo ${CPOD} | tr '[:upper:]' '[:lower:]' )
-export DOMAIN=cpod-${CPOD_LOWER}.shwrfr.mooo.com
 export DNS=${SUBNET}.1
 export NTP=${DNS}
 export GATEWAY=${DNS}
@@ -18,7 +12,7 @@ export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="DPortGroup"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/MGMT
+export TARGET=vcsa.${DOMAIN}/KUBO/host/MGMT
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -27,7 +21,7 @@ export NAME_VCSA=VCSA
 export IP_VCSA=${SUBNET}.20
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
 export TARGET_VCSA=${SUBNET}.11
-export DATASTORE_VCSA=Datatore
+export DATASTORE_VCSA=Temp
 export PORTGROUP_VCSA="VM Network"
 
 export HOSTNAME_NSX=nsx.${DOMAIN}

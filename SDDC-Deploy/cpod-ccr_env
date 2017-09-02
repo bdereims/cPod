@@ -27,7 +27,7 @@ export NAME_VCSA=VCSA
 export IP_VCSA=${SUBNET}.20
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
 export TARGET_VCSA=${SUBNET}.11
-export DATASTORE_VCSA=Datatore
+export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
 
 export HOSTNAME_NSX=nsx.${DOMAIN}

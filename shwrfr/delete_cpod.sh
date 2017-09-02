@@ -44,12 +44,16 @@ exit_gate() {
 }
 
 main() {
+	printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
+	read $GO
+
 	mutex
+
 	echo "=== Deleting cPod called '$1'."
 
 	CPOD_NAME="cpod-$1"
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
-	IP=$( cat ${HOSTS} | grep cpod-${CPOD_NAME_LOWER} | cut -f1 )
+	IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
 	bgp_delete_peer ${IP}
 	vapp_delete ${1}
@@ -61,4 +65,4 @@ main() {
 	exit_gate 0
 }
 
-main $1 $2
+main $1
