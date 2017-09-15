@@ -36,3 +36,7 @@ export HOSTNAME_NSX=nsx.cpod-euc.shwrfr.mooo.com
 export NAME_NSX=NSX
 export IP_NSX=172.18.5.21
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.2-5672532.ova
+
+export HOSTNAME_PHOTONOS=photonos
+export NAME_PHOTONOS=photonos
+export OVA_PHOTONOS=${BITS}/photon-custom-hw10-1.0-62c543d.ova

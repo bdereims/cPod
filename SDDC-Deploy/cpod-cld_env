@@ -3,8 +3,8 @@
 
 #######################
 
-export CPOD=XXX
-export SUBNET=172.18.XX
+export CPOD=CLD
+export SUBNET=172.18.21
 
 #######################
 
@@ -16,9 +16,9 @@ export GATEWAY=${DNS}
 export NETMASK=255.255.255.0
 export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
-export PORTGROUP="DPortGroup"
+export PORTGROUP="VM Network"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/MGMT
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -35,6 +35,6 @@ export NAME_NSX=NSX
 export IP_NSX=${SUBNET}.21
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
 
-export HOSTNAME_PHOTONOS=photonos
-export NAME_PHOTONOS=photonos
+export HOSTNAME_PHOTONOS=photonos-2
+export NAME_PHOTONOS=photonos-2
 export OVA_PHOTONOS=${BITS}/photon-custom-hw10-1.0-62c543d.ova

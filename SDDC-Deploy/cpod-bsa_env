@@ -3,8 +3,8 @@
 
 #######################
 
-export CPOD=XXX
-export SUBNET=172.18.XX
+export CPOD=BSA
+export SUBNET=172.18.22
 
 #######################
 
@@ -16,9 +16,9 @@ export GATEWAY=${DNS}
 export NETMASK=255.255.255.0
 export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
-export PORTGROUP="DPortGroup"
+export PORTGROUP="VM Network"
 export ADMIN=administrator%40vsphere.local
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/MGMT
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
 export DATASTORE=Datastore
 export BITS=/data/BITS
 

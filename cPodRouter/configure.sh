@@ -88,14 +88,14 @@ mkdir -p /root/BITS
 cp ${BITS}/* /root/BITS/.
 
 #Install Photon CLI
-mkdir -p /tmp/$$
-cd /tmp/$$
-wget https://github.com/vmware/photon-controller/releases/download/v1.1.0/photon-linux64-1.1.0-5de1cb7
-PHOTONCLI=$(ls -1 photon-linux*)
-cp ${PHOTONCLI} /usr/bin/photon
-chmod ugo+rx /usr/bin/photon
-cd -
-rm -fr /tmp/$$
+#mkdir -p /tmp/$$
+#cd /tmp/$$
+#wget https://github.com/vmware/photon-controller/releases/download/v1.1.0/photon-linux64-1.1.0-5de1cb7
+#PHOTONCLI=$(ls -1 photon-linux*)
+#cp ${PHOTONCLI} /usr/bin/photon
+#chmod ugo+rx /usr/bin/photon
+#cd -
+#rm -fr /tmp/$$
 
 #Install jq 1.5
 mkdir -p /tmp/$$
