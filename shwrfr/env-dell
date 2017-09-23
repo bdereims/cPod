@@ -9,8 +9,8 @@ HEADER="cPod"
 NETWORK_DIR=network
 COMPUTE_DIR=compute
 
-#NSX=10.1.0.101
-NSX=172.18.5.21
+NSX=10.1.0.101
+#NSX=172.18.5.21
 NSX_ADMIN="admin"
 NSX_TRANSPORTZONE="TransportZone"
 EDGE="edge-6"
