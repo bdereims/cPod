@@ -1,0 +1,24 @@
+#!/bin/bash
+#bdereims@vmware.com
+
+# this file is not synced in git
+. ./env.passwd
+
+HEADER="cPod"
+
+NETWORK_DIR=network
+COMPUTE_DIR=compute
+
+NSX=10.1.0.101
+NSX_ADMIN="admin"
+NSX_TRANSPORTZONE="TransportZone"
+EDGE="edge-6"
+
+VCENTER=10.1.0.100
+VCENTER_ADMIN="administrator@vsphere.local"
+VCENTER_DATACENTER="Showroom"
+VCENTER_CLUSTER="HP Cluster"
+TEMPLATE_VM="template-cPodrouter-HP"
+#TEMPLATE_ESX="template-ESX"
+TEMPLATE_ESX="template-ESX65U1-HP"
+DATASTORE="HP-VSAN"
