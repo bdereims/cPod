@@ -3,19 +3,9 @@
 
 
 [ "${1}" == "" ] && echo "usage: ${0} deploy_env" && exit 1
+[ ! -f "${1}" ] && echo "error: file '${1}' does not exist" && exit 1
 
-if [ -f "${1}" ]; then
-	. ./"${1}"
-else
-	SUBNET=$( ./cpod_ip.sh ${1} )
-
-	[ $? -ne 0 ] && echo "error: file or env '${1}' does not exist" && exit 1
-
-	CPOD=${1}
-	. ./cpod-xxx_env
-fi
-
-exit 1
+. ./"${1}"
 
 ### Local vars ####
 

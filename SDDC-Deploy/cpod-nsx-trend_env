@@ -3,8 +3,8 @@
 
 #######################
 
-# export CPOD=XXX
-# export SUBNET=172.18.XX
+export CPOD=NSX-TREND
+export SUBNET=172.18.26
 
 #######################
 
