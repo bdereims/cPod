@@ -32,8 +32,16 @@ network_env() {
 }
 
 mutex() {
-	[ -f lock ] && echo "A cPod creation is running, please launch later." && exit 1
+	while [ -f lock ]
+	do
+		echo "Waiting..."
+		sleep 1
+	done
 	touch lock
+}
+
+de_mutex() {
+	rm lock
 }
 
 network_create() {
@@ -63,23 +71,34 @@ bgp_add_peer() {
 	./network/add_bgp_neighbour.sh $1 $2 
 }
 
+prep_cpod() {
+	./prep_cpod.sh $1
+}
+
 exit_gate() {
-	rm -fr lock
+	[ -f lock ] && rm lock
 	exit $1 
 }
 
 main() {
-	mutex
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
 	START=$( date +%s ) 
 	
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 
+	mutex
 	network_env
 	network_create ${NAME_LOWER}
 	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP}
+	de_mutex
+
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP}
+
+	mutex
 	bgp_add_peer edge-6 ${NEXT_IP}
+	de_mutex
+
+	prep_cpod ${1}
 
 	### Installation of vCenter : cd ../SDDC-Deploy ; ./deploy_vcsa.sh cpod-XXX_env
 	### vCenter Prep : compute/prep_vcsa.sh cPod-XXX
