@@ -23,7 +23,7 @@ main() {
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
 	#IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
-	scp -o StrictHostKeyChecking=no ${SCRIPT} root@${CPOD_NAME_LOWER}:./${SHELL_SCRIPT}
+	scp -o StrictHostKeyChecking=no ${SCRIPT} root@${CPOD_NAME_LOWER}:./${SHELL_SCRIPT} 
 	ssh -o StrictHostKeyChecking=no root@${CPOD_NAME_LOWER} "./${SHELL_SCRIPT}"
 
 	rm ${SCRIPT}

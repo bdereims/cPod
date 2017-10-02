@@ -12,3 +12,5 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Defa
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
 
 Get-VDPortgroup $Portgroup | Get-VDSecurityPolicy | Set-VDSecurityPolicy -ForgedTransmits $true -AllowPromiscuous $true
+Get-VDPortgroup $Portgroup | Get-VDUplinkTeamingPolicy | Set-VDUplinkTeamingPolicy -ActiveUplinkPort "Uplink 2" -StandbyUplinkPort "Uplink 1" -UnusedUplinkPort "Uplink 3"  
+Get-VDPortgroup $Portgroup | Get-VDUplinkTeamingPolicy | Set-VDUplinkTeamingPolicy -UnusedUplinkPort "Uplink 4"  

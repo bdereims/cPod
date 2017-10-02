@@ -11,21 +11,35 @@ DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 
 network_env() {
-	TRANSIT_IP=$( grep "cpod-" ${DNSMASQ} | sed 's!^.*/!!' | sort | tail -n 1 )
-	#TRANSIT_IP="172.16.0.15"
-	TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
-	TMP=$( expr ${TMP} + 1 )
+	#TRANSIT_IP=$( grep "cpod-" ${DNSMASQ} | sed 's!^.*/!!' | sort | tail -n 1 )
+	#TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
+	#TMP=$( expr ${TMP} + 1 )
 
-	[ ${TMP} -gt 253 ] && echo "! Impossible to create cPod. Maximum is reached." && exit_gate 1
+	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | head -1 )
+	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | tail -1 )
 
-	BASE_IP=$( echo ${TRANSIT_IP} | sed 's/\.[0-9]*$//' )
-	NEXT_IP=${BASE_IP}.${TMP}
+	TRANSIT_SUBNET=$( echo ${FIRST_LINE} | sed 's!^.*/!!' | sed 's/\.[0-9]*$//' )
 
-	#ping -c 1 ${NEXT_IP} 2>&1 > /dev/null
-	#[ $? -lt 1 ] && echo "! Impossible to create cPod. '${NEXT_IP}' is already taken, verify last_ip file." && exit_gate 1
+	TRANSIT_IP=$( echo ${FIRST_LINE} | sed 's!^.*/!!' | sed 's/.*\.//' )
+	TRANSIT_IP=$( expr ${TRANSIT_IP} )
+	LAST_IP=$( echo ${LAST_LINE} | sed 's!^.*/!!' | sed 's/.*\.//' )
+	LAST_IP=$( expr ${LAST_IP} )
 
-	TMP=$( expr ${TMP} - 10 )
-	SUBNET=172.18.${TMP}."0/24"
+	while [ ${TRANSIT_IP} -le ${LAST_IP} ]
+	do
+        	if [[ ! $( grep "${TRANSIT_SUBNET}.${TRANSIT_IP}" ${DNSMASQ} ) ]]; then
+                	break
+        	fi
+
+        	TRANSIT_IP=$( expr ${TRANSIT_IP} + 1 )
+	done
+
+	[ ${TRANSIT_IP} -gt 253 ] && echo "! Impossible to create cPod. Maximum is reached." && exit_gate 1
+
+	NEXT_IP="${TRANSIT_SUBNET}.${TRANSIT_IP}"
+
+	TMP=$( expr ${TRANSIT_IP} - 10 )
+	SUBNET="172.18.${TMP}.0/24"
 
 	echo "The cPod IP address is '${NEXT_IP}' in transit network."
 	echo "The subnet of the cPod is '${SUBNET}'."

@@ -5,6 +5,7 @@
 
 [ "${1}" == "" ] && echo "usage: ${0} <deploy_env or cPod Name>" && exit 1
 
+
 if [ -f "${1}" ]; then
 	. ./${COMPUTE_DIR}/"${1}"
 else
@@ -35,3 +36,7 @@ umount /mnt
 mount -o loop $OVA /mnt
 cd /mnt/vcsa-cli-installer/lin64
 ./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip /tmp/vcsa-65.json
+
+sleep 60 
+
+./compute/prep_vcsa.sh ${CPOD}
