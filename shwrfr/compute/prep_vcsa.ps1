@@ -5,7 +5,7 @@ $Datacenter = "###VCENTER_DATACENTER###"
 $Cluster = "###VCENTER_CLUSTER###"
 $Domain = "###DOMAIN###"
 $vCenterESX = "esx-01."+${DOMAIN}
-$numberESX = 5
+$numberESX = 6
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -DefaultVIServerMode multiple
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass

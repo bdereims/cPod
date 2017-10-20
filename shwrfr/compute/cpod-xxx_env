@@ -9,6 +9,8 @@
 #######################
 
 CPOD_LOWER=$( echo ${CPOD} | tr '[:upper:]' '[:lower:]' )
+CPOD_HIGH=$( echo ${CPOD} | tr '[:lower:]' '[:upper:]' )
+export SITE="cPod-${CPOD_HIGH}"
 export DOMAIN=cpod-${CPOD_LOWER}.shwrfr.mooo.com
 export DNS=${SUBNET}.1
 export NTP=${DNS}
@@ -23,8 +25,11 @@ export DATASTORE=Datastore
 export BITS=/data/BITS
 
 export HOSTNAME_VCSA=vcsa.${DOMAIN}
+export HOSTNAME_PSC=psc.${DOMAIN}
 export NAME_VCSA=VCSA
+export NAME_PSC=PSC
 export IP_VCSA=${SUBNET}.20
+export IP_PSC=${SUBNET}.19
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
 export TARGET_VCSA=${SUBNET}.11
 export DATASTORE_VCSA=Datastore

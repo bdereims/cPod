@@ -1,6 +1,6 @@
 {
     "__version": "2.3.0",
-    "__comments": "cPod Env - vCSA",
+    "__comments": "Sample template to deploy a vCenter Server Appliance with an embedded Platform Services Controller on an ESXi host.",
     "new.vcsa": {
         "esxi": {
             "hostname": "###TARGET###",
@@ -11,7 +11,7 @@
         },
         "appliance": {
             "thin.disk.mode": true,
-            "deployment.option": "management-tiny",
+            "deployment.option": "small",
             "name": "###NAME###"
         },
         "network": {
@@ -31,9 +31,8 @@
         },
         "sso": {
             "password": "###PASSWORD###",
-            "domain-name": "###DOMAIN###",
-            "platform.services.controller": "###PSC###", 
-            "sso.port": 443 
+            "domain-name": "vsphere.local",
+            "site-name": "cPod"
         }
     },
     "ceip": {

@@ -30,6 +30,7 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
 done
 
+printf "${BASEIP}19\tpsc\n" >> ${HOSTS}
 printf "${BASEIP}20\tvcsa\n" >> ${HOSTS}
 printf "${BASEIP}21\tnsx\n" >> ${HOSTS}
 printf "#${BASEIP}22-24\tnsx controllers\n" >> ${HOSTS}

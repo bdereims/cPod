@@ -17,11 +17,11 @@ else
 	. ./${COMPUTE_DIR}/cpod-xxx_env
 fi
 
-### Local vars ####
+### PSC vars ####
 
-HOSTNAME=${HOSTNAME_VCSA}
-NAME=${NAME_VCSA}
-IP=${IP_VCSA}
+HOSTNAME=${HOSTNAME_PSC}
+NAME=${NAME_PSC}
+IP=${IP_PSC}
 OVA=${OVA_VCSA}
 TARGET=${TARGET_VCSA}
 DATASTORE=${DATASTORE_VCSA}
@@ -29,13 +29,33 @@ PORTGROUP=${PORTGROUP_VCSA}
 
 ###################
 
-SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/"
-cat ${COMPUTE_DIR}/vcsa-65.json | sed "${SEDCMD}"  > /tmp/vcsa-65.json
-
 umount /mnt
 mount -o loop $OVA /mnt
-cd /mnt/vcsa-cli-installer/lin64
+
+SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###SITE###/${SITE}/;s/###DOMAIN###/${DOMAIN}/"
+cat ${COMPUTE_DIR}/psc-65.json
+cat ${COMPUTE_DIR}/psc-65.json | sed "${SEDCMD}"  > /tmp/psc-65.json
+
+pushd /mnt/vcsa-cli-installer/lin64
+./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip /tmp/psc-65.json
+popd
+
+sleep 60
+
+### update vCSA vars ####
+
+HOSTNAME=${HOSTNAME_VCSA}
+NAME=${NAME_VCSA}
+IP=${IP_VCSA}
+
+###################
+
+SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###PSC###/${HOSTNAME_PSC}/;s/###DOMAIN###/${DOMAIN}/"
+cat ${COMPUTE_DIR}/vcsa-65.json | sed "${SEDCMD}"  > /tmp/vcsa-65.json
+
+pushd /mnt/vcsa-cli-installer/lin64
 ./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip /tmp/vcsa-65.json
+popd
 
 sleep 60 
 

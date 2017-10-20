@@ -1,6 +1,6 @@
 {
     "__version": "2.3.0",
-    "__comments": "cPod Env - vCSA",
+    "__comments": "cPod Env - PSC",
     "new.vcsa": {
         "esxi": {
             "hostname": "###TARGET###",
@@ -11,7 +11,7 @@
         },
         "appliance": {
             "thin.disk.mode": true,
-            "deployment.option": "management-tiny",
+            "deployment.option": "infrastructure",
             "name": "###NAME###"
         },
         "network": {
@@ -27,13 +27,12 @@
         },
         "os": {
             "password": "###PASSWORD###",
-            "ssh.enable": true 
+            "ssh.enable": false
         },
         "sso": {
             "password": "###PASSWORD###",
             "domain-name": "###DOMAIN###",
-            "platform.services.controller": "###PSC###", 
-            "sso.port": 443 
+            "site-name": "###SITE###"
         }
     },
     "ceip": {
