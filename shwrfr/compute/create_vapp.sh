@@ -7,7 +7,7 @@
 
 . ./env
 
-[ "$1" == "" -o "$2" == "" -o "$3" == "" ] && echo "usage: $0 <name_of_vapp> <name_of_port_group> <ip_on_transit>" && exit 1 
+[ "$1" == "" -o "$2" == "" -o "$3" == "" ] && echo "usage: $0 <name_of_vapp> <name_of_port_group> <ip_on_transit> <num_esx>" && exit 1 
 
 PS_SCRIPT=create_vapp.ps1
 
@@ -28,9 +28,10 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###IP###/${3}/" \
 -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" \
 -e "s/###DATASTORE###/${DATASTORE}/" \
+-e "s/###NUMESX###/${4}/" \
 ${SCRIPT}
 
-echo "Creating vApp '${HEADER}-${1}'."
+echo "Creating vApp '${HEADER}-${1}' with ${4} ESXi."
 #docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
 docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
 

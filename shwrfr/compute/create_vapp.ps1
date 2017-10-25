@@ -13,7 +13,7 @@ $templateVM = "###TEMPLATE_VM###"
 $IP = "###IP###"
 $rootPasswd = "###ROOT_PASSWD###"
 $Datastore = "###DATASTORE###"
-$numberESX = 6 
+$numberESX = ###NUMESX###
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -DefaultVIServerMode multiple
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass

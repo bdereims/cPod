@@ -42,4 +42,4 @@ export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
 
 export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
-export OVA_PHOTONOS=${BITS}/photon-custom-hw10-1.0-62c543d.ova
+export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova

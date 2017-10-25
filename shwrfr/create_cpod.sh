@@ -5,7 +5,14 @@
 
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1 
+[ "$1" == "" ] && echo "usage: $0 <name_of_cpod> <number_of_esx (default = 3)>" && exit 1 
+if [ "${2}" ==  "" ]; then
+	NUM_ESX="3"
+else
+	NUM_ESX="${2}"
+fi
+
+#========================================================================================
 
 DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
@@ -15,8 +22,8 @@ network_env() {
 	#TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
 	#TMP=$( expr ${TMP} + 1 )
 
-	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | head -1 )
-	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | tail -1 )
+	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | sort -n -t "." -k 7 | head -1 )
+	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | sort -n -t "." -k 7 | tail -1 )
 
 	TRANSIT_SUBNET=$( echo ${FIRST_LINE} | sed 's!^.*/!!' | sed 's/\.[0-9]*$//' )
 
@@ -70,7 +77,7 @@ network_create() {
 
 vapp_create() {
 	NAME_UPPER=$( echo ${1} | tr '[:lower:]' '[:upper:]' )
-	${COMPUTE_DIR}/create_vapp.sh ${NAME_UPPER} ${2} ${3}
+	${COMPUTE_DIR}/create_vapp.sh ${NAME_UPPER} ${2} ${3} ${4}
 }
 
 modify_dnsmasq() {
@@ -106,7 +113,7 @@ main() {
 	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP}
 	de_mutex
 
-	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP}
+	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP} ${NUM_ESX}
 
 	mutex
 	bgp_add_peer edge-6 ${NEXT_IP}
