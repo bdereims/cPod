@@ -30,10 +30,12 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
 done
 
-printf "${BASEIP}19\tpsc\n" >> ${HOSTS}
-printf "${BASEIP}20\tvcsa\n" >> ${HOSTS}
-printf "${BASEIP}21\tnsx\n" >> ${HOSTS}
-printf "#${BASEIP}22-24\tnsx controllers\n" >> ${HOSTS}
-printf "${BASEIP}25\tedgegw\n" >> ${HOSTS}
+printf "${BASEIP}10\tpsc\n" >> ${HOSTS}
+printf "${BASEIP}9\tvcsa\n" >> ${HOSTS}
+printf "${BASEIP}8\tnsx\n" >> ${HOSTS}
+printf "#${BASEIP}4-6\tnsx controllers\n" >> ${HOSTS}
+printf "${BASEIP}7\tedgegw\n" >> ${HOSTS}
+touch /data/Datastore/exclude.tag
+touch /data/TEMP/exclude.tag
 	
 systemctl stop dnsmasq ; systemctl start dnsmasq 

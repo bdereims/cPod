@@ -3,7 +3,7 @@
 
 . ./env
 
-[ "${1}" == "" ] && echo "usage: ${0} <deploy_env or cPod Name>" && exit 1
+[ "${1}" == "" ] && echo "usage: ${0} <deploy_env or cPod Name> <num_of_esx>" && exit 1
 
 
 if [ -f "${1}" ]; then
@@ -59,4 +59,5 @@ popd
 
 sleep 60 
 
-./compute/prep_vcsa.sh ${CPOD}
+NUMESX=$( ssh root@cpod-devops "grep esx /etc/hosts | wc -l" )
+./compute/prep_vcsa.sh ${CPOD} ${NUMESX}

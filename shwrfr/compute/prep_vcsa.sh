@@ -5,7 +5,7 @@
 
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1
+[ "$1" == "" ] && echo "usage: $0 <name_of_cpod> <num_of_esx>" && exit 1
 
 CPOD_NAME=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 CPOD_NAME="cpod-${CPOD_NAME}"
@@ -30,6 +30,7 @@ sed -i -e "s/###VCENTER###/${CPOD_VCENTER}/" \
 -e "s/###VCENTER_DATACENTER###/${CPOD_VCENTER_DATACENTER}/" \
 -e "s/###VCENTER_CLUSTER###/${CPOD_VCENTER_CLUSTER}/" \
 -e "s/###DOMAIN###/${CPOD_DOMAIN}/" \
+-e "s/###NUMESX###/${2}/" \
 ${SCRIPT}
 
 echo "Preparing vCenter of ${1}'."

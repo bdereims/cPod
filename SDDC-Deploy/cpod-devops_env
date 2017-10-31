@@ -3,8 +3,8 @@
 
 #######################
 
-# export CPOD=XXX
-# export SUBNET=172.18.XX
+export CPOD=DEVOPS
+export SUBNET=172.18.2
 
 #######################
 
@@ -21,7 +21,6 @@ export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="VM Network"
 #export ADMIN=administrator%40vsphere.local
 export ADMIN=administrator%40${DOMAIN}
-#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
 export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
 export DATASTORE=Datastore
 export BITS=/data/BITS
@@ -46,6 +45,7 @@ export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
 export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 
-export HOSTNAME_UBUNTU=darkstar-ubuntu
-export NAME_UBUNTU=darkstar-Ubuntu
-export OVA_UBUNTU=${BITS}/ubuntu-16.04-server-cloudimg-amd64.ova
+export HOSTNAME_VIC=VIC
+export NAME_VIC=VIC
+export IP_VIC=${SUBNET}.30
+export OVA_VIC=${BITS}/vic-v1.2.1-4104e5f9.ova
