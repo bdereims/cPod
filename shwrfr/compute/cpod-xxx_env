@@ -37,9 +37,9 @@ export TARGET_VCSA=${SUBNET}.11
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
 
-export HOSTNAME_NSX=nsx.${DOMAIN}
-export NAME_NSX=NSX
-export IP_NSX=${SUBNET}.21
+export HOSTNAME_NSX=nsx-v.${DOMAIN}
+export NAME_NSX=NSX-V
+export IP_NSX=${SUBNET}.8
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
 
 export HOSTNAME_PHOTONOS=photonos

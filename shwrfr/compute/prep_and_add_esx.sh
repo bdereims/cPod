@@ -32,9 +32,9 @@ done
 
 printf "${BASEIP}10\tpsc\n" >> ${HOSTS}
 printf "${BASEIP}9\tvcsa\n" >> ${HOSTS}
-printf "${BASEIP}8\tnsx\n" >> ${HOSTS}
-printf "#${BASEIP}4-6\tnsx controllers\n" >> ${HOSTS}
-printf "${BASEIP}7\tedgegw\n" >> ${HOSTS}
+printf "${BASEIP}8\tnsx-v\n" >> ${HOSTS}
+printf "#${BASEIP}4-6\tnsx-v controllers\n" >> ${HOSTS}
+printf "${BASEIP}7\tedgegw-v\n" >> ${HOSTS}
 touch /data/Datastore/exclude.tag
 touch /data/TEMP/exclude.tag
 	
