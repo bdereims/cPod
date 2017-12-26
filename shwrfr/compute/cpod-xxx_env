@@ -30,17 +30,28 @@ export HOSTNAME_VCSA=vcsa.${DOMAIN}
 export HOSTNAME_PSC=psc.${DOMAIN}
 export NAME_VCSA=VCSA
 export NAME_PSC=PSC
-export IP_VCSA=${SUBNET}.9
-export IP_PSC=${SUBNET}.10
-export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
-export TARGET_VCSA=${SUBNET}.11
+export IP_VCSA=${SUBNET}.3
+export IP_PSC=${SUBNET}.2
+#export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7312210.iso
+export TARGET_VCSA=${SUBNET}.21
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
 
 export HOSTNAME_NSX=nsx-v.${DOMAIN}
 export NAME_NSX=NSX-V
-export IP_NSX=${SUBNET}.8
+export IP_NSX=${SUBNET}.4
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
+
+export HOSTNAME_VRLI=vrli.${DOMAIN}
+export NAME_VRLI=vRLI
+export IP_VRLI=${SUBNET}.9
+export OVA_VRLI=${BITS}/VMware-vRealize-Log-Insight-4.5.1-6858700.ova
+
+export HOSTNAME_VROPS=vrops.${DOMAIN}
+export NAME_VROPS=vROPS
+export IP_VROPS=${SUBNET}.10
+export OVA_VROPS=${BITS}/vRealize-Operations-Manager-Appliance-6.6.1.6163035_OVF10.ova
 
 export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos

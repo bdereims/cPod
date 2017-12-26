@@ -26,3 +26,8 @@ export HOSTNAME_NSX=nsx.cpod-nsx-pan.shwrfr.mooo.com
 export NAME_NSX=NSX
 export IP_NSX=172.18.16.21
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.2-5672532.ova
+
+export HOSTNAME_VRA=vra73.cpod-nsx-pan.shwrfr.mooo.com
+export NAME_VRA=vRA73
+export IP_VRA=172.18.16.25
+export OVA_VRA=${BITS}/VMware-vR-Appliance-7.3.0.536-5610496_OVF10.ova

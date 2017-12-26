@@ -19,7 +19,8 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	IP=$( echo ${ESX} | cut -f2 -d',' )
 	BASEIP=$( echo ${IP} | sed 's/\.[0-9]*$/./' )
 	CPODROUTER="${BASEIP}1"
-	NEWIP=$( expr ${I} + 10 )
+	#NEWIP=$( expr ${I} + 10 )
+	NEWIP=$( expr ${I} + 20 )
 	NEWIP="${BASEIP}${NEWIP}"
 	NAME=$( printf "esx-%02d" ${I} )
 	printf "${NEWIP}\t${NAME}\n" >> ${HOSTS}
@@ -30,12 +31,19 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
 done
 
-printf "${BASEIP}10\tpsc\n" >> ${HOSTS}
-printf "${BASEIP}9\tvcsa\n" >> ${HOSTS}
-printf "${BASEIP}8\tnsx-v\n" >> ${HOSTS}
-printf "#${BASEIP}4-6\tnsx-v controllers\n" >> ${HOSTS}
-printf "${BASEIP}7\tedgegw-v\n" >> ${HOSTS}
+printf "${BASEIP}2\tpsc\n" >> ${HOSTS}
+printf "${BASEIP}3\tvcsa\n" >> ${HOSTS}
+printf "${BASEIP}4\tnsx-v\n" >> ${HOSTS}
+printf "#${BASEIP}5-7\tnsx-v controllers\n" >> ${HOSTS}
+printf "${BASEIP}8\tedgegw-v\n" >> ${HOSTS}
+printf "${BASEIP}9\tvrli\n" >> ${HOSTS}
+printf "${BASEIP}10\tvrops\n" >> ${HOSTS}
+
 touch /data/Datastore/exclude.tag
-touch /data/TEMP/exclude.tag
+touch /data/Temp/exclude.tag
+
+sed -i "s#ExecStart=/usr/sbin/rpc.nfsd $RPCNFSDARGS#ExecStart=/usr/sbin/rpc.nfsd 32 $RPCNFSDARGS#" /usr/lib/systemd/system/nfs-server.service
+systemctl daemon-reload
+systemctl resatrt nfs-server
 	
 systemctl stop dnsmasq ; systemctl start dnsmasq 

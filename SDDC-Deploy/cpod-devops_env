@@ -14,14 +14,17 @@ export SITE="cPod-${CPOD_HIGH}"
 export DOMAIN=cpod-${CPOD_LOWER}.shwrfr.mooo.com
 export DNS=${SUBNET}.1
 export NTP=${DNS}
-export GATEWAY=${DNS}
+#export GATEWAY=${DNS}
+export GATEWAY=192.168.21.1
 export NETMASK=255.255.255.0
 export PASSWORD=VMware1!
 export VC_PASSWORD=${PASSWORD}
-export PORTGROUP="VM Network"
+#export PORTGROUP="VM Network"
+export PORTGROUP="vxw-dvs-33-virtualwire-2-sid-5001-VIC-L3"
 #export ADMIN=administrator%40vsphere.local
 export ADMIN=administrator%40${DOMAIN}
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
+#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Rack01-NSX-V
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -45,7 +48,12 @@ export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
 export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 
-export HOSTNAME_VIC=VIC
-export NAME_VIC=VIC
-export IP_VIC=${SUBNET}.30
+#export HOSTNAME_VIC=VIC
+#export NAME_VIC=VIC
+#export IP_VIC=${SUBNET}.30
+#export OVA_VIC=${BITS}/vic-v1.2.1-4104e5f9.ova
+
+export HOSTNAME_VIC=vic-l3
+export NAME_VIC=VIC-L3
+export IP_VIC=192.168.21.2
 export OVA_VIC=${BITS}/vic-v1.2.1-4104e5f9.ova
