@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx 
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: nginx.k8s 
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx 
+          servicePort: http

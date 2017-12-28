@@ -2,3 +2,4 @@ sddc-deploy/VMware-ovftool-4.1.0-2459827-lin.x86_64.bundle
 sddc-deploy/ovftool.tgz
 shwrfr/keys/*
 BITS/*
+shwrfr/extra/post_slack.sh
