@@ -98,13 +98,12 @@ prep_cpod() {
 
 exit_gate() {
 	[ -f lock ] && rm lock
-	./extra/post_slack.sh "Error during creation of cPod '${HEADER}-${1}'"
 	exit $1 
 }
 
 main() {
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
-	./extra/post_slack.sh "Starting creation of cPod '${HEADER}-${1}'"
+	./extra/post_slack.sh "Starting creation of cPod *'${HEADER}-${1}'*"
 	START=$( date +%s ) 
 	
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
@@ -130,7 +129,7 @@ main() {
 	END=$( date +%s )
 	TIME=$( expr ${END} - ${START} )
 	echo "In ${TIME} Seconds."
-	./extra/post_slack.sh "cPod '${HEADER}-${1}' has been successfully created in ${TIME}s"
+	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${1}'* has been successfully created in *${TIME}s*"
 	exit_gate 0
 }
 

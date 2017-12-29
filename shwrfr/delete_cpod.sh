@@ -40,7 +40,6 @@ release_mutex() {
 
 exit_gate() {
 	release_mutex
-	./extra/post_slack.sh "Error during deletion of cPod '${HEADER}-${1}'"
 	exit $1 
 }
 
@@ -48,7 +47,7 @@ main() {
 	printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
 	read $GO
 
-	./extra/post_slack.sh "Deleting cPod '${HEADER}-${1}'"
+	./extra/post_slack.sh "Deleting cPod *'${HEADER}-${1}'*"
 	mutex
 
 	echo "=== Deleting cPod called '$1'."
@@ -64,7 +63,7 @@ main() {
 	modify_dnsmasq ${CPOD_NAME_LOWER}
 
 	echo "=== Deletion is finished."
-	./extra/post_slack.sh "cPod '${HEADER}-${1}' has been deleted"
+	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${1}'* has been deleted"
 	exit_gate 0
 }
 

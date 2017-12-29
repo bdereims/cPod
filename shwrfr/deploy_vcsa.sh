@@ -71,4 +71,4 @@ NUMESX=$( ssh root@cpod-devops "grep esx /etc/hosts | wc -l" )
 rm ${PSC_CONF_FILE}
 rm ${VCSA_CONF_FILE}
 
-./extra/post_slack.sh "VCSA for <https://vcsa.${DOMAIN}|${DOMAIN}> seems ready!"
+./extra/post_slack.sh ":thumbsup: VCSA for <https://vcsa.${DOMAIN}|${DOMAIN}> seems ready!"
