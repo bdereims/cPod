@@ -26,7 +26,7 @@ Write-Host "Add cPodRouter VM."
 $CpodRouter = New-VM -Name cPodRouter-$cPodName -VM $templateVM -ResourcePool $Vapp -Datastore $Datastore
 
 Write-Host "Add Disk for /data in cPodRouter."
-$CpodRouter | New-HardDisk -ThinProvisioned -CapacityKB 4096000000 
+$CpodRouter | New-HardDisk -ThinProvisioned -CapacityKB 1024000000 
 
 Write-Host "Modify cPodRouter vNIC."
 Get-NetworkAdapter -VM $CpodRouter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
