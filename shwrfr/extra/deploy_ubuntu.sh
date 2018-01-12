@@ -22,9 +22,9 @@ fi
 ### Local vars ####
 
 #HOSTNAME=${HOSTNAME_UBUNTU}
-HOSTNAME=jumbox-ubuntu
+HOSTNAME=jumbox
 #NAME=${NAME_UBUNTU}
-NAME=jumbox-ubuntu
+NAME=jumbox
 OVA=${OVA_UBUNTU}
 
 ###################
