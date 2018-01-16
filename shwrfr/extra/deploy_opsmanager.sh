@@ -21,28 +21,29 @@ fi
 
 ### Local vars ####
 
-#HOSTNAME=${HOSTNAME_UBUNTU}
-HOSTNAME=jumbox
-#NAME=${NAME_UBUNTU}
-NAME=jumbox
-OVA=${OVA_UBUNTU}
+HOSTNAME=${HOSTNAME_OPSMANAGER}
+NAME=${NAME_OPSMANAGER}
+IP=${IP_OPSMANAGER}
+OVA=${OVA_OPSMANAGER}
 
 ###################
 
 export MYSCRIPT=/tmp/$$
 
 cat << EOF > ${MYSCRIPT}
-cd ${OVFDIR}
-ovftool --acceptAllEulas --noSSLVerify --skipManifestCheck \
---X:injectOvfEnv --overwrite --powerOffTarget --allowExtraConfig \
---X:apiVersion=5.5 --diskMode=thin \
---prop:password=${PASSWORD} \
---prop:hostname=${HOSTNAME} \
-"--datastore=${DATASTORE}" -n=${NAME} "--network=${PORTGROUP}" \
+ovftool --acceptAllEulas --skipManifestCheck --X:injectOvfEnv --allowExtraConfig \
+--prop:admin_passwd=${PASSWORD} \
+--prop:custom_hostname=${HOSTNAME} \
+--prop:ip0=${IP} \
+--prop:netmask0=${NETMASK} \
+--prop:gateway=${GATEWAY} \
+--prop:DNS=${DNS} \
+--prop:ntp_servers=${NTP} \
+-ds=${DATASTORE} -n=${NAME} --network='${PORTGROUP}' \
 ${OVA} \
-vi://${ADMIN}:'${PASSWORD}'@${TARGET}
+vi://${ADMIN}:'${VC_PASSWORD}'@${TARGET}
 EOF
 
 sh ${MYSCRIPT}
 
-rm ${MYSCRIPT}
+#rm ${MYSCRIPT}

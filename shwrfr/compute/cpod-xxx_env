@@ -58,6 +58,20 @@ export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
 export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 
+export HOSTNAME_DARKSTAR=darkstar
+export NAME_DARKSTAR=darkstar
+export OVA_DARKSTAR=${BITS}/darkstar.ova
+
 export HOSTNAME_UBUNTU=darkstar-ubuntu
 export NAME_UBUNTU=darkstar-Ubuntu
 export OVA_UBUNTU=${BITS}/ubuntu-16.04-server-cloudimg-amd64.ova
+
+export HOSTNAME_VIC=vic
+export NAME_VIC=VIC
+export IP_VIC=${SUBNET}.11
+export OVA_VIC=${BITS}/vic-v1.3.0-3033-f8cc7317.ova
+
+export HOSTNAME_OPSMANAGER=opsmanager
+export NAME_OPSMANAGER=OPS_MANAGER
+export IP_OPSMANAGER=${SUBNET}.12
+export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.233.ova 
