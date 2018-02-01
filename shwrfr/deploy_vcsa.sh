@@ -65,8 +65,9 @@ popd
 
 sleep 60 
 
-CPOD=$( echo ${1} | tr '[:upper:]' '[:lower:]' )
-NUMESX=$( ssh root@cpod-${CPOD} "grep esx /etc/hosts | wc -l" )
+CPOD="${1}"
+CPOD_LOWER=$( echo ${1} | tr '[:upper:]' '[:lower:]' )
+NUMESX=$( ssh root@cpod-${CPOD_LOWER} "grep esx /etc/hosts | wc -l" )
 ./compute/prep_vcsa.sh ${CPOD} ${NUMESX}
 
 rm ${PSC_CONF_FILE}
