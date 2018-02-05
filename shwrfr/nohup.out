@@ -1,12 +1,23 @@
-Opening OVA source: /data/BITS/photon-hw13-2.0.ova
-The manifest does not validate
-Error: Could not open URL https://vcsa.cpod-1.shwrfr.mooo.com/sdk/vimServiceVersions.xml (response code: 404)
-Completed with errors
-Opening OVA source: /data/BITS/photon-hw13-2.0.ova
-The manifest does not validate
-Opening OVA source: /data/BITS/photon-hw13-2.0.ova
-The manifest does not validate
-Error: Locator does not refer to an object: vi://administrator%40cpod-cday.shwrfr.mooo.com@vcsa.cpod-cday.shwrfr.mooo.com:443/cPod-CDAY/host/Management
-Completed with errors
-Error: Locator does not refer to an object: vi://administrator%40cpod-cday.shwrfr.mooo.com@vcsa.cpod-cday.shwrfr.mooo.com:443/cPod-CDAY/host/Management
-Completed with errors
+Creating VM 'acaussignac'.
+Creating VM 'bdereims'.
+the input device is not a TTY
+the input device is not a TTY
+Creating VM 'jfontenette'.
+the input device is not a TTY
+api
+compute
+create_cpod.sh
+delete_cpod.sh
+deploy_vcsa.sh
+enter_maintenance_cpod.sh
+env
+env-dell
+env-hp
+env.passwd
+extra
+list_cpod.sh
+network
+nohup.out
+prep_cpod.sh
+README.md
+storage
