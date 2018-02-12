@@ -16,6 +16,7 @@ CPOD_DOMAIN="${CPOD_NAME}.shwrfr.mooo.com"
 CPOD_VCENTER="vcsa.${CPOD_DOMAIN}"
 CPOD_VCENTER_ADMIN="administrator@${CPOD_DOMAIN}"
 
+
 PS_SCRIPT=prep_vcsa.ps1
 
 SCRIPT_DIR=/tmp/scripts
@@ -34,6 +35,7 @@ sed -i -e "s/###VCENTER###/${CPOD_VCENTER}/" \
 ${SCRIPT}
 
 echo "Preparing vCenter of ${1}'."
-docker run --rm -it --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT}
+#docker run --rm -it --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT}
+docker run --rm --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT}
 
 rm -fr ${SCRIPT}

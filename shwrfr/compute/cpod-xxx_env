@@ -74,4 +74,4 @@ export OVA_VIC=${BITS}/vic-v1.3.0-3033-f8cc7317.ova
 export HOSTNAME_OPSMANAGER=opsmanager
 export NAME_OPSMANAGER=OPS_MANAGER
 export IP_OPSMANAGER=${SUBNET}.12
-export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.233.ova 
+export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.249.ova
