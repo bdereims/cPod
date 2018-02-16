@@ -22,7 +22,8 @@ export PORTGROUP="VM Network"
 #export ADMIN=administrator%40vsphere.local
 export ADMIN=administrator%40${DOMAIN}
 #export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
+#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Edge
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -45,12 +46,12 @@ export IP_NSX=${SUBNET}.4
 export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
 
 export HOSTNAME_VRLI=vrli.${DOMAIN}
-export NAME_VRLI=vRLI
-export IP_VRLI=${SUBNET}.9
+export NAME_VRLI=VRLI
+export IP_VRLI=${SUBNET}.11
 export OVA_VRLI=${BITS}/VMware-vRealize-Log-Insight-4.5.1-6858700.ova
 
 export HOSTNAME_VROPS=vrops.${DOMAIN}
-export NAME_VROPS=vROPS
+export NAME_VROPS=VROPS
 export IP_VROPS=${SUBNET}.10
 export OVA_VROPS=${BITS}/vRealize-Operations-Manager-Appliance-6.6.1.6163035_OVF10.ova
 
@@ -61,6 +62,10 @@ export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 export HOSTNAME_DARKSTAR=darkstar
 export NAME_DARKSTAR=darkstar
 export OVA_DARKSTAR=${BITS}/darkstar.ova
+
+export HOSTNAME_GRACEHOPER=gracehoper
+export NAME_GRACEHOPER=gracehoper
+export OVA_GRACEHOPER=${BITS}/windows10-vmw.ova
 
 export HOSTNAME_UBUNTU=darkstar-ubuntu
 export NAME_UBUNTU=darkstar-Ubuntu
