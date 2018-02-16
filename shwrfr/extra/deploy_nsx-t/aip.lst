@@ -1,0 +1,59 @@
+HTTP/1.1 200 
+Date: Fri, 16 Feb 2018 15:26:23 GMT
+Content-Type: application/json;charset=UTF-8
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Server: NSX
+
+{
+  "result_count" : 16,
+  "results" : [ {
+    "allocation_id" : "172.18.8.70",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.81",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.71",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.82",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.72",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.83",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.73",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.84",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.80",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.78",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.79",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.74",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.85",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.75",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.76",
+    "_protection" : "NOT_PROTECTED"
+  }, {
+    "allocation_id" : "172.18.8.77",
+    "_protection" : "NOT_PROTECTED"
+  } ]
+}

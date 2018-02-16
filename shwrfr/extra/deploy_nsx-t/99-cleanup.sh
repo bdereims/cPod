@@ -11,7 +11,7 @@ nsx_call() {
 	# $3 : Payload in JSON
 
         curl -k -b cookies.$$ -H "`grep X-XSRF-TOKEN headers.$$`" \
-	-X ${1} -d '${3}' \
+	-X ${1} -d @${3} \
 	-H 'Content-Type: application/json;charset=UTF-8' \
         -i https://${NSX_MANAGER}${2}
 }
@@ -31,15 +31,15 @@ clean_ip_pool() {
 	echo "Delete IP Pool"
 
 	nsx_call GET "/api/v1/pools/ip-pools/${1}/allocations" > aip.lst
-	for AIP in $( cat aip.lst | jq '.["results"] | .[] | .allocation_id' )
+	for AIP in $( tail -n +8 aip.lst | jq '.["results"] | .[] | .allocation_id' )
 	do
 		echo "{ \"allocation_id\": ${AIP} }"
-		#echo "{ \"allocation_id\": ${AIP} }" > aip.$$
+		echo "{ \"allocation_id\": ${AIP} }" > aip.$$
 		#curl -k -b cookies.$$ -H "`grep X-XSRF-TOKEN headers.$$`" \
 		#-X POST -d @aip.$$ \
 		#-H 'Content-Type: application/json;charset=UTF-8' \
 		#-i https://${NSX_MANAGER}/api/v1/pools/ip-pools/${1}?action=RELEASE
-		nsx_call POST "/api/v1/pools/ip-pools/${1}?action=RELEASE" "{ \"allocation_id\": ${AIP} }" 
+		nsx_call POST "/api/v1/pools/ip-pools/${1}?action=RELEASE" aip.$$ 
 	done
 
 	#curl -k -b cookies.$$ -H "`grep X-XSRF-TOKEN headers.$$`" \
@@ -47,16 +47,16 @@ clean_ip_pool() {
 	#-H 'Content-Type: application/json;charset=UTF-8' \
 	#-i https://${NSX_MANAGER}/api/v1/pools/ip-pools/${1}
 
-	nsx_call DELETE "/api/v1/pools/ip-pools/${1}"
+	#nsx_call DELETE "/api/v1/pools/ip-pools/${1}"
 
-	rm aip.lst
+	#rm aip.lst
 }
 
 main() {
 	echo "Cleaning Up NSX-T"
 	create_nsx_session
 
-	clean_ip_pool "e3bdcdfd-d8cd-4ff9-a31a-a34fa42a4315"
+	clean_ip_pool "76496dee-ea59-4910-a4a9-5ff4f5999435"
 
 	delete_nsx_session
 }
