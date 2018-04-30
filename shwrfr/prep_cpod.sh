@@ -23,6 +23,14 @@ main() {
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
 	#IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
+        STATUS=1
+        while [ ${STATUS} -gt 0 ]
+        do
+                echo "Waiting for cPodRouter of ${CPOD_NAME_LOWER}..."
+                STATUS=$( ping -c 1 ${CPOD_NAME_LOWER} 2>&1 > /dev/null ; echo $? )
+                STATUS=$(expr $STATUS)
+        done
+
 	sshpass -p ${ROOT_PASSWD} scp ~/.ssh/id_rsa.pub root@${CPOD_NAME_LOWER}:/root/.ssh/authorized_keys
 	scp -o StrictHostKeyChecking=no ${SCRIPT} root@${CPOD_NAME_LOWER}:./${SHELL_SCRIPT} 
 	ssh -o StrictHostKeyChecking=no root@${CPOD_NAME_LOWER} "./${SHELL_SCRIPT}"

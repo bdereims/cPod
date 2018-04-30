@@ -3,7 +3,13 @@
 
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1 
+[ "$1" == "" ] && echo "usage: $0 <name_of_cpod> <owner's email alias (ex: bdereims)>" && exit 1 
+
+if [ "${2}" ==  "" ]; then
+	OWNER="admin"
+else
+	OWNER="${2}"
+fi
 
 DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
@@ -24,7 +30,7 @@ vapp_delete() {
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	sed -i "/${1}./d" ${DNSMASQ} 
-	sed -i "/\t${1}$/d" ${HOSTS} 
+	sed -i "/\t${1}.*$/d" ${HOSTS} 
 
 	systemctl stop dnsmasq 
         systemctl start dnsmasq
@@ -43,7 +49,20 @@ exit_gate() {
 	exit $1 
 }
 
+test_owner() {
+	LINE=$( grep ${CPOD_NAME_LOWER} /etc/hosts | cut -f3 | sed "s/#//" )
+	if [ "${LINE}" != "" ] && [ "${LINE}" != "${OWNER}" ]; then
+		echo "Error: Not Ok for deletion"
+		exit 1
+	fi
+}
+
 main() {
+	CPOD_NAME="cpod-$1"
+        CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
+
+	test_owner ${2}
+
 	printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
 	read $GO
 
@@ -52,8 +71,6 @@ main() {
 
 	echo "=== Deleting cPod called '$1'."
 
-	CPOD_NAME="cpod-$1"
-	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
 	IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
 	bgp_delete_peer ${IP}

@@ -21,9 +21,9 @@ export VC_PASSWORD=${PASSWORD}
 export PORTGROUP="VM Network"
 #export ADMIN=administrator%40vsphere.local
 export ADMIN=administrator%40${DOMAIN}
-#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
+export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
 #export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
-export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Edge
+#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Edge
 export DATASTORE=Datastore
 export BITS=/data/BITS
 
@@ -35,19 +35,21 @@ export IP_VCSA=${SUBNET}.3
 export IP_PSC=${SUBNET}.2
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-5973321.iso
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7312210.iso
-export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7515524.iso
+#export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7515524.iso
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-8024368.iso
 export TARGET_VCSA=${SUBNET}.21
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
 
-export HOSTNAME_NSX=nsx-v.${DOMAIN}
+export HOSTNAME_NSX=nsx.${DOMAIN}
 export NAME_NSX=NSX-V
 export IP_NSX=${SUBNET}.4
-export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
+#export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.4.0-7564187.ova
 
 export HOSTNAME_VRLI=vrli.${DOMAIN}
 export NAME_VRLI=VRLI
-export IP_VRLI=${SUBNET}.11
+export IP_VRLI=${SUBNET}.9
 export OVA_VRLI=${BITS}/VMware-vRealize-Log-Insight-4.5.1-6858700.ova
 
 export HOSTNAME_VROPS=vrops.${DOMAIN}
@@ -74,9 +76,9 @@ export OVA_UBUNTU=${BITS}/ubuntu-16.04-server-cloudimg-amd64.ova
 export HOSTNAME_VIC=vic
 export NAME_VIC=VIC
 export IP_VIC=${SUBNET}.11
-export OVA_VIC=${BITS}/vic-v1.3.0-3033-f8cc7317.ova
+export OVA_VIC=${BITS}/vic-v1.3.1-3409-132fb13d.ova
 
 export HOSTNAME_OPSMANAGER=opsmanager
-export NAME_OPSMANAGER=OPS_MANAGER
+export NAME_OPSMANAGER=OPSMANAGER
 export IP_OPSMANAGER=${SUBNET}.12
-export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.249.ova
+export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.269.ova

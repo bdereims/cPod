@@ -33,9 +33,9 @@ done
 
 printf "${BASEIP}2\tpsc\n" >> ${HOSTS}
 printf "${BASEIP}3\tvcsa\n" >> ${HOSTS}
-printf "${BASEIP}4\tnsx-v\n" >> ${HOSTS}
-printf "#${BASEIP}5-7\tnsx-v controllers\n" >> ${HOSTS}
-printf "${BASEIP}8\tedgegw-v\n" >> ${HOSTS}
+printf "${BASEIP}4\tnsx\n" >> ${HOSTS}
+printf "#${BASEIP}5-7\tnsx controllers\n" >> ${HOSTS}
+printf "${BASEIP}8\tedge\n" >> ${HOSTS}
 printf "${BASEIP}9\tvrli\n" >> ${HOSTS}
 printf "${BASEIP}10\tvrops\n" >> ${HOSTS}
 
@@ -44,6 +44,6 @@ touch /data/Temp/exclude.tag
 
 sed -i "s#ExecStart=/usr/sbin/rpc.nfsd $RPCNFSDARGS#ExecStart=/usr/sbin/rpc.nfsd 32 $RPCNFSDARGS#" /usr/lib/systemd/system/nfs-server.service
 systemctl daemon-reload
-systemctl resatrt nfs-server
+systemctl stop nfs-server ; systemctl start nfs-server
 	
 systemctl stop dnsmasq ; systemctl start dnsmasq 

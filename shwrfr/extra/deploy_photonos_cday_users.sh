@@ -39,6 +39,7 @@ deploy_photonos_pcli() {
 for i in `cd ~ ; ./list_mail_users.sh | sed -e 's/@.*$//'`;
 do
 	NAME="${i}"
+	#deploy_photonos ${NAME}
 	deploy_photonos_pcli ${NAME}
 done 
 

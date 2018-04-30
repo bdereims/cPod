@@ -1,7 +1,7 @@
 #!/bin/bash
 #bdereims@vmware.com
 
-NSX_MANAGER=nsx-t.cpod-gv.shwrfr.mooo.com
+NSX_MANAGER=nsx.cpod-gv.shwrfr.mooo.com
 NSX_USER=admin
 NSX_USER_PASSWD=VMware1!
 
@@ -47,16 +47,16 @@ clean_ip_pool() {
 	#-H 'Content-Type: application/json;charset=UTF-8' \
 	#-i https://${NSX_MANAGER}/api/v1/pools/ip-pools/${1}
 
-	#nsx_call DELETE "/api/v1/pools/ip-pools/${1}"
+	nsx_call DELETE "/api/v1/pools/ip-pools/${1}?force=true"
 
-	#rm aip.lst
+	rm aip.lst
 }
 
 main() {
 	echo "Cleaning Up NSX-T"
 	create_nsx_session
 
-	clean_ip_pool "76496dee-ea59-4910-a4a9-5ff4f5999435"
+	clean_ip_pool "fa2d3676-e7c2-488a-b177-871209709700"
 
 	delete_nsx_session
 }

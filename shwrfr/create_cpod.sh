@@ -5,11 +5,18 @@
 
 . ./env
 
-[ "$1" == "" ] && echo "usage: $0 <name_of_cpod> <number_of_esx (default = 3)>" && exit 1 
+[ "$1" == "" ] && echo "usage: $0 <name_of_cpod> <number_of_esx (default = 3)> <owner's email alias (ex: bdereims)>" && exit 1 
+
 if [ "${2}" ==  "" ]; then
 	NUM_ESX="3"
 else
 	NUM_ESX="${2}"
+fi
+
+if [ "${3}" ==  "" ]; then
+	OWNER="admin"
+else
+	OWNER="${3}"
 fi
 
 #========================================================================================
@@ -83,7 +90,7 @@ vapp_create() {
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
-	printf "${2}\tcpod-${1}\n" >> ${HOSTS}
+	printf "${2}\tcpod-${1}\t#${OWNER}\n" >> ${HOSTS}
 
 	systemctl stop dnsmasq ; systemctl start dnsmasq
 }
@@ -111,7 +118,7 @@ main() {
 	mutex
 	network_env
 	network_create ${NAME_LOWER}
-	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP}
+	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP} ${3}
 	de_mutex
 
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP} ${NUM_ESX}

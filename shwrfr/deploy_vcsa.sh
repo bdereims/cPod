@@ -33,7 +33,7 @@ PORTGROUP=${PORTGROUP_VCSA}
 ###################
 
 #umount /mnt
-#mount -o loop $OVA /mnt
+mount -o loop $OVA /mnt
 
 SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###SITE###/${SITE}/;s/###DOMAIN###/${DOMAIN}/"
 cat ${COMPUTE_DIR}/psc-65.json | sed "${SEDCMD}"  > ${PSC_CONF_FILE} 
