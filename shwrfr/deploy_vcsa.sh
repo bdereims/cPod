@@ -3,7 +3,7 @@
 
 . ./env
 
-[ "${1}" == "" ] && echo "usage: ${0} <deploy_env or cPod Name> <num_of_esx>" && exit 1
+[ "${1}" == "" ] && echo "usage: ${0} <deploy_env or cPod Name>" && exit 1
 
 
 if [ -f "${1}" ]; then
@@ -32,13 +32,13 @@ PORTGROUP=${PORTGROUP_VCSA}
 
 ###################
 
-#umount /mnt
+umount /mnt
 mount -o loop $OVA /mnt
 
 SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###SITE###/${SITE}/;s/###DOMAIN###/${DOMAIN}/"
 cat ${COMPUTE_DIR}/psc-65.json | sed "${SEDCMD}"  > ${PSC_CONF_FILE} 
 
-./extra/post_slack.sh "Deploying a new PSC for *${DOMAIN}*"
+./extra/post_slack.sh "Deploying a new PSC for *${DOMAIN}*. We're working for you, it takes times. Stay tuned..."
 
 pushd /mnt/vcsa-cli-installer/lin64
 ./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip ${PSC_CONF_FILE} 

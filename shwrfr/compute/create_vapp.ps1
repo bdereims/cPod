@@ -10,6 +10,7 @@ $Portgroup = "###PORTGTOUP###"
 $oldNet = "50-EDGE"
 $cPodName = "###CPOD_NAME###"
 $templateVM = "###TEMPLATE_VM###"
+$templateESX = "###TEMPLATE_ESX###"
 $IP = "###IP###"
 $rootPasswd = "###ROOT_PASSWD###"
 $Datastore = "###DATASTORE###"
@@ -43,7 +44,8 @@ Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $
 Write-Host "Add ESX VMs."
 For ($i=1; $i -le $numberESX; $i++) {
 	Write-Host "-> cPod-$cPodName-esx-$i"
-	New-VM -Name cPod-$cPodName-esx-$i -VM "template-ESX65U1" -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
+	#New-VM -Name cPod-$cPodName-esx-$i -VM "template-ESX65U1" -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
+	New-VM -Name cPod-$cPodName-esx-$i -VM $templateESX -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 	Start-VM -VM cPod-$cPodName-esx-$i -Confirm:$false -RunAsync 
 }
 

@@ -19,6 +19,7 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 ${SCRIPT}
 
 echo "List vApp."
-docker run --rm -it --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell -NoLogo ${SCRIPT} 
+#docker run --rm -it --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell -NoLogo ${SCRIPT} 
+docker run --rm --dns=10.50.0.3 -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell -NoLogo ${SCRIPT} 
 
 rm -fr ${SCRIPT}

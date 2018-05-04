@@ -37,6 +37,7 @@ export IP_PSC=${SUBNET}.2
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7312210.iso
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7515524.iso
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-8024368.iso
+#export OVA_VCSA=${BITS}/VMware-VCSA-all-6.7.0-8217866.iso
 export TARGET_VCSA=${SUBNET}.21
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"

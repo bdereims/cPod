@@ -96,6 +96,7 @@ modify_dnsmasq() {
 }
 
 bgp_add_peer() {
+	echo "Adding cPodRouter as BGP peer"
 	./network/add_bgp_neighbour.sh $1 $2 
 }
 

@@ -25,6 +25,7 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###PORTGTOUP###/${2}/" \
 -e "s/###CPOD_NAME###/${1}/" \
 -e "s/###TEMPLATE_VM###/${TEMPLATE_VM}/" \
+-e "s/###TEMPLATE_ESX###/${TEMPLATE_ESX}/" \
 -e "s/###IP###/${3}/" \
 -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" \
 -e "s/###DATASTORE###/${DATASTORE}/" \
@@ -33,6 +34,7 @@ ${SCRIPT}
 
 echo "Creating vApp '${HEADER}-${1}' with ${4} ESXi."
 #docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
-docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
+#docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
+docker run --rm -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
 
 rm -fr ${SCRIPT}

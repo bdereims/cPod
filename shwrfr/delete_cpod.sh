@@ -15,7 +15,12 @@ DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 
 mutex() {
-	[ -f lock ] && echo "A cPod creation is running, please launch later." && exit 1
+	while [ -f lock ]
+	do
+		echo "Waiting..."
+		sleep 1
+	done
+
 	touch lock
 }
 
@@ -50,37 +55,40 @@ exit_gate() {
 }
 
 test_owner() {
-	LINE=$( grep ${CPOD_NAME_LOWER} /etc/hosts | cut -f3 | sed "s/#//" )
+	LINE=$( grep ${CPOD_NAME_LOWER} /etc/hosts | cut -f3 | sed "s/#//" | head -1 )
 	if [ "${LINE}" != "" ] && [ "${LINE}" != "${OWNER}" ]; then
 		echo "Error: Not Ok for deletion"
+		./extra/post_slack.sh ":wow: You're not allowed to delete ${CPOD_NAME_HIGH}"
 		exit 1
 	fi
 }
 
 main() {
 	CPOD_NAME="cpod-$1"
+	CPOD_NAME_HIGH=$( echo ${CPOD_NAME} | tr '[:lower:]' '[:upper:]' )
         CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
+	NAME_HIGH=$( echo $1 | tr '[:lower:]' '[:upper:]' )
 
 	test_owner ${2}
 
-	printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
-	read $GO
+	#printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
+	#read $GO
 
-	./extra/post_slack.sh "Deleting cPod *'${HEADER}-${1}'*"
+	./extra/post_slack.sh "Deleting cPod *'${HEADER}-${NAME_HIGH}'*"
 	mutex
 
-	echo "=== Deleting cPod called '$1'."
+	echo "=== Deleting cPod called '${NAME_HIGH}'."
 
 	IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
 	bgp_delete_peer ${IP}
-	vapp_delete ${1}
+	vapp_delete ${NAME_HIGH}
 	sleep 15
 	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}
 	modify_dnsmasq ${CPOD_NAME_LOWER}
 
 	echo "=== Deletion is finished."
-	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${1}'* has been deleted"
+	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${NAME_HIGH}'* has been deleted"
 	exit_gate 0
 }
 
