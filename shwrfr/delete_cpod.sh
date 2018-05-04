@@ -58,7 +58,7 @@ test_owner() {
 	LINE=$( grep ${CPOD_NAME_LOWER} /etc/hosts | cut -f3 | sed "s/#//" | head -1 )
 	if [ "${LINE}" != "" ] && [ "${LINE}" != "${OWNER}" ]; then
 		echo "Error: Not Ok for deletion"
-		./extra/post_slack.sh ":wow: You're not allowed to delete ${CPOD_NAME_HIGH}"
+		./extra/post_slack.sh ":wow: *${OWNER}* you're not allowed to delete *${NAME_HIGH}*"
 		exit 1
 	fi
 }
