@@ -3,3 +3,4 @@ sddc-deploy/ovftool.tgz
 shwrfr/keys/*
 BITS/*
 shwrfr/extra/post_slack.sh
+shwrfr/govc_env

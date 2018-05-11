@@ -57,7 +57,8 @@ IP=${IP_VCSA}
 SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###PSC###/${HOSTNAME_PSC}/;s/###DOMAIN###/${DOMAIN}/"
 cat ${COMPUTE_DIR}/vcsa-65.json | sed "${SEDCMD}"  > ${VCSA_CONF_FILE} 
 
-./extra/post_slack.sh "Deploying a new VCSA for *${DOMAIN}*"
+#./extra/post_slack.sh "Deploying a new VCSA for *${DOMAIN}*"
+./extra/post_slack.sh "Deploying a new VCSA for cPod '*${1}*'"
 
 pushd /mnt/vcsa-cli-installer/lin64
 ./vcsa-deploy install --no-esx-ssl-verify --accept-eula --acknowledge-ceip ${VCSA_CONF_FILE} 
@@ -73,4 +74,4 @@ NUMESX=$( ssh root@cpod-${CPOD_LOWER} "grep esx /etc/hosts | wc -l" )
 rm ${PSC_CONF_FILE}
 rm ${VCSA_CONF_FILE}
 
-./extra/post_slack.sh ":thumbsup: VCSA for <https://vcsa.${DOMAIN}|${DOMAIN}> seems ready!"
+./extra/post_slack.sh ":thumbsup: <https://vcsa.${DOMAIN}|VCSA> for cPod *'${1}'* seems ready!"

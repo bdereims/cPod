@@ -109,9 +109,20 @@ exit_gate() {
 	exit $1 
 }
 
+check_space() {
+	./extra/check_space.sh
+	if [ $? != 0 ]; then
+		echo "Error: No more space, can't continue."
+		./extra/post_slack.sh ":thumbsdown: Can't create cPod *${1}*, no more space on Datastore."
+		exit_gate 1
+	fi
+}
+
 main() {
+	check_space $1
+
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
-	./extra/post_slack.sh "Starting creation of cPod *'${HEADER}-${1}'*"
+	./extra/post_slack.sh "Starting creation of cPod '*${1}*'"
 	START=$( date +%s ) 
 	
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
@@ -137,7 +148,7 @@ main() {
 	END=$( date +%s )
 	TIME=$( expr ${END} - ${START} )
 	echo "In ${TIME} Seconds."
-	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${1}'* has been successfully created in *${TIME}s*"
+	./extra/post_slack.sh ":thumbsup: cPod '*${1}*' has been successfully created in *${TIME}s*"
 
 	exit_gate 0
 }

@@ -74,7 +74,7 @@ main() {
 	#printf "Are you sure to delete ${1}? Enter to continue or CTRL+C to abort"
 	#read $GO
 
-	./extra/post_slack.sh "Deleting cPod *'${HEADER}-${NAME_HIGH}'*"
+	./extra/post_slack.sh "Deleting cPod '*${NAME_HIGH}*'"
 	mutex
 
 	echo "=== Deleting cPod called '${NAME_HIGH}'."
@@ -88,7 +88,7 @@ main() {
 	modify_dnsmasq ${CPOD_NAME_LOWER}
 
 	echo "=== Deletion is finished."
-	./extra/post_slack.sh ":thumbsup: cPod *'${HEADER}-${NAME_HIGH}'* has been deleted"
+	./extra/post_slack.sh ":thumbsup: cPod '*${NAME_HIGH}*' has been deleted"
 	exit_gate 0
 }
 

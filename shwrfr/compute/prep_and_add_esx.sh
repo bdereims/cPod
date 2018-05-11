@@ -42,7 +42,10 @@ printf "${BASEIP}10\tvrops\n" >> ${HOSTS}
 touch /data/Datastore/exclude.tag
 touch /data/Temp/exclude.tag
 
-sed -i "s#ExecStart=/usr/sbin/rpc.nfsd $RPCNFSDARGS#ExecStart=/usr/sbin/rpc.nfsd 32 $RPCNFSDARGS#" /usr/lib/systemd/system/nfs-server.service
+mkdir -p /data/Datastore/scratch/log
+chown -R nobody:65534 /data/Datastore/scratch
+
+sed -i "s#ExecStart=/usr/sbin/rpc.nfsd $RPCNFSDARGS#ExecStart=/usr/sbin/rpc.nfsd 12 $RPCNFSDARGS#" /usr/lib/systemd/system/nfs-server.service
 systemctl daemon-reload
 systemctl stop nfs-server ; systemctl start nfs-server
 	

@@ -41,6 +41,13 @@ Get-Cluster | Where-Object {$_.ExtensionData.TriggeredAlarmState} | ForEach-Obje
 }
 
 $thisDataStore = Get-datastore Datastore
-get-vmhost | foreach {$_ | get-advancedsetting -name "Syslog.global.logDir" | set-advancedsetting -Value "[Datastore] scratch/log" -confirm:$false}
+get-vmhost | foreach {
+	$_ | Get-AdvancedSetting -name "Syslog.global.logDir" | set-advancedsetting -Value "[Datastore] scratch/log" -confirm:$false
+	$_ | Get-AdvancedSetting UserVars.SuppressShellWarning | Set-AdvancedSetting -Value 1 -confirm:$false
+	Remove-VmHostNtpServer -NtpServer 10.1.0.99 -VMHost $_ -confirm:$false
+	Add-VmHostNtpServer -NtpServer 10.50.0.3 -VMHost $_
+	Get-VMHostService $_ | where { $_.Key -eq "ntpd" } | Restart-VMHostService -confirm:$false
+}
+
 
 Disconnect-VIServer * -confirm:$false
