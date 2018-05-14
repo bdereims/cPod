@@ -122,7 +122,7 @@ main() {
 	check_space $1
 
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
-	./extra/post_slack.sh "Starting creation of cPod '*${1}*'"
+	./extra/post_slack.sh "Starting creation of cPod *${1}*"
 	START=$( date +%s ) 
 	
 	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
@@ -148,7 +148,7 @@ main() {
 	END=$( date +%s )
 	TIME=$( expr ${END} - ${START} )
 	echo "In ${TIME} Seconds."
-	./extra/post_slack.sh ":thumbsup: cPod '*${1}*' has been successfully created in *${TIME}s*"
+	./extra/post_slack.sh ":thumbsup: cPod *${1}* has been successfully created in *${TIME}s*"
 
 	exit_gate 0
 }
