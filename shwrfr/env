@@ -1,1 +1,5 @@
-env-dell
+#!/bin/bash
+#bdereims@vmware.com
+
+ENV=${CLUSTER:="dell"}
+source env-${ENV}
