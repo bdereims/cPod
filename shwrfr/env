@@ -1,5 +1,11 @@
 #!/bin/bash
 #bdereims@vmware.com
 
-ENV=${CLUSTER:="dell"}
+ALL_CLUSTER=(dell hp)
+
+ENV=$CLUSTER
+if [[ ! ${CLUSTER} ]]; then
+	ENV=${ALL_CLUSTER[0]}
+fi
+
 source env-${ENV}

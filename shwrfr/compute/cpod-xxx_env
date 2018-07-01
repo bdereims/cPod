@@ -62,9 +62,9 @@ export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
 export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 
-export HOSTNAME_PHOTONOS=forty-two
-export NAME_PHOTONOS=FORTY-TWO
-export OVA_PHOTONOS=${BITS}/forty-two.ova
+#export HOSTNAME_PHOTONOS=forty-two
+#export NAME_PHOTONOS=FORTY-TWO
+#export OVA_PHOTONOS=${BITS}/forty-two.ova
 
 export HOSTNAME_DARKSTAR=darkstar
 export NAME_DARKSTAR=darkstar
