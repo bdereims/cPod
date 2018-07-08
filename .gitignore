@@ -4,3 +4,6 @@ shwrfr/keys/*
 BITS/*
 shwrfr/extra/post_slack.sh
 shwrfr/govc_env
+*.passwd
+lock
+extra/post_slack.sh
