@@ -1,3 +1,4 @@
 *.passwd
 lock
 extra/post_slack.sh
+cpod_licensing.sh
