@@ -4,6 +4,7 @@
 # this file is not synced in git
 . ./env.passwd
 
+CLUSTER="hp"
 HEADER="cPod"
 
 NETWORK_DIR=network

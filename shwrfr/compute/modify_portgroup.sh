@@ -21,7 +21,7 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###PORTGTOUP###/${1}/" \
 ${SCRIPT}
 
-echo "Modifying '${1}' with Promiscuous and ForgetTrasnmits."
+echo "Modifying '${1}' with Promiscuous and ForgedTransmits."
 #docker run --rm -it -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
 docker run --rm -v ${SCRIPT_DIR}:${SCRIPT_DIR} vmware/powerclicore:ubuntu14.04 powershell ${SCRIPT} 2>&1 > /dev/null
 
