@@ -12,7 +12,7 @@ CPOD_NAME="cpod-${CPOD_NAME}"
 #CPOD_VCENTER_ADMIN="administrator@vsphere.local"
 CPOD_VCENTER_DATACENTER="cPod-${1}"
 CPOD_VCENTER_CLUSTER="Cluster"
-CPOD_DOMAIN="${CPOD_NAME}.shwrfr.mooo.com"
+CPOD_DOMAIN="${CPOD_NAME}.${ROOT_DOMAIN}"
 CPOD_VCENTER="vcsa.${CPOD_DOMAIN}"
 CPOD_VCENTER_ADMIN="administrator@${CPOD_DOMAIN}"
 
@@ -24,6 +24,8 @@ SCRIPT=/tmp/scripts/$$.ps1
 
 mkdir -p ${SCRIPT_DIR}
 cp ${COMPUTE_DIR}/${PS_SCRIPT} ${SCRIPT}
+
+export VCENTER_CPOD_PASSWD=$( ./extra/passwd_for_cpod.sh ${1} )
 
 sed -i -e "s/###VCENTER###/${CPOD_VCENTER}/" \
 -e "s/###VCENTER_ADMIN###/${CPOD_VCENTER_ADMIN}/" \

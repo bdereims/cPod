@@ -15,6 +15,7 @@ $IP = "###IP###"
 $rootPasswd = "###ROOT_PASSWD###"
 $Datastore = "###DATASTORE###"
 $numberESX = ###NUMESX###
+$rootDomain = "###ROOT_DOMAIN###"
 
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -DefaultVIServerMode multiple
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
@@ -27,14 +28,14 @@ Write-Host "Add cPodRouter VM."
 $CpodRouter = New-VM -Name cPodRouter-$cPodName -VM $templateVM -ResourcePool $Vapp -Datastore $Datastore
 
 Write-Host "Add Disk for /data in cPodRouter."
-$CpodRouter | New-HardDisk -ThinProvisioned -CapacityKB 1024000000 
+$CpodRouter | New-HardDisk -ThinProvisioned -CapacityKB 821900000 
 
 Write-Host "Modify cPodRouter vNIC."
 Get-NetworkAdapter -VM $CpodRouter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 Start-VM -VM $CpodRouter -Confirm:$false 
 
 Write-Host "Launch Update script in the cPod context."
-Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $IP ; reboot" -GuestUser root -GuestPassword $rootPasswd -scripttype Bash -ToolsWaitSecs 45 -RunAsync
+Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $IP $rootDomain ; reboot" -GuestUser root -GuestPassword $rootPasswd -scripttype Bash -ToolsWaitSecs 45 -RunAsync
 
 #$ESX = New-VM -Name cPod-$cPodName-esx -VM "template-ESX" -ResourcePool $Vapp -Datastore $Datastore 
 #Get-VM $ESX | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false

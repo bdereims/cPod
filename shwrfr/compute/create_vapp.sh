@@ -4,6 +4,8 @@
 # $1 : cPod Name
 # $2 : PortGroup Name
 # $3 : @IP
+# $4 : # of ESX
+# $5 : Root Domain
 
 . ./env
 
@@ -30,6 +32,7 @@ sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" \
 -e "s/###DATASTORE###/${DATASTORE}/" \
 -e "s/###NUMESX###/${4}/" \
+-e "s/###ROOT_DOMAIN###/${5}/" \
 ${SCRIPT}
 
 echo "Creating vApp '${HEADER}-${1}' with ${4} ESXi."

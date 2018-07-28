@@ -11,7 +11,7 @@ CPOD_NAME=$( echo $1 | tr '[:upper:]' '[:lower:]' )
 CPOD_VCENTER_ADMIN="administrator@vsphere.local"
 CPOD_VCENTER_DATACENTER="${1}"
 CPOD_VCENTER_CLUSTER="Cluster"
-CPOD_DOMAIN="${CPOD_NAME}.shwrfr.mooo.com"
+CPOD_DOMAIN="${CPOD_NAME}.${ROOT_DOMAIN}"
 CPOD_VCENTER="vcsa.${CPOD_DOMAIN}"
 
 PS_SCRIPT=remove_orphaned.ps1

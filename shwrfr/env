@@ -1,6 +1,7 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+ROOT_DOMAIN="shwrfr.com"
 ALL_CLUSTER=(dell hp)
 
 ENV=$CLUSTER

@@ -6,6 +6,7 @@
 [ "$1" == "" ] && echo "usage: $0 <name_of_cpod>" && exit 1 
 
 HOSTS=/etc/hosts
+GEN_PASSWD=$( ./extra/passwd_for_cpod.sh ${1} )
 
 main() {
 	echo "=== Preparing cPod called '$1'."
@@ -17,7 +18,7 @@ main() {
 
 	mkdir -p ${SCRIPT_DIR} 
 	cp ${COMPUTE_DIR}/${SHELL_SCRIPT} ${SCRIPT}
-	sed -i -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" ${SCRIPT}
+	sed -i -e "s/###ROOT_PASSWD###/${ROOT_PASSWD}/" -e "s/###GEN_PASSWD###/${GEN_PASSWD}/" ${SCRIPT}
 
 	CPOD_NAME="cpod-$1"
 	CPOD_NAME_LOWER=$( echo ${CPOD_NAME} | tr '[:upper:]' '[:lower:]' )
@@ -34,8 +35,7 @@ main() {
 
 	sshpass -p ${ROOT_PASSWD} scp ~/.ssh/id_rsa.pub root@${CPOD_NAME_LOWER}:/root/.ssh/authorized_keys
 	scp -o StrictHostKeyChecking=no ${SCRIPT} root@${CPOD_NAME_LOWER}:./${SHELL_SCRIPT} 
-	ssh -o StrictHostKeyChecking=no root@${CPOD_NAME_LOWER} "./${SHELL_SCRIPT}"
-
+	ssh -o StrictHostKeyChecking=no root@${CPOD_NAME_LOWER} "./${SHELL_SCRIPT}" 
 	rm ${SCRIPT}
 }
 

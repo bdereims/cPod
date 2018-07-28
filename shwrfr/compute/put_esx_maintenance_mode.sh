@@ -16,7 +16,7 @@ mkdir -p ${SCRIPT_DIR}
 cp ${COMPUTE_DIR}/${PS_SCRIPT} ${SCRIPT} 
 
 NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
-VCENTER="vcsa.cpod-${NAME_LOWER}.shwrfr.mooo.com"
+VCENTER="vcsa.cpod-${NAME_LOWER}.${ROOT_DOMAIN}"
 
 sed -i -e "s/###VCENTER###/${VCENTER}/" \
 -e "s/###VCENTER_ADMIN###/${VCENTER_ADMIN}/" \

@@ -5,6 +5,7 @@ DHCP_LEASE=/var/lib/misc/dnsmasq.leases
 DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 PASSWORD=###ROOT_PASSWD###
+GEN_PASSWORD="###GEN_PASSWD###"
 
 [ "$( hostname )" == "mgmt-cpodrouter" ] && exit 1
 [ -f already_prep ] && exit 0
@@ -28,7 +29,8 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli system hostname set --host=${NAME}"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "vim-cmd hostsvc/vmotion/vnic_set vmk0"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli storage nfs add --host=${CPODROUTER} --share=/data/Datastore --volume-name=Datastore"
-	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
+	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "printf \"${GEN_PASSWORD}\n${GEN_PASSWORD}\n\" | passwd root"
+	sshpass -p ${GEN_PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
 done
 
 printf "${BASEIP}2\tpsc\n" >> ${HOSTS}
@@ -50,3 +52,5 @@ systemctl daemon-reload
 systemctl stop nfs-server ; systemctl start nfs-server
 	
 systemctl stop dnsmasq ; systemctl start dnsmasq 
+
+echo "root:${GEN_PASSWORD}" | chpasswd

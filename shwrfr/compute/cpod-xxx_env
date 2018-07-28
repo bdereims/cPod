@@ -11,7 +11,7 @@
 CPOD_LOWER=$( echo ${CPOD} | tr '[:upper:]' '[:lower:]' )
 CPOD_HIGH=$( echo ${CPOD} | tr '[:lower:]' '[:upper:]' )
 export SITE="cPod-${CPOD_HIGH}"
-export DOMAIN=cpod-${CPOD_LOWER}.shwrfr.mooo.com
+export DOMAIN=cpod-${CPOD_LOWER}.${ROOT_DOMAIN}
 export DNS=${SUBNET}.1
 export NTP=${DNS}
 export GATEWAY=${DNS}

@@ -42,10 +42,12 @@ fi
 umount /mnt
 mount -o loop $OVA /mnt
 
+export PASSWORD=$( ./extra/passwd_for_cpod.sh ${1} )
+
 SEDCMD="s/###PASSWORD###/${PASSWORD}/;s!###TARGET###!${TARGET}!;s/###PORTGROUP###/${PORTGROUP}/;s/###DATASTORE###/${DATASTORE}/;s/###IP###/${IP}/;s/###DNS###/${DNS}/;s/###GATEWAY###/${GATEWAY}/;s/###HOSTNAME###/${HOSTNAME}/;s/###NAME###/${NAME}/;s/###PSC###/${HOSTNAME_PSC}/;s/###DOMAIN###/${DOMAIN}/"
 cat ${COMPUTE_DIR}/vcsa-67.json | sed "${SEDCMD}"  > ${VCSA_CONF_FILE} 
 
-./extra/post_slack.sh "Deploying a new VCSA for *${1}*. We're working for you, it takes times. Stay tuned..."
+./extra/post_slack.sh "Deploying a new VCSA for *${1}*. We're working for you, it takes time. Stay tuned..."
 
 pushd /mnt/vcsa-cli-installer/lin64
 ROOT="/mnt/vcsa-cli-installer/lin64"

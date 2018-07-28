@@ -84,13 +84,15 @@ network_create() {
 
 vapp_create() {
 	NAME_UPPER=$( echo ${1} | tr '[:lower:]' '[:upper:]' )
-	${COMPUTE_DIR}/create_vapp.sh ${NAME_UPPER} ${2} ${3} ${4}
+	${COMPUTE_DIR}/create_vapp.sh ${NAME_UPPER} ${2} ${3} ${4} ${5}
 }
 
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
-	echo "server=/cpod-${1}.shwrfr.mooo.com/${2}" >> ${DNSMASQ}
-	printf "${2}\tcpod-${1}\t#${OWNER}\n" >> ${HOSTS}
+	echo "server=/cpod-${1}.${ROOT_DOMAIN}/${2}" >> ${DNSMASQ}
+	#GEN_PASSWORD=$( pwgen -s -N 1 -n -c -y 10 | sed -e 's/\\/!/' -e 's/;/-/' -e 's/"/$/' -e 's/&/!/' -e "s#'#[#" )
+	GEN_PASSWORD="$(pwgen -s -1 15 1)!"
+	printf "${2}\tcpod-${1}\t#${OWNER}\t${GEN_PASSWORD}\n" >> ${HOSTS}
 
 	systemctl stop dnsmasq ; systemctl start dnsmasq
 }
@@ -133,7 +135,7 @@ main() {
 	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP} ${3}
 	de_mutex
 
-	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP} ${NUM_ESX}
+	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP} ${NUM_ESX} ${ROOT_DOMAIN}
 
 	mutex
 	bgp_add_peer edge-6 ${NEXT_IP}
