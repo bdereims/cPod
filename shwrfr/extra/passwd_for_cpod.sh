@@ -9,7 +9,7 @@ HOSTS=/etc/hosts
 CPOD=$( echo $1 | tr '[:upper:]' '[:lower:]' ) 
 
 main() {
-	cat /etc/hosts | grep ${CPOD} | sed "s/#//" | awk '$2 ~ /cpod-/ {gsub(/cpod-/,""); print $4}'
+	cat /etc/hosts | sed -n "/${CPOD}\t/p" | sed "s/#//" | awk '$2 ~ /cpod-/ {gsub(/cpod-/,""); print $4}'
 }
 
 main $1

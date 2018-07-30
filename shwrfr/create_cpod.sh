@@ -29,8 +29,8 @@ network_env() {
 	#TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
 	#TMP=$( expr ${TMP} + 1 )
 
-	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | sort -n -t "." -k 7 | head -1 )
-	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | sort -n -t "." -k 7 | tail -1 )
+	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | awk -F "/" '{print $3}' | sort -n -t "." -k 7 | head -1 )
+	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | awk -F "/" '{print $3}' | sort -n -t "." -k 7 | tail -1 )
 
 	TRANSIT_SUBNET=$( echo ${FIRST_LINE} | sed 's!^.*/!!' | sed 's/\.[0-9]*$//' )
 
