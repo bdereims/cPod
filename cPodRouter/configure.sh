@@ -18,7 +18,7 @@ chage -I -1 -m 0 -M 99999 -E -1 root
 
 #Update for the role
 tdnf -y update
-tdnf -y install dnsmasq git sshpass ntp nginx tar wget nfs-utils
+tdnf -y install dnsmasq git sshpass ntp nginx tar wget nfs-utils iputils bindutils
 
 #Change name
 echo $NAME > /etc/hostname
