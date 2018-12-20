@@ -25,10 +25,6 @@ DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 
 network_env() {
-	#TRANSIT_IP=$( grep "cpod-" ${DNSMASQ} | sed 's!^.*/!!' | sort | tail -n 1 )
-	#TMP=$( echo ${TRANSIT_IP} | sed 's/.*\.//' )
-	#TMP=$( expr ${TMP} + 1 )
-
 	FIRST_LINE=$( grep "cpod-" ${DNSMASQ} | awk -F "/" '{print $3}' | sort -n -t "." -k 7 | head -1 )
 	LAST_LINE=$( grep "cpod-" ${DNSMASQ} | awk -F "/" '{print $3}' | sort -n -t "." -k 7 | tail -1 )
 
@@ -90,7 +86,6 @@ vapp_create() {
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
 	echo "server=/cpod-${1}.${ROOT_DOMAIN}/${2}" >> ${DNSMASQ}
-	#GEN_PASSWORD=$( pwgen -s -N 1 -n -c -y 10 | sed -e 's/\\/!/' -e 's/;/-/' -e 's/"/$/' -e 's/&/!/' -e "s#'#[#" )
 	GEN_PASSWORD="$(pwgen -s -1 15 1)!"
 	printf "${2}\tcpod-${1}\t#${OWNER}\t${GEN_PASSWORD}\n" >> ${HOSTS}
 
@@ -102,8 +97,13 @@ bgp_add_peer() {
 	./network/add_bgp_neighbour.sh $1 $2 
 }
 
+bgp_add_peer_vtysh() {
+        echo "Adding cPodRouter as BGP peer"
+        ./network/add_bgp_peer_vtysh.sh $1 $2
+}
+
 prep_cpod() {
-	./prep_cpod.sh $1
+	./prep_cpod.sh $1 $2
 }
 
 exit_gate() {
@@ -120,31 +120,45 @@ check_space() {
 	fi
 }
 
+check_if_existing() {
+	IN_HOSTS=$( grep ${1} ${HOST} | wc -l )	
+	IN_DNSMASQ=$( grep ${1} ${DNSMASQ} | wc -l )	
+	RESULT=$( expr ${IN_HOSTS} + ${IN_DNSMASQ} )
+
+	if [ ${RESULT} > 0 ]; then
+		NAME_UPPER=$( echo $1 | tr '[:lower:]' '[:upper:]' )
+		echo "=== cPod ${NAME_UPPER} already exists, choose other name or destroy it."
+		./extra/post_slack.sh ":thumbsdown: cPod *${NAME_UPPER}* already exists."
+		exit 1
+	fi
+}
+
 main() {
+	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
+
+	#check_if_existing ${NAME_LOWER}
+
 	check_space $1
 
 	echo "=== Starting to deploy a new cPod called '${HEADER}-${1}'."
 	./extra/post_slack.sh "Starting creation of cPod *${1}*"
 	START=$( date +%s ) 
 	
-	NAME_LOWER=$( echo $1 | tr '[:upper:]' '[:lower:]' )
-
 	mutex
-	network_env
-	network_create ${NAME_LOWER}
-	modify_dnsmasq ${NAME_LOWER} ${NEXT_IP} ${3}
+		network_env
+		network_create ${NAME_LOWER}
+		modify_dnsmasq ${NAME_LOWER} ${NEXT_IP} ${3}
 	de_mutex
 
 	vapp_create ${1} ${PORTGROUP_NAME} ${NEXT_IP} ${NUM_ESX} ${ROOT_DOMAIN}
 
 	mutex
-	bgp_add_peer edge-6 ${NEXT_IP}
+		#bgp_add_peer edge-6 ${NEXT_IP}
+		bgp_add_peer_vtysh ${NEXT_IP} 65001
 	de_mutex
 
-	prep_cpod ${1}
-
-	### Installation of vCenter : cd ../SDDC-Deploy ; ./deploy_vcsa.sh cpod-XXX_env
-	### vCenter Prep : compute/prep_vcsa.sh cPod-XXX
+	echo "prep with ${1} ${NUM_ESX}"
+	prep_cpod ${1} ${NUM_ESX}
 
 	echo "=== Creation is finished."
 	END=$( date +%s )

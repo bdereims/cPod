@@ -22,7 +22,7 @@ export PORTGROUP="VM Network"
 #export ADMIN=administrator%40vsphere.local
 export ADMIN=administrator%40${DOMAIN}
 export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Cluster
-#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Management
+#export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/MANAGEMENT
 #export TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/Edge
 export DATASTORE=Datastore
 export BITS=/data/BITS
@@ -38,6 +38,7 @@ export IP_PSC=${SUBNET}.2
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-7515524.iso
 export OVA_VCSA=${BITS}/VMware-VCSA-all-6.5.0-8024368.iso
 #export OVA_VCSA=${BITS}/VMware-VCSA-all-6.7.0-8217866.iso
+export OVA_VCSA=${BITS}/VMware-VCSA-all-6.7.0-8217866.iso
 export TARGET_VCSA=${SUBNET}.21
 export DATASTORE_VCSA=Datastore
 export PORTGROUP_VCSA="VM Network"
@@ -46,7 +47,7 @@ export HOSTNAME_NSX=nsx.${DOMAIN}
 export NAME_NSX=NSX-V
 export IP_NSX=${SUBNET}.4
 #export OVA_NSX=${BITS}/VMware-NSX-Manager-6.3.3-6276725.ova
-export OVA_NSX=${BITS}/VMware-NSX-Manager-6.4.0-7564187.ova
+export OVA_NSX=${BITS}/VMware-NSX-Manager-6.4.2-9643711.ova
 
 export HOSTNAME_VRLI=vrli.${DOMAIN}
 export NAME_VRLI=VRLI
@@ -62,9 +63,9 @@ export HOSTNAME_PHOTONOS=photonos
 export NAME_PHOTONOS=photonos
 export OVA_PHOTONOS=${BITS}/photon-hw13-2.0.ova
 
-#export HOSTNAME_PHOTONOS=forty-two
-#export NAME_PHOTONOS=FORTY-TWO
-#export OVA_PHOTONOS=${BITS}/forty-two.ova
+export HOSTNAME_FORTYTWO=forty-two
+export NAME_FORTYTWO=FORTY-TWO
+export OVA_FORTYTWO=${BITS}/forty-two_2018-12-6.ova
 
 export HOSTNAME_DARKSTAR=darkstar
 export NAME_DARKSTAR=darkstar
@@ -87,3 +88,13 @@ export HOSTNAME_OPSMANAGER=opsmanager
 export NAME_OPSMANAGER=OPSMANAGER
 export IP_OPSMANAGER=${SUBNET}.12
 export OVA_OPSMANAGER=${BITS}/Pivotal/pcf-vsphere-2.0-build.269.ova
+
+export HOSTNAME_VIO=vio
+export NAME_VIO=VIO
+export IP_VIO=${SUBNET}.12
+export OVA_VIO=${BITS}/VMware-OpenStack-5.0.0.0-8909572_OVF10.ova
+
+export HOSTNAME_VIO_K8s=vio-k8s
+export NAME_VIO_K8S=VIO-K8S
+export IP_VIO_K8S=${SUBNET}.13
+export OVA_VIO_K8S=${BITS}/VMware-OpenStack-for-Kubernetes-5.0.0.0-8958925_OVF10.ova

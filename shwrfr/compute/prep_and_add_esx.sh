@@ -6,13 +6,26 @@ DNSMASQ=/etc/dnsmasq.conf
 HOSTS=/etc/hosts
 PASSWORD=###ROOT_PASSWD###
 GEN_PASSWORD="###GEN_PASSWD###"
+ISO_BANK_SERVER="###ISO_BANK_SERVER###"
+ISO_BANK_DIR="###ISO_BANK_DIR###"
+NUM_ESX="###NUM_ESX###"
 
 [ "$( hostname )" == "mgmt-cpodrouter" ] && exit 1
 [ -f already_prep ] && exit 0
 
 touch already_prep
 
-# waiting for all esx, boot takes time
+# waiting for all ESX get lease, boot takes time
+ISTHERE=0
+NUM_ESX=$( expr ${NUM_ESX} )
+while [ ${ISTHERE} != ${NUM_ESX} ]
+do
+	sleep 3
+	ISTHERE=$( cat ${DHCP_LEASE} | cut -d ' ' -f2 | sort -u | wc -l )
+	if [ "${ISTHERE}X" == "X" ]; then
+		ISTHERE=0
+	fi
+done
 sleep 60
 
 I=$( cat ${DHCP_LEASE} | wc -l )
@@ -20,7 +33,6 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	IP=$( echo ${ESX} | cut -f2 -d',' )
 	BASEIP=$( echo ${IP} | sed 's/\.[0-9]*$/./' )
 	CPODROUTER="${BASEIP}1"
-	#NEWIP=$( expr ${I} + 10 )
 	NEWIP=$( expr ${I} + 20 )
 	NEWIP="${BASEIP}${NEWIP}"
 	NAME=$( printf "esx-%02d" ${I} )
@@ -28,7 +40,9 @@ for ESX in $( cat ${DHCP_LEASE} | cut -f 2,3 -d' ' | sed 's/\ /,/' ); do
 	I=$( expr ${I} - 1 )
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli system hostname set --host=${NAME}"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "vim-cmd hostsvc/vmotion/vnic_set vmk0"
+	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli system settings advanced set -o /Mem/ShareForceSalting -i 0"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli storage nfs add --host=${CPODROUTER} --share=/data/Datastore --volume-name=Datastore"
+	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli storage nfs add --host=${ISO_BANK_SERVER} --share=${ISO_BANK_DIR} --volume-name=ISO-Bank -r"
 	sshpass -p ${PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "printf \"${GEN_PASSWORD}\n${GEN_PASSWORD}\n\" | passwd root"
 	sshpass -p ${GEN_PASSWORD} ssh -o StrictHostKeyChecking=no root@${IP} "esxcli network ip interface ipv4 set -i vmk0 -I ${NEWIP} -N 255.255.255.0 -t static ; esxcli network ip interface set -e false -i vmk0 ; esxcli network ip interface set -e true -i vmk0"
 done

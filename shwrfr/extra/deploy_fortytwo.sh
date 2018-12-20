@@ -22,10 +22,12 @@ fi
 ### Local vars ####
 
 HOSTNAME=${HOSTNAME_FORTYTWO}
-NAME=${NAME_FORYTWO}
+NAME=${NAME_FORTYTWO}
 OVA=${OVA_FORTYTWO}
 
 ###################
+
+PASSWORD=$( ./${EXTRA_DIR}/passwd_for_cpod.sh ${1} )
 
 export MYSCRIPT=/tmp/$$
 
@@ -34,7 +36,7 @@ cd ${OVFDIR}
 ovftool --acceptAllEulas --noSSLVerify --skipManifestCheck \
 --X:injectOvfEnv --overwrite --powerOffTarget --allowExtraConfig \
 --X:apiVersion=5.5 --diskMode=thin \
-"--datastore=${DATASTORE}" -n=${NAME} "--network=${PORTGROUP}" \
+"--datastore=${DATASTORE}" -n=${NAME} -nw="${PORTGROUP}" \
 ${OVA} \
 vi://${ADMIN}:'${PASSWORD}'@${TARGET}
 EOF

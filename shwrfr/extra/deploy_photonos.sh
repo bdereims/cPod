@@ -24,6 +24,7 @@ fi
 HOSTNAME=${HOSTNAME_PHOTONOS}
 NAME=${NAME_PHOTONOS}
 OVA=${OVA_PHOTONOS}
+#TARGET=vcsa.${DOMAIN}/cPod-${CPOD}/host/COMPUTE
 
 ###################
 

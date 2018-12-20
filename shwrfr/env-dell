@@ -9,19 +9,20 @@ HEADER="cPod"
 
 NETWORK_DIR=network
 COMPUTE_DIR=compute
+EXTRA_DIR=extra
 
 NSX=10.1.0.101
-#NSX=172.18.5.21
 NSX_ADMIN="admin"
 NSX_TRANSPORTZONE="TransportZone"
 EDGE="edge-6"
+
+ISO_BANK_SERVER="10.1.0.51"
+ISO_BANK_DIR="/VNXeDatastore/ISO-Bank"
 
 VCENTER=10.1.0.100
 VCENTER_ADMIN="administrator@vsphere.local"
 VCENTER_DATACENTER="Showroom"
 VCENTER_CLUSTER="Dell Cluster"
 TEMPLATE_VM="template-cPodrouter"
-#TEMPLATE_ESX="template-ESX"
-#TEMPLATE_ESX="template-ESX65U1"
-TEMPLATE_ESX="template-ESX67"
+TEMPLATE_ESX="template-ESX67U1"
 DATASTORE="DELL-VSAN"

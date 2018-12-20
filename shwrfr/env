@@ -1,8 +1,17 @@
 #!/bin/bash
 #bdereims@vmware.com
 
+SLACK=YES
+
 ROOT_DOMAIN="shwrfr.com"
 ALL_CLUSTER=(dell hp)
+
+for CLUSTER in ${ALL_CLUSTER[@]}; do
+        RESULT=$( ./extra/check_datastore.sh ${CLUSTER} )
+        if [ "${RESULT}" == "Ok!" ]; then
+                break
+        fi
+done
 
 ENV=$CLUSTER
 if [[ ! ${CLUSTER} ]]; then

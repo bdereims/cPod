@@ -34,8 +34,8 @@ vapp_delete() {
 
 modify_dnsmasq() {
 	echo "Modifying '${DNSMASQ}' and '${HOSTS}'."
-	sed -i "/${1}./d" ${DNSMASQ} 
-	sed -i "/\t${1}.*$/d" ${HOSTS} 
+	sed -i "/${1}\./d" ${DNSMASQ} 
+	sed -i "/\t${1}\t/d" ${HOSTS} 
 
 	systemctl stop dnsmasq 
         systemctl start dnsmasq
@@ -43,6 +43,10 @@ modify_dnsmasq() {
 
 bgp_delete_peer() {
 	./network/delete_bgp_neighbour.sh edge-6 ${1}
+}
+
+bgp_delete_peer_vtysh() {
+        ./network/delete_bgp_peer_vtysh.sh ${1} ${2}
 }
 
 release_mutex() {
@@ -55,7 +59,7 @@ exit_gate() {
 }
 
 test_owner() {
-	LINE=$( grep ${CPOD_NAME_LOWER} /etc/hosts | cut -f3 | sed "s/#//" | head -1 )
+	LINE=$( grep $'${CPOD_NAME_LOWER}\t' /etc/hosts | cut -f3 | sed "s/#//" | head -1 )
 	if [ "${LINE}" != "" ] && [ "${LINE}" != "${OWNER}" ]; then
 		echo "Error: Not Ok for deletion"
 		./extra/post_slack.sh ":wow: *${OWNER}* you're not allowed to delete *${NAME_HIGH}*"
@@ -81,7 +85,8 @@ main() {
 
 	IP=$( cat ${HOSTS} | grep ${CPOD_NAME_LOWER} | cut -f1 )
 
-	bgp_delete_peer ${IP}
+	#bgp_delete_peer ${IP}
+	bgp_delete_peer_vtysh ${IP} 65001
 	vapp_delete ${NAME_HIGH}
 	sleep 15
 	network_delete ${NSX_TRANSPORTZONE} ${CPOD_NAME_LOWER}

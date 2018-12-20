@@ -21,9 +21,6 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false -Defa
 Connect-VIServer -Server $Vc -User $vcUser -Password $vcPass
 
 #####
-
-$policy = Get-SpbmStoragePolicy -Name "cPodPolicy"
-
 Write-Host "Create vApp."
 $Vapp = New-VApp -Name cPod-$cPodName -Location ( Get-Cluster -Name $Cluster ) 
 
@@ -31,29 +28,25 @@ Write-Host "Add cPodRouter VM."
 $CpodRouter = New-VM -Name cPodRouter-$cPodName -VM $templateVM -ResourcePool $Vapp -Datastore $Datastore
 
 Write-Host "Add Disk for /data in cPodRouter."
-$CpodRouter | New-HardDisk -StorageFormat Thin -CapacityKB 600000000 
-
-$CpodRouterHD = Get-HardDisk -VM $CpodRouter
-Set-SpbmEntityConfiguration -Configuration (Get-SpbmEntityConfiguration $CpodRouterHD) -StoragePolicy $policy
+$CpodRouter | New-HardDisk -ThinProvisioned -CapacityKB 821900000 
 
 Write-Host "Modify cPodRouter vNIC."
-Get-NetworkAdapter -VM $CpodRouter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -Portgroup ( Get-VDPortGroup -Name $Portgroup ) -Confirm:$false
+Get-NetworkAdapter -VM $CpodRouter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 Start-VM -VM $CpodRouter -Confirm:$false 
 
 Write-Host "Launch Update script in the cPod context."
 Invoke-VMScript -VM $CpodRouter -ScriptText "cd update ; ./update.sh $cPodName $IP $rootDomain ; reboot" -GuestUser root -GuestPassword $rootPasswd -scripttype Bash -ToolsWaitSecs 45 -RunAsync
 
+#$ESX = New-VM -Name cPod-$cPodName-esx -VM "template-ESX" -ResourcePool $Vapp -Datastore $Datastore 
+#Get-VM $ESX | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
+#Start-VM -VM cPod-$cPodName-esx -Confirm:$false -RunAsync
+
 #####
 Write-Host "Add ESX VMs."
 For ($i=1; $i -le $numberESX; $i++) {
 	Write-Host "-> cPod-$cPodName-esx-$i"
-	$ESXVM = New-VM -Name cPod-$cPodName-esx-$i -VM $templateESX -ResourcePool $Vapp -Datastore $Datastore
-	
-	Get-NetworkAdapter -VM $ESXVM | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -Portgroup ( Get-VDPortGroup -Name $Portgroup ) -Confirm:$false
-
-	$ESXHD = Get-HardDisk -VM $ESXVM
-	Set-SpbmEntityConfiguration -Configuration (Get-SpbmEntityConfiguration $ESXHD) -StoragePolicy $policy
-
+	#New-VM -Name cPod-$cPodName-esx-$i -VM "template-ESX65U1" -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
+	New-VM -Name cPod-$cPodName-esx-$i -VM $templateESX -ResourcePool $Vapp -Datastore $Datastore | Get-NetworkAdapter | Where {$_.NetworkName -eq $oldNet } | Set-NetworkAdapter -NetworkName $Portgroup -Confirm:$false
 	Start-VM -VM cPod-$cPodName-esx-$i -Confirm:$false -RunAsync 
 }
 
